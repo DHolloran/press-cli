@@ -1,0 +1,52 @@
+{
+	"install" : {
+		"directory"         : "/Applications/MAMP/htdocs/",
+		"directory-name"    : "{Make from URL}",
+		"dbname"            : "{Make from URL}",
+		"dbuser"            : "root",
+		"dbpass"            : "root",
+		"dbhost"            : "127.0.0.1",
+		"dbprefix"          : "{Make from site title}",
+		"url"               : "",
+		"title"             : "",
+		"admin_user"        : "matchbox",
+		"admin_password"    : "{Be nice to generate this eventually}",
+		"admin_email"       : "dholloran@matchboxdesigngroup.com",
+		"text-editor"       : "st",
+		"vhosts-path"       : "/Applications/MAMP/conf/apache/vhosts.conf",
+		"hosts-path"        : "/private/etc/hosts",
+		"index-php-path"    : "index.php",
+		"remove-wp-plugins" : "true/false??? is there a JSON boolean",
+		"plugins"           : {
+			"regenerate-thumbnails"  : "{Activate} true/false??? is there a JSON boolean",
+			"duplicate-post"         : "{Activate} true/false??? is there a JSON boolean",
+			"log-deprecated-notices" : "{Activate} true/false??? is there a JSON boolean",
+			"simply-show-ids"        : "{Activate} true/false??? is there a JSON boolean",
+			"query-monitor"          : "{Activate} true/false??? is there a JSON boolean",
+			"jetpack"                : "{Activate} true/false??? is there a JSON boolean",
+			"launch-check"           : "{Activate} true/false??? is there a JSON boolean",
+			"wordpress-seo"          : "{Activate} true/false??? is there a JSON boolean"
+		}
+	},
+	"new-theme" : {
+		"root"             : "wp-content/themes",
+		"theme-url"        : "{Get this URL dynamically and add option eventually}https://github.com/matchboxdesigngroup/mdg-base/archive/0.2.5.zip",
+		"theme-name"       : "{Make from site title}",
+		"theme-version"    : "0.9.0",
+		"description"      : "{Make from site title}",
+		"remove-wp-themes" : "true/false??? is there a JSON boolean",
+		"npm-install"      : "true/false??? is there a JSON boolean",
+		"bower-install"    : "true/false??? is there a JSON boolean"
+	},
+	"existing-theme" : {
+		"root"                  : "wp-content",
+		"git-base"              : "https://dholloran@matchboxdesigngroup.git.beanstalkapp.com",
+		"git-repository"        : "",
+		"theme-name"            : "",
+		"branches"              : {
+			"master",
+			"develop"
+		},
+		"remove-default-themes" : "true/false??? is there a JSON boolean"
+	}
+}
