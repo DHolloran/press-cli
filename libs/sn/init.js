@@ -1,0 +1,272 @@
+var sn = {
+	options : {
+		config : {},
+		set    : {},
+	},
+};
+
+/**
+ * Handles reading the configuration options.
+ *
+ * @return  {Object}  The configuration options.
+ */
+sn.options.getConfig = function() {
+	var fs = require('fs');
+
+	return JSON.parse( fs.readFileSync('./config.json', 'utf8') );
+}; // sn.options.getConfig()
+
+/**
+ * Strips non alpha-numeric characters from a string.
+ *
+ * @param   {String}  string  The string.
+ *
+ * @return  {String}          The converted string.
+ */
+sn.stripNonAlphaNumeric = function( string ) {
+	return string.replace(/\W/g, ' ');
+}; // sn.stripNonAlphaNumeric();
+
+/**
+ * Converts non alpha-numeric characters to dashes.
+ *
+ * @param   {String}  string  The string.
+ *
+ * @return  {String}          The converted string.
+ */
+sn.convertToDashes = function( string ) {
+	string = sn.stripNonAlphaNumeric( string );
+	return string.replace(/ /g, '-').replace('_', '-').replace('--', '-');
+}; // sn.convertToDashes()
+
+/**
+ * Converts non alpha-numeric characters to underscores.
+ *
+ * @param   {String}  string  The string.
+ *
+ * @return  {String}          The converted string.
+ */
+sn.convertToUnderscores = function( string ) {
+	string = sn.stripNonAlphaNumeric( string );
+	return string.replace(/ /g, '_').replace('-', '_').replace('__', '_');
+}; // sn.convertToDashes()
+
+/**
+ * Converts a string to a slug
+ *
+ * @param   {String}  string  The string.
+ *
+ * @return  {String}          The converted string.
+ */
+sn.convertToSlug = function( string ) {
+	string = sn.convertToDashes( string );
+
+	return string.toLowerCase();
+}; // sn.convertToSlug()
+
+/**
+ * Converts a string to an ID
+ *
+ * @param   {String}  string  The string.
+ *
+ * @return  {String}          The converted string.
+ */
+sn.convertToID = function( string ) {
+	string = sn.convertToUnderscores( string );
+
+	return string.toLowerCase();
+}; // sn.convertToID()
+
+/**
+ * Trims the protocols off of an URL.
+ *
+ * @param   {String}  string  The URL.
+ *
+ * @return  {String}          The trimmed URL.
+ */
+sn.trimProtocol = function( url ) {
+	url = url.replace('http://', '');
+	url = url.replace('https://', '');
+
+	return url;
+}; // sn.trimProtocol()
+
+/**
+ * Sets config.install.directoryName option from site URL.
+ *
+ * @return  {Boolean}  FALSE
+ */
+sn.options.set.directoryName = function() {
+	var url = ( typeof sn.options.config.install.url === 'undefined' ) ? '' : sn.options.config.install.url;
+
+	if ( url === '' || sn.options.config.install.directoryName != '' ) {
+		return false;
+	} // if()
+
+	sn.options.config.install.directoryName = sn.trimProtocol( url );
+
+	return false;
+}; // sn.options.set.directoryName();
+
+/**
+ * Sets config.install.dbname option from site URL.
+ *
+ * @return  {Boolean}  FALSE
+ */
+sn.options.set.dbname = function() {
+	var url = ( typeof sn.options.config.install.url === 'undefined' ) ? '' : sn.options.config.install.url;
+
+	if ( url === '' || sn.options.config.install.dbname != '' ) {
+		return false;
+	} // if()
+
+	url = sn.trimProtocol( url );
+	var id  = sn.convertToID( url );
+	var dbname = 'wp_' + id;
+
+	sn.options.config.install.dbname = dbname;
+
+	return false;
+}; // sn.options.set.dbname();
+
+/**
+ * Sets config.install.dbprefix option from site title.
+ *
+ * @return  {Boolean}  FALSE
+ */
+sn.options.set.dbprefix = function() {
+	if ( sn.options.config.install.dbprefix != '' ) {
+		return false;
+	} // if()
+
+	var _             = require('underscore');
+	var defaultPrefix = 'wp_';
+	var dbprefix      = '';
+	var title         = ( typeof sn.options.config.install.title === 'undefined' ) ? '' : sn.options.config.install.title;
+
+	// Make sure we have a title
+	if ( title === '' ) {
+		sn.options.config.install.dbprefix = defaultPrefix;
+
+		return false;
+	} // if()
+
+	// Get the title parts
+	var titleParts = title.split( ' ' );
+	_.each( titleParts, function(value, key, list) {
+		if ( value !== '' ) {
+			dbprefix = dbprefix + value.charAt(0);
+		} // if()
+	});
+
+	if ( dbprefix === '' ) {
+		dbprefix = defaultPrefix;
+	} else {
+		dbprefix = dbprefix.toLowerCase() + '_';
+	} // if/else()
+
+	sn.options.config.install.dbprefix = dbprefix;
+
+	return false;
+}; // sn.options.set.dbprefix();
+
+/**
+ * Sets config.newTheme.themeName option from site title.
+ *
+ * @return  {Boolean}  FALSE
+ */
+sn.options.set.themeName = function() {
+	var title = ( typeof sn.options.config.install.title === 'undefined' ) ? '' : sn.options.config.install.title;
+
+	if ( title === '' || sn.options.config.newTheme.themeName != '' ) {
+		return false;
+	} // if()
+
+	sn.options.config.newTheme.themeName = title;
+
+	return false;
+}; // sn.options.set.themeName()
+
+
+sn.options.set.themeURL = function() {
+	if ( sn.options.config.newTheme.themeURL != '' ) {
+		return false;
+	} // if()
+
+	var apiURL = 'https://api.github.com';
+	var user   = ( typeof sn.options.config.newTheme.user === 'undefined' ) ? '' : sn.options.config.newTheme.user;
+	var repo   = ( typeof sn.options.config.newTheme.repo === 'undefined' ) ? '' : sn.options.config.newTheme.repo;
+
+	if ( user === '' || repo === '' ) {
+		return false;
+	} // if()
+
+	tagsURL = apiURL + '/repos/' + user + '/' + repo + '/tags';
+
+	// http.get( tagsURL, function(res) {
+	// 	console.log("Got response: " + res);
+	// }).on('error', function(e) {
+	// 	console.log("Got error: " + e.message);
+	// });
+
+	// /matchboxdesigngroup/mdg-base/tags
+
+	// url = url + user + '/' + repo + '/';
+
+	url = '';
+	sn.options.config.newTheme.themeURL = url;
+
+	return false;
+}; // sn.options.set.themeURL()
+
+/**
+ * Sets config.newTheme.themeDescription option from site title.
+ *
+ * @return  {Boolean}  FALSE
+ */
+sn.options.set.themeDescription = function() {
+	var title = ( typeof sn.options.config.install.title === 'undefined' ) ? '' : sn.options.config.install.title;
+
+	if ( title === '' || sn.options.config.newTheme.themeDescription != '' ) {
+		return false;
+	} // if()
+
+	var description = 'This custom theme has been created for '+title+' by <a href="http://www.matchboxdesigngroup.com/">Matchbox Design Group</a>';
+	sn.options.config.newTheme.themeDescription = description;
+
+	return false;
+}; // sn.options.set.themeDescription()
+
+/**
+ * Sets default configuration options before CLI options.
+ *
+ * @return  {Boolean}  FALSE
+ */
+sn.options.setDefaults = function() {
+	sn.options.set.directoryName();
+	sn.options.set.dbname();
+	sn.options.set.dbprefix();
+	sn.options.set.themeName();
+	sn.options.set.themeURL();
+	sn.options.set.themeDescription();
+
+	return false;
+}; // sn.options.setDefaults()
+
+/**
+ * Initializes Snifter Utilities.
+ *
+ * @return  {Boolean}  FALSE
+ */
+sn.init = function() {
+	// Get configuration options
+	sn.options.config = sn.options.getConfig();
+
+	// Set default options (If not set in configuration)
+	sn.options.setDefaults();
+
+	return false;
+}; // sn.init()
+
+// Export Options
+module.exports = sn;
