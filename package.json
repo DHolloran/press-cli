@@ -1,0 +1,11 @@
+{
+  "name": "snifter-utilities",
+  "version": "1.0.0",
+  "description": "Utility for the Snifter base WordPress template.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Dan Holloran <dtholloran@gmail.com>",
+  "license": "GPL-3+"
+}
