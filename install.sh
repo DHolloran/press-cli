@@ -1,7 +1,7 @@
 #!/bin/sh
 
 # 1. Check for wp-cli wp --info?
-# 2. Install or Offer to install wp-cli curl -O https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar| or http://wp-cli.org/
+# 2. Add bin fall back of wp-cli.phar or Install or Offer to install wp-cli curl -O https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar| or http://wp-cli.org/
 # 3. --save/--init option to make/fill out a configuration file
 # 4. Add update option
 #
