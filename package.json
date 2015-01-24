@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "Utility for the Snifter base WordPress template.",
   "main": "index.js",
+  "repository" : "https://github.com/DHolloran/snifter-utilities",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
