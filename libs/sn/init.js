@@ -377,6 +377,96 @@ sn.options.cli.install.get.all = function( callback ) {
 }; // sn.options.cli.install.get.all()
 
 /**
+ * Gets the existing theme name.
+ *
+ * @since   1.0.0
+ *
+ * @param   {Function}  callback  The function to be executed on completion.
+ *
+ * @return  {Boolean}             FALSE
+ */
+sn.options.cli.theme.get.themeDirectoryName = function( callback ) {
+	if ( sn.options.config.theme.isNewTheme ) {
+		sn.exec.callback( callback );
+
+		return false;
+	} // if()
+
+	sn.options.cli.ask( 'Existing Theme Name', '', function( data ) {
+		sn.options.config.theme.existing.themeDirectoryName = data;
+
+		sn.exec.callback( callback );
+	});
+
+	return false;
+}; // sn.options.cli.theme.get.themeDirectoryName()
+
+/**
+ * Gets the existing theme git repository.
+ *
+ * @since   1.0.0
+ *
+ * @param   {Function}  callback  The function to be executed on completion.
+ *
+ * @return  {Boolean}             FALSE
+ */
+sn.options.cli.theme.get.gitRepository = function( callback ) {
+	if ( sn.options.config.theme.isNewTheme ) {
+		sn.exec.callback( callback );
+
+		return false;
+	} // if()
+
+	sn.options.cli.ask( 'Existing Theme Repository Slug', '', function( data ) {
+		sn.options.config.theme.existing.gitRepository = data;
+
+		sn.exec.callback( callback );
+	});
+
+	return false;
+}; // sn.options.cli.theme.get.gitRepository()
+
+/**
+ * Gets the theme setup option.
+ *
+ * @since   1.0.0
+ *
+ * @param   {Function}  callback  The function to be executed on completion.
+ *
+ * @return  {Boolean}             FALSE
+ */
+sn.options.cli.theme.get.isNewTheme = function( callback ) {
+	sn.options.cli.ask( 'Setup new theme (Y/N)', 'Y', function( data ) {
+		sn.options.config.theme.isNewTheme = data;
+
+		sn.exec.callback( callback );
+	});
+
+	return false;
+}; // sn.options.cli.theme.get.isNewTheme()
+
+/**
+ * Gets all of the theme options.
+ *
+ * @since   1.0.0
+ *
+ * @todo    Break out existing and new theme options into sn.options.cli.theme.get.allNew/Existing() om a check against sn.options.config.theme.isNewTheme.
+ *
+ * @param   {Function}  callback  The function to be executed on completion.
+ *
+ * @return  {Boolean}             FALSE
+ */
+sn.options.cli.theme.get.all = function( callback ) {
+	sn.options.cli.theme.get.isNewTheme(function() {
+		sn.options.cli.theme.get.gitRepository(function() {
+			sn.options.cli.theme.get.themeName(function() {
+				sn.exec.callback( callback );
+			});
+		});
+	});
+}; // sn.options.cli.theme.get.all()
+
+/**
  * Handles reading the configuration options.
  *
  * @since   1.0.0
