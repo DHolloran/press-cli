@@ -1,7 +1,17 @@
 var sn = {
+	exec    : {},
+	utils   : {},
 	options : {
 		config : {},
 		set    : {},
+		cli    : {
+			install : {
+				get : {},
+			},
+			theme : {
+				get : {},
+			},
+		},
 	},
 };
 
