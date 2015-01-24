@@ -11,6 +11,7 @@
   "license": "GPL-3+",
   "dependencies": {
     "colors": "^1.0.3",
+    "commander": "^2.6.0",
     "github": "^0.2.3",
     "underscore": "~1.7.0"
   }
