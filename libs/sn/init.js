@@ -209,6 +209,51 @@ sn.exec.callback = function( callback ) {
 
 	return false;
 }; // sn.exec.callback()
+
+/**
+ * Handles asking for the options not set in configuration.
+ *
+ * @param   {String}    optionMsg      The option request text.
+ * @param   {Mixed}     defaultOption  The default option.
+ * @param   {Function}  callback       The function to be executed on completion.
+ *
+ * @return  {Boolean}                   FALSE
+ */
+sn.options.cli.ask = function( optionMsg, defaultOption, callback ) {
+	var stdin = process.stdin,
+			stdout = process.stdout
+	;
+
+	stdin.resume();
+	var msg = '';
+	if ( defaultOption === '' ) {
+		stdout.write( optionMsg + "*".error + ": " );
+	} else if ( defaultOption === null ) {
+		stdout.write( optionMsg + ": " );
+	} else {
+		msg = " (" + defaultOption + ")";
+		stdout.write( optionMsg + msg.info + ":" );
+	} // if/else()
+
+	stdin.once( 'data', function( data ) {
+		data = data.toString('utf8').trim();
+
+		if ( defaultOption === '' && data === '' ) {
+			var errorMsg = optionMsg + ' is required!';
+			sn.utils.error( errorMsg.error  );
+			sn.options.cli.ask( optionMsg, defaultOption, callback );
+		} else {
+			data = ( data === '' ) ? defaultOption : data;
+			data = ( data.toLowerCase() === 'y' ) ? true : data;
+			data = ( typeof data === 'string' && data.toLowerCase() === 'n' ) ? false : data;
+			if ( typeof callback !== 'undefined' ) {
+				callback( data );
+
+				return false;
+			} // if()
+		} // if/else()
+	});
+}; // sn.options.cli.ask()
  * Sets config.install.directoryName option from site URL.
  *
  * @return  {Boolean}  FALSE
