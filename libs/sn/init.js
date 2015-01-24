@@ -181,6 +181,19 @@ String.prototype.shuffle = function() {
 	return array.join('');
 };
 
+/**
+ * Generates a random strong password.
+ *
+ * @return  {String}  The random strong password.
+ */
+sn.options.generatePassword = function() {
+	var specials  = '!@#$%^&*()_+{}:"<>?|[];\',./`~';
+	var lowercase = 'abcdefghijklmnopqrstuvwxyz';
+	var uppercase = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+	var numbers   = '0123456789';
+	var all       = specials + lowercase + uppercase + numbers;
+	return (specials.pick(1) + lowercase.pick(1) + uppercase.pick(1) + all.pick(3, 10)).shuffle();
+}; // sn.options.generatePassword()
 
 /**
  * Sets config.install.directoryName option from site URL.
