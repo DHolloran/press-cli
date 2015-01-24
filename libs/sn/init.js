@@ -278,15 +278,21 @@ sn.options.set.themeDescription = function() {
 /**
  * Sets default configuration options before CLI options.
  *
- * @return  {Boolean}  FALSE
+ * @param   {Function}  callback  The function to be executed on completion.
+ *
+ * @return  {Boolean}             FALSE
  */
-sn.options.setDefaults = function() {
+sn.options.setDefaults = function( callback ) {
 	sn.options.set.directoryName();
 	sn.options.set.dbname();
 	sn.options.set.dbprefix();
 	sn.options.set.themeName();
 	sn.options.set.themeURL();
 	sn.options.set.themeDescription();
+
+	if ( typeof callback === 'function' ) {
+		callback();
+	} // if()
 
 	return false;
 }; // sn.options.setDefaults()
@@ -301,7 +307,11 @@ sn.init = function() {
 	sn.options.config = sn.options.getConfig();
 
 	// Set default options (If not set in configuration)
-	sn.options.setDefaults();
+	sn.options.setDefaults(function() {
+		sn.options.cli();
+	});
+
+
 
 	return false;
 }; // sn.init()
