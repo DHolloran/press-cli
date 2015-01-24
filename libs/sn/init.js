@@ -99,7 +99,7 @@ sn.trimProtocol = function( url ) {
 sn.options.set.directoryName = function() {
 	var url = ( typeof sn.options.config.install.url === 'undefined' ) ? '' : sn.options.config.install.url;
 
-	if ( url === '' || sn.options.config.install.directoryName != '' ) {
+	if ( url === '' || sn.options.config.install.directoryName !== '' ) {
 		return false;
 	} // if()
 
@@ -116,7 +116,7 @@ sn.options.set.directoryName = function() {
 sn.options.set.dbname = function() {
 	var url = ( typeof sn.options.config.install.url === 'undefined' ) ? '' : sn.options.config.install.url;
 
-	if ( url === '' || sn.options.config.install.dbname != '' ) {
+	if ( url === '' || sn.options.config.install.dbname !== '' ) {
 		return false;
 	} // if()
 
@@ -135,7 +135,7 @@ sn.options.set.dbname = function() {
  * @return  {Boolean}  FALSE
  */
 sn.options.set.dbprefix = function() {
-	if ( sn.options.config.install.dbprefix != '' ) {
+	if ( sn.options.config.install.dbprefix !== '' ) {
 		return false;
 	} // if()
 
@@ -178,7 +178,7 @@ sn.options.set.dbprefix = function() {
 sn.options.set.themeName = function() {
 	var title = ( typeof sn.options.config.install.title === 'undefined' ) ? '' : sn.options.config.install.title;
 
-	if ( title === '' || sn.options.config.newTheme.themeName != '' ) {
+	if ( title === '' || sn.options.config.newTheme.themeName !== '' ) {
 		return false;
 	} // if()
 
@@ -186,6 +186,7 @@ sn.options.set.themeName = function() {
 
 	return false;
 }; // sn.options.set.themeName()
+
 /**
  * Retrieves the zip URL from the latest tag
  *
@@ -195,7 +196,6 @@ sn.options.set.themeName = function() {
  *
  * @return  {Boolean}  FALSE
  */
-
 sn.options.set.themeURL = function() {
 	if ( sn.options.config.newTheme.themeURL !== '' ) {
 		return false;
@@ -265,7 +265,7 @@ sn.options.set.themeURL = function() {
 sn.options.set.themeDescription = function() {
 	var title = ( typeof sn.options.config.install.title === 'undefined' ) ? '' : sn.options.config.install.title;
 
-	if ( title === '' || sn.options.config.newTheme.themeDescription != '' ) {
+	if ( title === '' || sn.options.config.newTheme.themeDescription !== '' ) {
 		return false;
 	} // if()
 
