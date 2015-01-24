@@ -49,7 +49,7 @@
 		},
 		"existing" : {
 			"gitRepository"       : "",
-			"themeName"           : "",
+			"themeDirectoryName"  : "",
 			"root"                : "wp-content",
 			"gitBase"             : "https://dholloran@matchboxdesigngroup.git.beanstalkapp.com",
 			"removeDefaultThemes" : true,
