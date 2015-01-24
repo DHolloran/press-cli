@@ -5,8 +5,8 @@ var sn = {
 	},
 };
 
+// Terminal colors
 var colors = require('colors');
-
 colors.setTheme({
 	silly: 'rainbow',
 	prompt: 'grey',
@@ -15,41 +15,29 @@ colors.setTheme({
 	help: 'cyan',
 	warn: 'yellow',
 	debug: 'blue',
-	error: 'red'
+	error: 'red',
 });
 
 /**
- * Handles reading the configuration options.
  * Outputs an error message to stdout.
  *
- * @return  {Object}  The configuration options.
  * @param   {String}  msg  The message to output to stdout.
  *
  * @return  {Boolean}       FALSE
  */
-sn.options.getConfig = function() {
-	var fs = require('fs');
 sn.utils.error = function( msg ) {
 	console.error( msg.error );
 
-	return JSON.parse( fs.readFileSync('./config.json', 'utf8') );
-}; // sn.options.getConfig()
 	return false;
 }; // sn.utils.error()
 
 /**
- * Strips non alpha-numeric characters from a string.
  * Outputs a warning message to stdout.
  *
- * @param   {String}  string  The string.
  * @param   {String}  msg  The message to output to stdout.
  *
- * @return  {String}          The converted string.
  * @return  {Boolean}       FALSE
  */
-sn.stripNonAlphaNumeric = function( string ) {
-	return string.replace(/\W/g, ' ');
-}; // sn.stripNonAlphaNumeric();
 sn.utils.warn = function( msg ) {
 	console.warn( msg.warn );
 
@@ -57,19 +45,12 @@ sn.utils.warn = function( msg ) {
 }; // sn.utils.warn()
 
 /**
- * Converts non alpha-numeric characters to dashes.
  * Outputs a message to stdout.
  *
- * @param   {String}  string  The string.
  * @param   {String}  msg  The message to output to stdout.
  *
- * @return  {String}          The converted string.
  * @return  {Boolean}       FALSE
  */
-sn.convertToDashes = function( string ) {
-	string = sn.stripNonAlphaNumeric( string );
-	return string.replace(/ /g, '-').replace('_', '-').replace('--', '-');
-}; // sn.convertToDashes()
 sn.utils.info = function( msg ) {
 	console.log( msg );
 
@@ -77,19 +58,12 @@ sn.utils.info = function( msg ) {
 }; // sn.utils.info()
 
 /**
- * Converts non alpha-numeric characters to underscores.
  * Outputs a debug message to stdout.
  *
- * @param   {String}  string  The string.
  * @param   {String}  msg  The message to output to stdout.
  *
- * @return  {String}          The converted string.
  * @return  {Boolean}       FALSE
  */
-sn.convertToUnderscores = function( string ) {
-	string = sn.stripNonAlphaNumeric( string );
-	return string.replace(/ /g, '_').replace('-', '_').replace('__', '_');
-}; // sn.convertToDashes()
 sn.utils.debug = function( msg ) {
 	console.log( msg.debug );
 
@@ -97,7 +71,6 @@ sn.utils.debug = function( msg ) {
 }; // sn.utils.debug()
 
 /**
- * Converts a string to a slug
  * Outputs a help message to stdout.
  *
  * @param   {String}  msg  The message to output to stdout.
@@ -109,43 +82,71 @@ sn.utils.help = function( msg ) {
 
 	return false;
 }; // sn.utils.help()
- *
- * @param   {String}  string  The string.
- *
- * @return  {String}          The converted string.
- */
-sn.convertToSlug = function( string ) {
-	string = sn.convertToDashes( string );
 
-	return string.toLowerCase();
-}; // sn.convertToSlug()
+/**
+ * Strips non alpha-numeric characters from a string.
+ *
+ * @return  {String} The converted string.
+ */
+String.prototype.stripNonAlphaNumeric = function() {
+	return this.replace(/\W/g, ' ');
+}; // String.prototype.stripNonAlphaNumeric();
+
+/**
+ * Converts non alpha-numeric characters to dashes.
+ *
+ * @return  {String}  The converted string.
+ */
+String.prototype.convertToDashes = function() {
+	return this.stripNonAlphaNumeric().replace(/[_\s]/g, '-').replace('--', '-');
+}; // String.prototype.convertToDashes()
+
+/**
+ * Converts non alpha-numeric characters to underscores.
+ *
+ * @return  {String}  The converted string.
+ */
+String.prototype.convertToUnderscores = function() {
+	return this.stripNonAlphaNumeric().replace(/[-\s]/g, '_').replace('__', '_');
+}; // String.prototype.convertToUnderscores()
+
+/**
+ * Converts a string to a slug
+ *
+ * @return  {String}  The converted string.
+ */
+String.prototype.convertToSlug = function() {
+	return this.convertToDashes().toLowerCase();
+}; // String.prototype.convertToSlug()
 
 /**
  * Converts a string to an ID
  *
- * @param   {String}  string  The string.
- *
- * @return  {String}          The converted string.
+ * @return  {String}  The converted string.
  */
-sn.convertToID = function( string ) {
-	string = sn.convertToUnderscores( string );
-
-	return string.toLowerCase();
-}; // sn.convertToID()
+String.prototype.convertToID = function() {
+	return this.convertToUnderscores().toLowerCase();
+}; // String.prototype.convertToID()
 
 /**
- * Trims the protocols off of an URL.
+ * Trims any URL protocols off of a string.
  *
- * @param   {String}  string  The URL.
- *
- * @return  {String}          The trimmed URL.
+ * @return  {String}  The trimmed string.
  */
-sn.trimProtocol = function( url ) {
-	url = url.replace('http://', '');
-	url = url.replace('https://', '');
+String.prototype.trimProtocol = function() {
+	return this.replace('https://', '').replace('http://', '');
+}; // String.prototype.trimProtocol()
 
-	return url;
-}; // sn.trimProtocol()
+
+/**
+ * Picks characters from a string.
+ *
+ * @param   {Integer}  min  The minimum amount of characters to choose.
+ * @param   {Integer}  max  The maximum amount of characters to choose.
+ *
+ * @return  {String}        The selected characters.
+ */
+
 
 /**
  * Sets config.install.directoryName option from site URL.
