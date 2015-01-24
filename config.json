@@ -37,6 +37,7 @@
 		"themeDescription" : "",
 		"user"             : "matchboxdesigngroup",
 		"repo"             : "mdg-base",
+		"releaseTag"       : "0.2.5",
 		"root"             : "wp-content/themes",
 		"themeVersion"     : "0.9.0",
 		"removeWpThemes"   : true,
