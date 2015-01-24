@@ -20,52 +20,95 @@ colors.setTheme({
 
 /**
  * Handles reading the configuration options.
+ * Outputs an error message to stdout.
  *
  * @return  {Object}  The configuration options.
+ * @param   {String}  msg  The message to output to stdout.
+ *
+ * @return  {Boolean}       FALSE
  */
 sn.options.getConfig = function() {
 	var fs = require('fs');
+sn.utils.error = function( msg ) {
+	console.error( msg.error );
 
 	return JSON.parse( fs.readFileSync('./config.json', 'utf8') );
 }; // sn.options.getConfig()
+	return false;
+}; // sn.utils.error()
 
 /**
  * Strips non alpha-numeric characters from a string.
+ * Outputs a warning message to stdout.
  *
  * @param   {String}  string  The string.
+ * @param   {String}  msg  The message to output to stdout.
  *
  * @return  {String}          The converted string.
+ * @return  {Boolean}       FALSE
  */
 sn.stripNonAlphaNumeric = function( string ) {
 	return string.replace(/\W/g, ' ');
 }; // sn.stripNonAlphaNumeric();
+sn.utils.warn = function( msg ) {
+	console.warn( msg.warn );
+
+	return false;
+}; // sn.utils.warn()
 
 /**
  * Converts non alpha-numeric characters to dashes.
+ * Outputs a message to stdout.
  *
  * @param   {String}  string  The string.
+ * @param   {String}  msg  The message to output to stdout.
  *
  * @return  {String}          The converted string.
+ * @return  {Boolean}       FALSE
  */
 sn.convertToDashes = function( string ) {
 	string = sn.stripNonAlphaNumeric( string );
 	return string.replace(/ /g, '-').replace('_', '-').replace('--', '-');
 }; // sn.convertToDashes()
+sn.utils.info = function( msg ) {
+	console.log( msg );
+
+	return false;
+}; // sn.utils.info()
 
 /**
  * Converts non alpha-numeric characters to underscores.
+ * Outputs a debug message to stdout.
  *
  * @param   {String}  string  The string.
+ * @param   {String}  msg  The message to output to stdout.
  *
  * @return  {String}          The converted string.
+ * @return  {Boolean}       FALSE
  */
 sn.convertToUnderscores = function( string ) {
 	string = sn.stripNonAlphaNumeric( string );
 	return string.replace(/ /g, '_').replace('-', '_').replace('__', '_');
 }; // sn.convertToDashes()
+sn.utils.debug = function( msg ) {
+	console.log( msg.debug );
+
+	return false;
+}; // sn.utils.debug()
 
 /**
  * Converts a string to a slug
+ * Outputs a help message to stdout.
+ *
+ * @param   {String}  msg  The message to output to stdout.
+ *
+ * @return  {Boolean}       FALSE
+ */
+sn.utils.help = function( msg ) {
+	console.log( msg.help );
+
+	return false;
+}; // sn.utils.help()
  *
  * @param   {String}  string  The string.
  *
