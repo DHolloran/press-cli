@@ -31,6 +31,8 @@ colors.setTheme({
 /**
  * Outputs an error message to stdout.
  *
+ * @since   1.0.0
+ *
  * @param   {String}  msg  The message to output to stdout.
  *
  * @return  {Boolean}       FALSE
@@ -43,6 +45,8 @@ sn.utils.error = function( msg ) {
 
 /**
  * Outputs a warning message to stdout.
+ *
+ * @since   1.0.0
  *
  * @param   {String}  msg  The message to output to stdout.
  *
@@ -57,6 +61,8 @@ sn.utils.warn = function( msg ) {
 /**
  * Outputs a message to stdout.
  *
+ * @since   1.0.0
+ *
  * @param   {String}  msg  The message to output to stdout.
  *
  * @return  {Boolean}       FALSE
@@ -69,6 +75,8 @@ sn.utils.info = function( msg ) {
 
 /**
  * Outputs a debug message to stdout.
+ *
+ * @since   1.0.0
  *
  * @param   {String}  msg  The message to output to stdout.
  *
@@ -83,6 +91,8 @@ sn.utils.debug = function( msg ) {
 /**
  * Outputs a help message to stdout.
  *
+ * @since   1.0.0
+ *
  * @param   {String}  msg  The message to output to stdout.
  *
  * @return  {Boolean}       FALSE
@@ -96,6 +106,8 @@ sn.utils.help = function( msg ) {
 /**
  * Strips non alpha-numeric characters from a string.
  *
+ * @since   1.0.0
+ *
  * @return  {String} The converted string.
  */
 String.prototype.stripNonAlphaNumeric = function() {
@@ -104,6 +116,8 @@ String.prototype.stripNonAlphaNumeric = function() {
 
 /**
  * Converts non alpha-numeric characters to dashes.
+ *
+ * @since   1.0.0
  *
  * @return  {String}  The converted string.
  */
@@ -114,6 +128,8 @@ String.prototype.convertToDashes = function() {
 /**
  * Converts non alpha-numeric characters to underscores.
  *
+ * @since   1.0.0
+ *
  * @return  {String}  The converted string.
  */
 String.prototype.convertToUnderscores = function() {
@@ -122,6 +138,8 @@ String.prototype.convertToUnderscores = function() {
 
 /**
  * Converts a string to a slug
+ *
+ * @since   1.0.0
  *
  * @return  {String}  The converted string.
  */
@@ -132,6 +150,8 @@ String.prototype.convertToSlug = function() {
 /**
  * Converts a string to an ID
  *
+ * @since   1.0.0
+ *
  * @return  {String}  The converted string.
  */
 String.prototype.convertToID = function() {
@@ -140,6 +160,8 @@ String.prototype.convertToID = function() {
 
 /**
  * Trims any URL protocols off of a string.
+ *
+ * @since   1.0.0
  *
  * @return  {String}  The trimmed string.
  */
@@ -150,6 +172,8 @@ String.prototype.trimProtocol = function() {
 
 /**
  * Picks characters from a string.
+ *
+ * @since   1.0.0
  *
  * @param   {Integer}  min  The minimum amount of characters to choose.
  * @param   {Integer}  max  The maximum amount of characters to choose.
@@ -175,6 +199,8 @@ String.prototype.pick = function(min, max) {
 /**
  * Shuffles a string.
  *
+ * @since   1.0.0
+ *
  * @return  {String}  The shuffled string.
  */
 String.prototype.shuffle = function() {
@@ -189,10 +215,12 @@ String.prototype.shuffle = function() {
 	}
 
 	return array.join('');
-};
+}; // String.prototype.shuffle()
 
 /**
  * Generates a random strong password.
+ *
+ * @since   1.0.0
  *
  * @return  {String}  The random strong password.
  */
@@ -208,6 +236,8 @@ sn.options.generatePassword = function() {
 /**
  * Executes the callback function.
  *
+ * @since   1.0.0
+ *
  * @param   {Function}  callback  The function to be executed.
  *
  * @return  {Boolean}             FALSE
@@ -222,6 +252,8 @@ sn.exec.callback = function( callback ) {
 
 /**
  * Handles asking for the options not set in configuration.
+ *
+ * @since   1.0.0
  *
  * @param   {String}    optionMsg      The option request text.
  * @param   {Mixed}     defaultOption  The default option.
@@ -268,6 +300,8 @@ sn.options.cli.ask = function( optionMsg, defaultOption, callback ) {
 /**
  * Gets the install administrator password.
  *
+ * @since   1.0.0
+ *
  * @param   {Function}  callback  The function to be executed on completion.
  *
  * @return  {Boolean}             FALSE
@@ -288,6 +322,8 @@ sn.options.cli.install.get.adminPassword = function( callback ) {
 /**
  * Gets the install site title.
  *
+ * @since   1.0.0
+ *
  * @param   {Function}  callback  The function to be executed on completion.
  *
  * @return  {Boolean}             FALSE
@@ -304,6 +340,8 @@ sn.options.cli.install.get.title = function( callback ) {
 
 /**
  * Gets the install site URL.
+ *
+ * @since   1.0.0
  *
  * @param   {Function}  callback  The function to be executed on completion.
  *
@@ -322,6 +360,8 @@ sn.options.cli.install.get.url = function( callback ) {
 /**
  * Gets all of the install options.
  *
+ * @since   1.0.0
+ *
  * @param   {Function}  callback  The function to be executed on completion.
  *
  * @return  {Boolean}             FALSE
@@ -339,6 +379,8 @@ sn.options.cli.install.get.all = function( callback ) {
 /**
  * Handles reading the configuration options.
  *
+ * @since   1.0.0
+ *
  * @return  {Object}  The configuration options.
  */
 sn.options.getConfig = function() {
@@ -349,6 +391,8 @@ sn.options.getConfig = function() {
 
 /**
  * Sets config.install.directoryName option from site URL.
+ *
+ * @since   1.0.0
  *
  * @return  {Boolean}  FALSE
  */
@@ -366,6 +410,8 @@ sn.options.set.directoryName = function() {
 
 /**
  * Sets config.install.dbname option from site URL.
+ *
+ * @since   1.0.0
  *
  * @return  {Boolean}  FALSE
  */
@@ -387,6 +433,8 @@ sn.options.set.dbname = function() {
 
 /**
  * Sets config.install.dbprefix option from site title.
+ *
+ * @since   1.0.0
  *
  * @return  {Boolean}  FALSE
  */
@@ -429,6 +477,8 @@ sn.options.set.dbprefix = function() {
 /**
  * Sets config.theme.create.themeName option from site title.
  *
+ * @since   1.0.0
+ *
  * @return  {Boolean}  FALSE
  */
 sn.options.set.themeName = function() {
@@ -445,6 +495,8 @@ sn.options.set.themeName = function() {
 
 /**
  * Retrieves the zip URL from the latest tag
+ *
+ * @since   1.0.0
  *
  * @todo Either and event or promise or something...
  * @todo Better error handling.
@@ -516,6 +568,8 @@ sn.options.set.themeURL = function() {
 /**
  * Sets config.theme.create.themeDescription option from site title.
  *
+ * @since   1.0.0
+ *
  * @return  {Boolean}  FALSE
  */
 sn.options.set.themeDescription = function() {
@@ -534,6 +588,8 @@ sn.options.set.themeDescription = function() {
 /**
  * Sets default configuration options before CLI options.
  *
+ * @since   1.0.0
+ *
  * @param   {Function}  callback  The function to be executed on completion.
  *
  * @return  {Boolean}             FALSE
@@ -546,12 +602,20 @@ sn.options.setDefaults = function( callback ) {
 	sn.options.set.themeURL();
 	sn.options.set.themeDescription();
 
+	sn.utils.debug( 'Directory Name: ' + sn.options.config.install.directoryName );
+	sn.utils.debug( 'dbname: ' + sn.options.config.install.dbname );
+	sn.utils.debug( 'dbprefix: ' + sn.options.config.install.dbprefix );
+	sn.utils.debug( 'Theme Name: ' + sn.options.config.theme.create.themeName );
+	sn.utils.debug( 'Theme URL: ' + sn.options.config.theme.create.themeURL );
+	sn.utils.debug( 'Theme Description: ' + sn.options.config.theme.create.themeDescription );
 
 	return sn.exec.callback( callback );
 }; // sn.options.setDefaults()
 
 /**
  * Initializes Snifter Utilities.
+ *
+ * @since   1.0.0
  *
  * @param   {Function}  callback  The function to be executed on completion.
  *
