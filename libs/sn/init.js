@@ -359,7 +359,7 @@ sn.options.set.directoryName = function() {
 		return false;
 	} // if()
 
-	sn.options.config.install.directoryName = sn.trimProtocol( url );
+	sn.options.config.install.directoryName = url.trimProtocol();
 
 	return false;
 }; // sn.options.set.directoryName();
@@ -376,8 +376,8 @@ sn.options.set.dbname = function() {
 		return false;
 	} // if()
 
-	url = sn.trimProtocol( url );
-	var id  = sn.convertToID( url );
+	url = url.trimProtocol();
+	var id  = url.convertToID();
 	var dbname = 'wp_' + id;
 
 	sn.options.config.install.dbname = dbname;
@@ -427,18 +427,18 @@ sn.options.set.dbprefix = function() {
 }; // sn.options.set.dbprefix();
 
 /**
- * Sets config.newTheme.themeName option from site title.
+ * Sets config.theme.create.themeName option from site title.
  *
  * @return  {Boolean}  FALSE
  */
 sn.options.set.themeName = function() {
 	var title = ( typeof sn.options.config.install.title === 'undefined' ) ? '' : sn.options.config.install.title;
 
-	if ( title === '' || sn.options.config.newTheme.themeName !== '' ) {
+	if ( title === '' || sn.options.config.theme.create.themeName !== '' ) {
 		return false;
 	} // if()
 
-	sn.options.config.newTheme.themeName = title;
+	sn.options.config.theme.create.themeName = title;
 
 	return false;
 }; // sn.options.set.themeName()
@@ -453,15 +453,15 @@ sn.options.set.themeName = function() {
  * @return  {Boolean}  FALSE
  */
 sn.options.set.themeURL = function() {
-	if ( sn.options.config.newTheme.themeURL !== '' ) {
+	if ( sn.options.config.theme.create.themeURL !== '' ) {
 		return false;
 	} // if()
 
 	var _          = require('underscore');
 	var https      = require('https');
-	var user       = ( typeof sn.options.config.newTheme.user === 'undefined' ) ? '' : sn.options.config.newTheme.user;
-	var repo       = ( typeof sn.options.config.newTheme.repo === 'undefined' ) ? '' : sn.options.config.newTheme.repo;
-	var releaseTag = ( typeof sn.options.config.newTheme.releaseTag === 'undefined' ) ? '' : sn.options.config.newTheme.releaseTag;
+	var user       = ( typeof sn.options.config.theme.create.user === 'undefined' ) ? '' : sn.options.config.theme.create.user;
+	var repo       = ( typeof sn.options.config.theme.create.repo === 'undefined' ) ? '' : sn.options.config.theme.create.repo;
+	var releaseTag = ( typeof sn.options.config.theme.create.releaseTag === 'undefined' ) ? '' : sn.options.config.theme.create.releaseTag;
 
 	// We need at least the user and repository
 	if ( user === '' || repo === '' ) {
@@ -472,7 +472,7 @@ sn.options.set.themeURL = function() {
 	if ( releaseTag !== '' ) {
 		var url = 'https://api.github.com/repos/' + user + '/' + repo + '/zipball/' + releaseTag;
 
-		sn.options.config.newTheme.themeURL = url;
+		sn.options.config.theme.create.themeURL = url;
 
 		return url;
 	} // if()
@@ -494,39 +494,39 @@ sn.options.set.themeURL = function() {
 
 	github.repos.getTags(msg, function(err, res) {
 		if ( err !== null ) {
-			console.error( err );
+			sn.utils.error( err );
 			return false;
 		} // if()
 
 		// Check if we got a tag back
 		json = JSON.parse(JSON.stringify(res));
 		if ( json.length === 0 ) {
-			console.warn( 'No releases found for https://github.com/' + user + '/' + repo + '/'  );
+			sn.utils.warn( 'No releases found for https://github.com/' + user + '/' + repo + '/'  );
 
 			return false;
 		} // if()
 
 		var url = ( typeof json[0].zipball_url === 'undefined' ) ? '' : json[0].zipball_url;
-		sn.options.config.newTheme.themeURL = url;
+		sn.options.config.theme.create.themeURL = url;
 	});
 
 	return false;
 }; // sn.options.set.themeURL()
 
 /**
- * Sets config.newTheme.themeDescription option from site title.
+ * Sets config.theme.create.themeDescription option from site title.
  *
  * @return  {Boolean}  FALSE
  */
 sn.options.set.themeDescription = function() {
 	var title = ( typeof sn.options.config.install.title === 'undefined' ) ? '' : sn.options.config.install.title;
 
-	if ( title === '' || sn.options.config.newTheme.themeDescription !== '' ) {
+	if ( title === '' || sn.options.config.theme.create.themeDescription !== '' ) {
 		return false;
 	} // if()
 
 	var description = 'This custom theme has been created for '+title+' by <a href="http://www.matchboxdesigngroup.com/">Matchbox Design Group</a>';
-	sn.options.config.newTheme.themeDescription = description;
+	sn.options.config.theme.create.themeDescription = description;
 
 	return false;
 }; // sn.options.set.themeDescription()
@@ -546,28 +546,27 @@ sn.options.setDefaults = function( callback ) {
 	sn.options.set.themeURL();
 	sn.options.set.themeDescription();
 
-	if ( typeof callback === 'function' ) {
-		callback();
-	} // if()
 
-	return false;
+	return sn.exec.callback( callback );
 }; // sn.options.setDefaults()
 
 /**
  * Initializes Snifter Utilities.
  *
- * @return  {Boolean}  FALSE
+ * @param   {Function}  callback  The function to be executed on completion.
+ *
+ * @return  {Boolean}   FALSE
  */
-sn.init = function() {
+sn.init = function( callback ) {
 	// Get configuration options
 	sn.options.config = sn.options.getConfig();
 
-	// Set default options (If not set in configuration)
-	sn.options.setDefaults(function() {
-		sn.options.cli();
+	// Get CLI options
+	sn.options.cli.install.get.all(function() {
+		sn.options.cli.theme.get.all(function(){
+			sn.options.setDefaults( callback );
+		});
 	});
-
-
 
 	return false;
 }; // sn.init()
