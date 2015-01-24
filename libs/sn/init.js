@@ -264,6 +264,77 @@ sn.options.cli.ask = function( optionMsg, defaultOption, callback ) {
 		} // if/else()
 	});
 }; // sn.options.cli.ask()
+
+/**
+ * Gets the install administrator password.
+ *
+ * @param   {Function}  callback  The function to be executed on completion.
+ *
+ * @return  {Boolean}             FALSE
+ */
+sn.options.cli.install.get.adminPassword = function( callback ) {
+	sn.options.cli.ask( 'Administrator Password', sn.options.generatePassword(), function( data ){
+		sn.options.config.install.adminPassword = data;
+
+		// Remind user to save their password
+		sn.utils.warn( 'Remember to save your password ' + data + ' in a safe place' );
+
+		sn.exec.callback( callback );
+	});
+
+	return false;
+}; // sn.options.cli.install.get.adminPassword
+
+/**
+ * Gets the install site title.
+ *
+ * @param   {Function}  callback  The function to be executed on completion.
+ *
+ * @return  {Boolean}             FALSE
+ */
+sn.options.cli.install.get.title = function( callback ) {
+	sn.options.cli.ask( 'Site Title', '', function( data ){
+		sn.options.config.install.title = data;
+
+		sn.exec.callback( callback );
+	});
+
+	return false;
+}; // sn.options.cli.install.get.title
+
+/**
+ * Gets the install site URL.
+ *
+ * @param   {Function}  callback  The function to be executed on completion.
+ *
+ * @return  {Boolean}             FALSE
+ */
+sn.options.cli.install.get.url = function( callback ) {
+	sn.options.cli.ask( 'Site URL (ex:myawesomesite.dev)', '', function( data ){
+		sn.options.config.install.url = data;
+
+		sn.exec.callback( callback );
+	});
+
+	return false;
+}; // sn.options.cli.install.get.url
+
+/**
+ * Gets all of the install options.
+ *
+ * @param   {Function}  callback  The function to be executed on completion.
+ *
+ * @return  {Boolean}             FALSE
+ */
+sn.options.cli.install.get.all = function( callback ) {
+	sn.options.cli.install.get.title(function(){
+		sn.options.cli.install.get.url(function(){
+			sn.options.cli.install.get.adminPassword(function(){
+				callback();
+			});
+		});
+	});
+}; // sn.options.cli.install.get.all()
  * Sets config.install.directoryName option from site URL.
  *
  * @return  {Boolean}  FALSE
