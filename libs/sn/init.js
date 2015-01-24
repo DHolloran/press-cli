@@ -196,6 +196,19 @@ sn.options.generatePassword = function() {
 }; // sn.options.generatePassword()
 
 /**
+ * Executes the callback function.
+ *
+ * @param   {Function}  callback  The function to be executed.
+ *
+ * @return  {Boolean}             FALSE
+ */
+sn.exec.callback = function( callback ) {
+	if ( typeof callback === 'function' ) {
+		callback();
+	} // if()
+
+	return false;
+}; // sn.exec.callback()
  * Sets config.install.directoryName option from site URL.
  *
  * @return  {Boolean}  FALSE
