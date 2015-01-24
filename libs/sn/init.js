@@ -186,35 +186,73 @@ sn.options.set.themeName = function() {
 
 	return false;
 }; // sn.options.set.themeName()
-
+/**
+ * Retrieves the zip URL from the latest tag
+ *
+ * @todo Either and event or promise or something...
+ * @todo Better error handling.
+ * @todo Abstract GitHub get release tag functionality.
+ *
+ * @return  {Boolean}  FALSE
+ */
 
 sn.options.set.themeURL = function() {
-	if ( sn.options.config.newTheme.themeURL != '' ) {
+	if ( sn.options.config.newTheme.themeURL !== '' ) {
 		return false;
 	} // if()
 
-	var apiURL = 'https://api.github.com';
-	var user   = ( typeof sn.options.config.newTheme.user === 'undefined' ) ? '' : sn.options.config.newTheme.user;
-	var repo   = ( typeof sn.options.config.newTheme.repo === 'undefined' ) ? '' : sn.options.config.newTheme.repo;
+	var _          = require('underscore');
+	var https      = require('https');
+	var user       = ( typeof sn.options.config.newTheme.user === 'undefined' ) ? '' : sn.options.config.newTheme.user;
+	var repo       = ( typeof sn.options.config.newTheme.repo === 'undefined' ) ? '' : sn.options.config.newTheme.repo;
+	var releaseTag = ( typeof sn.options.config.newTheme.releaseTag === 'undefined' ) ? '' : sn.options.config.newTheme.releaseTag;
 
+	// We need at least the user and repository
 	if ( user === '' || repo === '' ) {
 		return false;
 	} // if()
 
-	tagsURL = apiURL + '/repos/' + user + '/' + repo + '/tags';
+	// If we have a release tag no need to go get it.
+	if ( releaseTag !== '' ) {
+		var url = 'https://api.github.com/repos/' + user + '/' + repo + '/zipball/' + releaseTag;
 
-	// http.get( tagsURL, function(res) {
-	// 	console.log("Got response: " + res);
-	// }).on('error', function(e) {
-	// 	console.log("Got error: " + e.message);
-	// });
+		sn.options.config.newTheme.themeURL = url;
 
-	// /matchboxdesigngroup/mdg-base/tags
+		return url;
+	} // if()
 
-	// url = url + user + '/' + repo + '/';
+	var GitHubApi = require("github");
+	var github = new GitHubApi({
+		version: "3.0.0",
+		protocol: "https",
+		headers: {
+			"user-agent": user,
+		},
+	});
+	var msg = {
+		user     : user,
+		repo     : repo,
+		page     : 1,
+		per_page : 1,
+	};
 
-	url = '';
-	sn.options.config.newTheme.themeURL = url;
+	github.repos.getTags(msg, function(err, res) {
+		if ( err !== null ) {
+			console.error( err );
+			return false;
+		} // if()
+
+		// Check if we got a tag back
+		json = JSON.parse(JSON.stringify(res));
+		if ( json.length === 0 ) {
+			console.warn( 'No releases found for https://github.com/' + user + '/' + repo + '/'  );
+
+			return false;
+		} // if()
+
+		var url = ( typeof json[0].zipball_url === 'undefined' ) ? '' : json[0].zipball_url;
+		sn.options.config.newTheme.themeURL = url;
+	});
 
 	return false;
 }; // sn.options.set.themeURL()
