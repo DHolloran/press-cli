@@ -307,7 +307,7 @@ sn.options.cli.ask = function( optionMsg, defaultOption, callback ) {
  * @return  {Boolean}             FALSE
  */
 sn.options.cli.install.get.adminPassword = function( callback ) {
-	sn.options.cli.ask( 'Administrator Password', sn.options.generatePassword(), function( data ){
+	sn.options.cli.ask( 'Administrator Password', sn.options.generatePassword(), function( data ) {
 		sn.options.config.install.adminPassword = data;
 
 		// Remind user to save their password
@@ -329,7 +329,7 @@ sn.options.cli.install.get.adminPassword = function( callback ) {
  * @return  {Boolean}             FALSE
  */
 sn.options.cli.install.get.title = function( callback ) {
-	sn.options.cli.ask( 'Site Title', '', function( data ){
+	sn.options.cli.ask( 'Site Title', '', function( data ) {
 		sn.options.config.install.title = data;
 
 		sn.exec.callback( callback );
@@ -348,7 +348,7 @@ sn.options.cli.install.get.title = function( callback ) {
  * @return  {Boolean}             FALSE
  */
 sn.options.cli.install.get.url = function( callback ) {
-	sn.options.cli.ask( 'Site URL (ex:myawesomesite.dev)', '', function( data ){
+	sn.options.cli.ask( 'Site URL (ex:myawesomesite.dev)', '', function( data ) {
 		sn.options.config.install.url = data;
 
 		sn.exec.callback( callback );
@@ -367,9 +367,9 @@ sn.options.cli.install.get.url = function( callback ) {
  * @return  {Boolean}             FALSE
  */
 sn.options.cli.install.get.all = function( callback ) {
-	sn.options.cli.install.get.title(function(){
-		sn.options.cli.install.get.url(function(){
-			sn.options.cli.install.get.adminPassword(function(){
+	sn.options.cli.install.get.title(function() {
+		sn.options.cli.install.get.url(function() {
+			sn.options.cli.install.get.adminPassword(function() {
 				callback();
 			});
 		});
@@ -482,6 +482,10 @@ sn.options.set.dbprefix = function() {
  * @return  {Boolean}  FALSE
  */
 sn.options.set.themeName = function() {
+	if ( ! sn.options.config.theme.isNewTheme ) {
+		return false;
+	} // if()
+
 	var title = ( typeof sn.options.config.install.title === 'undefined' ) ? '' : sn.options.config.install.title;
 
 	if ( title === '' || sn.options.config.theme.create.themeName !== '' ) {
@@ -505,7 +509,7 @@ sn.options.set.themeName = function() {
  * @return  {Boolean}  FALSE
  */
 sn.options.set.themeURL = function() {
-	if ( sn.options.config.theme.create.themeURL !== '' ) {
+	if ( sn.options.config.theme.create.themeURL !== '' || ! sn.options.config.theme.isNewTheme ) {
 		return false;
 	} // if()
 
@@ -573,6 +577,10 @@ sn.options.set.themeURL = function() {
  * @return  {Boolean}  FALSE
  */
 sn.options.set.themeDescription = function() {
+	if ( ! sn.options.config.theme.isNewTheme ) {
+		return false;
+	} // if()
+
 	var title = ( typeof sn.options.config.install.title === 'undefined' ) ? '' : sn.options.config.install.title;
 
 	if ( title === '' || sn.options.config.theme.create.themeDescription !== '' ) {
@@ -627,7 +635,7 @@ sn.init = function( callback ) {
 
 	// Get CLI options
 	sn.options.cli.install.get.all(function() {
-		sn.options.cli.theme.get.all(function(){
+		sn.options.cli.theme.get.all(function() {
 			sn.options.setDefaults( callback );
 		});
 	});
