@@ -146,6 +146,22 @@ String.prototype.trimProtocol = function() {
  *
  * @return  {String}        The selected characters.
  */
+String.prototype.pick = function(min, max) {
+	var n, chars = '';
+
+	if (typeof max === 'undefined') {
+		n = min;
+	} else {
+		n = min + Math.floor(Math.random() * (max - min));
+	} // if/else()
+
+	for (var i = 0; i < n; i++) {
+		chars += this.charAt(Math.floor(Math.random() * this.length));
+	} // for()
+
+	return chars;
+}; // String.prototype.pick()
+
 
 
 /**
