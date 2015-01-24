@@ -335,6 +335,19 @@ sn.options.cli.install.get.all = function( callback ) {
 		});
 	});
 }; // sn.options.cli.install.get.all()
+
+/**
+ * Handles reading the configuration options.
+ *
+ * @return  {Object}  The configuration options.
+ */
+sn.options.getConfig = function() {
+	var fs = require('fs');
+
+	return JSON.parse( fs.readFileSync('./config.json', 'utf8') );
+}; // sn.options.getConfig()
+
+/**
  * Sets config.install.directoryName option from site URL.
  *
  * @return  {Boolean}  FALSE
