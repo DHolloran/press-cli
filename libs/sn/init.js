@@ -162,6 +162,24 @@ String.prototype.pick = function(min, max) {
 	return chars;
 }; // String.prototype.pick()
 
+/**
+ * Shuffles a string.
+ *
+ * @return  {String}  The shuffled string.
+ */
+String.prototype.shuffle = function() {
+	var array = this.split('');
+	var tmp, current, top = array.length;
+
+	if (top) while (--top) {
+		current = Math.floor(Math.random() * (top + 1));
+		tmp = array[current];
+		array[current] = array[top];
+		array[top] = tmp;
+	}
+
+	return array.join('');
+};
 
 
 /**
