@@ -5,6 +5,19 @@ var sn = {
 	},
 };
 
+var colors = require('colors');
+
+colors.setTheme({
+	silly: 'rainbow',
+	prompt: 'grey',
+	info: 'green',
+	data: 'grey',
+	help: 'cyan',
+	warn: 'yellow',
+	debug: 'blue',
+	error: 'red'
+});
+
 /**
  * Handles reading the configuration options.
  *

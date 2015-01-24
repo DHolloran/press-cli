@@ -1,23 +1,24 @@
 {
 	"install" : {
-		"url"               : "snifterutilitiestest.dev",
-		"title"             : "Snifter Utilities Test",
-		"adminPassword"    : "",
-		"directoryName"     : "",
-		"dbname"            : "",
-		"dbprefix"          : "",
-		"directory"         : "/Applications/MAMP/htdocs/",
-		"dbuser"            : "root",
-		"dbpass"            : "root",
-		"dbhost"            : "127.0.0.1",
-		"adminUser"        : "matchbox",
-		"adminEmail"       : "dholloran@matchboxdesigngroup.com",
-		"textEditor"       : "st",
-		"vhostsPath"       : "/Applications/MAMP/conf/apache/vhosts.conf",
-		"hostsPath"        : "/private/etc/hosts",
+		"url"             : "",
+		"title"           : "",
+		"adminPassword"   : "",
+		"directoryName"   : "",
+		"dbname"          : "",
+		"dbprefix"        : "",
+		"directory"       : "/Applications/MAMP/htdocs/",
+		"dbuser"          : "root",
+		"dbpass"          : "root",
+		"dbhost"          : "127.0.0.1",
+		"adminUser"       : "matchbox",
+		"adminEmail"      : "dholloran@matchboxdesigngroup.com",
+		"textEditor"      : "st",
+		"vhostsPath"      : "/Applications/MAMP/conf/apache/vhosts.conf",
+		"hostsPath"       : "/private/etc/hosts",
 		"indexPhpPath"    : "index.php",
 		"removeWpPlugins" : true,
-		"plugins"           : {
+		"installTheme"    : true,
+		"plugins"         : {
 			"regenerateThumbnails" : true,
 			"duplicatePost"        : true,
 			"logDeprecatedNotices" : true,
@@ -28,30 +29,31 @@
 		}
 	},
 	"theme"    : {
+		"isNewTheme"   : "",
 		"npmInstall"   : true,
-		"bowerInstall" : true
-	},
-	"newTheme" : {
-		"themeName"        : "",
-		"themeURL"         : "",
-		"themeDescription" : "",
-		"user"             : "matchboxdesigngroup",
-		"repo"             : "mdg-base",
-		"releaseTag"       : "0.2.5",
-		"root"             : "wp-content/themes",
-		"themeVersion"     : "0.9.0",
-		"removeWpThemes"   : true,
-		"author"           : "Matchbox Design Group <info@matchboxdesigngroup.com>",
-		"authorURI"        : "http://www.matchboxdesigngroup.com/",
-		"license"          : "GPL v3.0+",
-		"licenseURI"       : "http://www.gnu.org/licenses/gpl.html"
-	},
-	"existingTheme" : {
-		"gitRepository"       : "",
-		"themeName"           : "",
-		"root"                : "wp-content",
-		"gitBase"             : "https://dholloran@matchboxdesigngroup.git.beanstalkapp.com",
-		"removeDefaultThemes" : true,
-		"branches"            : {}
+		"bowerInstall" : true,
+		"create" : {
+			"themeName"        : "",
+			"themeURL"         : "",
+			"themeDescription" : "",
+			"user"             : "matchboxdesigngroup",
+			"repo"             : "mdg-base",
+			"releaseTag"       : "0.2.5",
+			"root"             : "wp-content/themes",
+			"themeVersion"     : "0.9.0",
+			"removeWpThemes"   : true,
+			"author"           : "Matchbox Design Group <info@matchboxdesigngroup.com>",
+			"authorURI"        : "http://www.matchboxdesigngroup.com/",
+			"license"          : "GPL v3.0+",
+			"licenseURI"       : "http://www.gnu.org/licenses/gpl.html"
+		},
+		"existing" : {
+			"gitRepository"       : "",
+			"themeName"           : "",
+			"root"                : "wp-content",
+			"gitBase"             : "https://dholloran@matchboxdesigngroup.git.beanstalkapp.com",
+			"removeDefaultThemes" : true,
+			"branches"            : {}
+		}
 	}
 }
