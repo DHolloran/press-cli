@@ -1,0 +1,59 @@
+{
+	"install" : {
+		"url"             : "",
+		"title"           : "",
+		"adminPassword"   : "",
+		"directoryName"   : "",
+		"dbname"          : "",
+		"dbprefix"        : "",
+		"directory"       : "",
+		"dbuser"          : "",
+		"dbpass"          : "",
+		"dbhost"          : "",
+		"adminUser"       : "",
+		"adminEmail"      : "",
+		"textEditor"      : "",
+		"vhostsPath"      : "",
+		"hostsPath"       : "",
+		"indexPhpPath"    : "",
+		"removeWpPlugins" : true,
+		"installTheme"    : true,
+		"plugins"         : {
+			"regenerateThumbnails" : true,
+			"duplicatePost"        : true,
+			"logDeprecatedNotices" : true,
+			"queryMonitor"         : true,
+			"jetpack"              : false,
+			"launchCheck"          : false,
+			"wordpressSeo"         : false
+		}
+	},
+	"theme"    : {
+		"isNewTheme"   : "",
+		"npmInstall"   : true,
+		"bowerInstall" : true,
+		"create" : {
+			"themeName"        : "",
+			"themeURL"         : "",
+			"themeDescription" : "",
+			"user"             : "",
+			"repo"             : "",
+			"releaseTag"       : "",
+			"root"             : "",
+			"themeVersion"     : "",
+			"removeWpThemes"   : true,
+			"author"           : "",
+			"authorURI"        : "",
+			"license"          : "",
+			"licenseURI"       : "",
+		},
+		"existing" : {
+			"gitRepository"       : "",
+			"themeDirectoryName"  : "",
+			"root"                : "",
+			"gitBase"             : "",
+			"removeDefaultThemes" : true,
+			"branches"            : {}
+		}
+	}
+}
