@@ -35,6 +35,7 @@
 		"bowerInstall" : true,
 		"create" : {
 			"themeName"        : "",
+			"themeSlug"        : "",
 			"themeURL"         : "",
 			"themeDescription" : "",
 			"user"             : "",
