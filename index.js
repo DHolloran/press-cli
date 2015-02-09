@@ -5,7 +5,10 @@
 	sn.init(function() {
 		var wp = require('./lib/wp/init.js');
 		wp.init(function(){
-			process.exit(0);
+			var theme = require( './lib/wp/theme.js' );
+			theme.init(function(){
+				process.exit(0);
+			});
 		});
 	});
 }());
