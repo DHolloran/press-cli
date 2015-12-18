@@ -26,6 +26,8 @@ abstract class Configuration {
         $this->output = $output;
     }
 
+    abstract protected function checkIfConfigExists();
+
     /**
      * The configuration values.
      *
@@ -46,7 +48,7 @@ abstract class Configuration {
      *
      * @return mixed
      */
-    public function getYamlConfig()
+    public function getYAMLConfig()
     {
         return $this->yamlConfig;
     }
@@ -56,7 +58,7 @@ abstract class Configuration {
      *
      * @return mixed
      */
-    public function getJsonConfig()
+    public function getJSONConfig()
     {
         return $this->jsonConfig;
     }
@@ -92,7 +94,7 @@ abstract class Configuration {
      *
      * @return self
      */
-    public function setYamlConfig($yamlConfig)
+    public function setYAMLConfig($yamlConfig)
     {
         $this->yamlConfig = $yamlConfig;
 
@@ -106,7 +108,7 @@ abstract class Configuration {
      *
      * @return self
      */
-    public function setJsonConfig($jsonConfig)
+    public function setJSONConfig($jsonConfig)
     {
         $this->jsonConfig = $jsonConfig;
 

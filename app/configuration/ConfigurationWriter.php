@@ -22,21 +22,20 @@ class ConfigurationWriter extends Configuration {
     /**
      * Creates a configuration file.
      *
-     * @param string          $configType
-     * @param OutputInterface $output
-     * @param boolean         $force
+     * @param string  $configType
+     * @param boolean $force
      */
-    public function createConfig(OutputInterface $output)
+    public function createConfig()
     {
         $this->checkIfConfigExists($this->getForce());
 
         switch ($this->getConfigType()) {
             case 'json':
-                $this->createJSONConfig($output);
+                $this->createJSONConfig();
                 break;
 
             default:
-                $this->createYAMLConfig($output);
+                $this->createYAMLConfig();
                 break;
         }
     }
@@ -50,23 +49,21 @@ class ConfigurationWriter extends Configuration {
             return;
         }
 
-        if ( file_exists($this->getJsonConfig()) or file_exists($this->getYamlConfig()) ) {
+        if ( file_exists($this->getJSONConfig()) or file_exists($this->getYAMLConfig()) ) {
             throw new \Exception("Configuration file already exists!");
         }
     }
 
     /**
      * Creates a new YAML configuration file.
-     *
-     * @param OutputInterface $output
      */
-    protected function createYAMLConfig(OutputInterface $output)
+    protected function createYAMLConfig()
     {
         $dumper = new Dumper();
 
         $yaml = $dumper->dump($this->configurationValues(), 2);
 
-        $this->createConfigurationFile($this->getYamlConfig(), $yaml, $output);
+        $this->createConfigurationFile($this->getYAMLConfig(), $yaml);
     }
 
     /**
@@ -74,21 +71,20 @@ class ConfigurationWriter extends Configuration {
      *
      * @param OutputInterface $output
      */
-    protected function createJSONConfig(OutputInterface $output)
+    protected function createJSONConfig()
     {
         $json = json_encode($this->configurationValues(), JSON_PRETTY_PRINT);
 
-        $this->createConfigurationFile($this->getJsonConfig(), $json, $output);
+        $this->createConfigurationFile($this->getJSONConfig(), $json);
     }
 
     /**
      * Creates a new configuration file.
      *
-     * @param string          $name
-     * @param string          $contents
-     * @param OutputInterface $output
+     * @param string $name
+     * @param string $contents
      */
-    protected function createConfigurationFile($name, $contents, OutputInterface $output)
+    protected function createConfigurationFile($name, $contents)
     {
         $file = file_put_contents($name, $contents);
 
@@ -98,7 +94,7 @@ class ConfigurationWriter extends Configuration {
 
         $configTypePath = getcwd() . "/{$name}";
 
-        $output->writeln("<info>Configuration created successfully at {$configTypePath}</info>");
+        $this->output->writeln("<info>Configuration created successfully at {$configTypePath}</info>");
     }
 
     /**

@@ -1,6 +1,7 @@
 <?php
 namespace App;
 
+use App\Configuration\ConfigurationReader;
 use App\Configuration\ConfigurationWriter;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputOption;
@@ -27,12 +28,6 @@ class InitCommand extends Command
                'The configuration file type to create json|yaml.'
             )
             ->addOption(
-               'global-config',
-               null,
-               InputArgument::OPTIONAL,
-               'The configuration file type to create json|yaml.'
-            )
-            ->addOption(
                'force',
                null,
                InputOption::VALUE_NONE,
@@ -51,10 +46,15 @@ class InitCommand extends Command
         $configType = $input->getOption('config-type');
         $force = $input->getOption('force');
 
-        $configurationWriter = new ConfigurationWriter($output);
-        $configurationWriter->setConfigType($configType);
-        $configurationWriter->setForce($force);
-        $configurationWriter->createConfig($output);
+        $writer = new ConfigurationWriter($output);
+        $writer->setConfigType($configType);
+        $writer->setForce($force);
+        $writer->createConfig();
+
+        $reader = new ConfigurationReader($output);
+        $reader->setConfigType($configType);
+        $config = $reader->config();
+        var_dump($config);
     }
 
 }
