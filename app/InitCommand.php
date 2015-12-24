@@ -1,7 +1,6 @@
 <?php
 namespace App;
 
-use App\Configuration\ConfigurationReader;
 use App\Configuration\ConfigurationWriter;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputOption;
@@ -22,16 +21,16 @@ class InitCommand extends Command
             ->setName('init')
             ->setDescription('Create a new configuration.')
             ->addOption(
-               'config-type',
-               null,
-               InputArgument::OPTIONAL,
-               'The configuration file type to create json|yaml.'
+                'config-type',
+                null,
+                InputArgument::OPTIONAL,
+                'The configuration file type to create json|yaml.'
             )
             ->addOption(
-               'force',
-               null,
-               InputOption::VALUE_NONE,
-               'Will bypass configuration file exists check and will overwrite configuration file.'
+                'force',
+                null,
+                InputOption::VALUE_NONE,
+                'Will bypass configuration file exists check and will overwrite configuration file.'
             );
     }
 
@@ -50,11 +49,5 @@ class InitCommand extends Command
         $writer->setConfigType($configType);
         $writer->setForce($force);
         $writer->createConfig();
-
-        $reader = new ConfigurationReader($output);
-        $reader->setConfigType($configType);
-        $config = $reader->config();
-        var_dump($config);
     }
-
 }

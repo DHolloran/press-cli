@@ -35,12 +35,9 @@ abstract class Configuration {
      *
      * @return  array
      */
-    public function configurationValues($config = [])
+    public function defaultValues($config = [])
     {
-        return array_merge([
-            'config1' => 'test1',
-            'config2' => 'test2',
-        ], $config);
+        return array_merge([], $config);
     }
 
     /**

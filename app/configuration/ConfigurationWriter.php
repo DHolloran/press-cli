@@ -61,7 +61,7 @@ class ConfigurationWriter extends Configuration {
     {
         $dumper = new Dumper();
 
-        $yaml = $dumper->dump($this->configurationValues(), 2);
+        $yaml = $dumper->dump($this->defaultValues(), 2);
 
         $this->createConfigurationFile($this->getYAMLConfig(), $yaml);
     }
@@ -73,7 +73,7 @@ class ConfigurationWriter extends Configuration {
      */
     protected function createJSONConfig()
     {
-        $json = json_encode($this->configurationValues(), JSON_PRETTY_PRINT);
+        $json = json_encode($this->defaultValues(), JSON_PRETTY_PRINT);
 
         $this->createConfigurationFile($this->getJSONConfig(), $json);
     }
