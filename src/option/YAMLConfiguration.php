@@ -36,42 +36,10 @@ class YAMLConfiguration
      */
     public static function get()
     {
-        return [
-            'database' => [
-                'user' => 'root',
-                'password' => 'root',
-                'prefix' => 'wp_',
-                'name' => 'wp_test',
-                'host' => '127.0.0.1:8889',
-            ],
-            'plugins' => [
-                'jetpack' => [ 'activate' => false ],
-                'crop-thumbnails' => [ 'activate' => true ],
-                'query-monitor' => [ 'activate' => true ],
-                'force-regenerate-thumbnails' => [ 'activate' => true ],
-            ],
-            'user' => [
-                'username' => 'dholloran',
-                'email' => 'dholloran@matchboxdesigngroup.com',
-                'password' => 'jooL8bYGrYdkVyHKvAeFDsiBnyEB9y',
-            ],
-            // 'theme' => [
-            //     'zip' => '',
-            //     'root' => '/',
-            //     'name' => 'test-theme',
-                // Update style.css
-            // ],
-            'site' => [
-                'title' => 'Site Title',
-                'url' => 'test.dev',
-            ],
-            'commands' => [
-                'postInstall' => [
-                    'npm install',
-                    'bower install'
-                ],
-            ]
-        ];
+        // Place holder for configuration.
+        include KCLI_EXEC_DIR . '/config.php';
+
+        return $config;
     }
 
     /**

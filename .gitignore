@@ -3,3 +3,4 @@ config.yml
 config.json
 test-com
 test
+/config.php
