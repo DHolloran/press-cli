@@ -37,10 +37,19 @@ class InstallCommand extends Command
         // Activate Theme
 
 
+        // Remove default themes (Except latest)
+
+
+        // Remove default plugins
+
+
         // Install wp.org plugins
 
 
         // Activate required plugins
+
+
+        // Remove default posts
 
 
         // Flush rewrite rules
