@@ -34,13 +34,15 @@ class YAMLConfiguration
      *
      * @return array
      */
-    public function get()
+    public static function get()
     {
         return [
             'database' => [
                 'user' => 'root',
                 'password' => 'root',
                 'prefix' => 'wp_',
+                'name' => 'wp_test',
+                'host' => '127.0.0.1:8889',
             ],
             'plugins' => [
                 'jetpack' => [ 'activate' => false ],
@@ -61,6 +63,7 @@ class YAMLConfiguration
             // ],
             'site' => [
                 'title' => 'Site Title',
+                'url' => 'test.dev',
             ],
             'commands' => [
                 'postInstall' => [
