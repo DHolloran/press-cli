@@ -1,12 +1,14 @@
 {
     "require": {
-        "wp-cli/wp-cli": "^0.21.1",
-        "symfony/console": "^3.0",
-        "symfony/yaml": "^3.0"
+        "wp-cli/wp-cli": "^0.24.1",
+        "symfony/console" : "~2.7"
     },
+    "bin": [
+        "kindling"
+    ],
     "autoload": {
-		"psr-4": {
-			"App\\": "app"
-		}
-	}
+        "psr-4": {
+            "KindlingCLI\\": "src"
+        }
+    }
 }
