@@ -6,6 +6,8 @@ use KindlingCLI\Command\InitCommand;
 use KindlingCLI\Command\InstallCommand;
 use Symfony\Component\Console\Application;
 
+define('KCLI_EXEC_DIR', __DIR__);
+
 $application = new Application();
 
 $application->add(new InstallCommand);

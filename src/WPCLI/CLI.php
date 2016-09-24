@@ -18,7 +18,7 @@ class CLI
     {
         $arguments = trim(implode(' ', $arguments));
         $options = self::execOptions($options);
-        $command = trim("./../vendor/bin/wp {$command}");
+        $command = trim(KCLI_EXEC_DIR . "/vendor/bin/wp {$command}");
         $command = implode(' ', array_filter([$command, $arguments, $options]));
 
         return system($command);
