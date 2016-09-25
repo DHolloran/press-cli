@@ -10,13 +10,16 @@ class PostInstall
      */
     public static function executeCommands()
     {
-        // $commands = $config['commands'];
-        //
-        // Execute Theme commands.
-        // Execute Root commands
-        // Other?
         $config = Configuration::get();
-        $config = Configuration::get();
+        $commands = $config['commands'];
     }
-//
+
+    /**
+     * Executes the post install theme commands.
+     */
+    public static function executeThemeCommands()
+    {
+        $config = Configuration::get();
+        $commands = $config['commands'];
+    }
 }

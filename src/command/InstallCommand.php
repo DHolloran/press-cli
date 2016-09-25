@@ -47,7 +47,8 @@ class InstallCommand extends Command
 
         // @todo Install PHPUnit scaffold.
 
-        // Activate Theme
+        // Run post install theme commands.
+        PostInstall::executeThemeCommands();
 
         $output->writeln("\n<info>== Setting up plugins =======================</info>");
 
@@ -74,6 +75,6 @@ class InstallCommand extends Command
         WP::rewriteSetStructure();
 
         // Run post install commands.
-        // PostInstall::executeCommands();
+        PostInstall::executeCommands();
     }
 }
