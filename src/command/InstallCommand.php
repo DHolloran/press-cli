@@ -5,6 +5,7 @@ use KindlingCLI\WPCLI\WP;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
+use KindlingCLI\Command\PostInstall;
 
 class InstallCommand extends Command
 {
@@ -16,6 +17,9 @@ class InstallCommand extends Command
 
     protected function execute(InputInterface $input, OutputInterface $output)
     {
+        // Run pre-install commands.
+
+
         // Check/Download WordPress
         WP::coreDownload($output);
 
@@ -28,7 +32,10 @@ class InstallCommand extends Command
         // Check/Run install
         WP::coreInstall($output);
 
-        // Check/Download/Merge theme
+        // Remove default themes (Except latest)
+        WP::themeDeleteDefaults();
+
+        // Check/Download/Merge theme (Zip/Tar/Git/Other?)
 
 
         // Rewrite style.css
@@ -37,21 +44,24 @@ class InstallCommand extends Command
         // Activate Theme
 
 
-        // Remove default themes (Except latest)
-
-
         // Remove default plugins
-
+        WP::pluginDeleteDefaults();
+        // License paid plugins
+        // define( 'WPMDB_LICENCE', 'XXXXX' );
+        // Possibly activate paid plugins separately after licensing.
 
         // Install wp.org plugins
-
-
-        // Activate required plugins
-
+        WP::pluginInstallAll();
 
         // Remove default posts
+        WP::postDeleteDefault();
 
+        // Create menus from theme menu locations?
 
-        // Flush rewrite rules
+        // Set rewrite rules
+        WP::rewriteSetStructure();
+
+        // Run post install commands.
+        // PostInstall::executeCommands();
     }
 }
