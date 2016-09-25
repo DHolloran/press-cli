@@ -88,6 +88,6 @@ class InstallCommand extends Command
         // @todo Disable with flag?
         PostInstall::executeCommands();
 
-        $output->writeln("\n<info>== Install Completed =======================</info>");
+        $output->writeln("\n<info>Install Completed!</info>");
     }
 }
