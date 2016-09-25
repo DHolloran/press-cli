@@ -17,9 +17,14 @@ class InstallCommand extends Command
 
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-        // @todo Split sections into there own commands?
+        // @codingStandardsIgnoreStart
+        // @todo Check for .kindling.yaml before executing and throw error if not found.
+        // @todo Split sections into there own commands? That way you can install via `$ kindling install:all` or `$kindling install:section`
         // @todo Allow for disabling of certain sections via flag?
         // @todo Post Git pull commands?
+        // @todo Install PHPUnit scaffold once theme is installed.
+        // @todo Initialize Git repository and remotes.
+        // @codingStandardsIgnoreEnd
 
         $output->writeln("<info>== Running Pre-install Commands =======================</info>");
 
@@ -49,12 +54,9 @@ class InstallCommand extends Command
         // Check/Download/Merge theme (Zip/Tar/Git/Other?)
         WP::themeInstall($output);
 
-        // @todo Install PHPUnit scaffold.
-
         $output->writeln("\n<info>== Running Post Theme Install Commands =======================</info>");
 
         // Run post install theme commands.
-        // @todo Disable with flag?
         PostInstall::executeThemeCommands();
 
         $output->writeln("\n<info>== Setting up plugins =======================</info>");
@@ -75,6 +77,8 @@ class InstallCommand extends Command
         // Remove default posts
         WP::postDeleteDefault();
 
+        $output->writeln("\n<info>== Setting up menus =======================</info>");
+
         // Create menus from theme menu locations?
         WP::menuCreateAll();
 
@@ -86,7 +90,6 @@ class InstallCommand extends Command
         $output->writeln("\n<info>== Running Post Install Commands =======================</info>");
 
         // Run post install commands.
-        // @todo Disable with flag?
         PostInstall::executeCommands();
 
         $output->writeln("\n<info>Install Completed!</info>");
