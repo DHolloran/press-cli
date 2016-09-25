@@ -39,10 +39,13 @@ class InstallCommand extends Command
         WP::themeDeleteDefaults();
 
         // Check/Download/Merge theme (Zip/Tar/Git/Other?)
+        WP::themeInstall($output);
 
+        // @todo Rewrite style.css
 
-        // Rewrite style.css
+        // @todo Activate Theme
 
+        // @todo Install PHPUnit scaffold.
 
         // Activate Theme
 
@@ -50,7 +53,8 @@ class InstallCommand extends Command
 
         // Remove default plugins
         WP::pluginDeleteDefaults();
-        // License paid plugins
+
+        // @todo License paid plugins
         // define( 'WPMDB_LICENCE', 'XXXXX' );
         // Possibly activate paid plugins separately after licensing.
 
