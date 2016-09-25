@@ -17,12 +17,11 @@ class InstallCommand extends Command
 
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-        // Run pre-install commands.
         // @todo Split sections into there own commands?
         // @todo Allow for disabling of certain sections via flag?
         // @todo Post Git pull commands?
 
-        $output->writeln("<info>== Installing WordPress =======================</info>");
+        $output->writeln("<info>== Running Pre-install Commands =======================</info>");
 
         // @todo Run pre-install commands.
 
@@ -53,6 +52,8 @@ class InstallCommand extends Command
 
         // @todo Install PHPUnit scaffold.
 
+        $output->writeln("\n<info>== Running Post Theme Install Commands =======================</info>");
+
         // Run post install theme commands.
         // @todo Disable with flag?
         PostInstall::executeThemeCommands();
@@ -82,8 +83,12 @@ class InstallCommand extends Command
         // Set rewrite rules
         WP::rewriteSetStructure();
 
+        $output->writeln("\n<info>== Running Post Install Commands =======================</info>");
+
         // Run post install commands.
         // @todo Disable with flag?
         PostInstall::executeCommands();
+
+        $output->writeln("\n<info>== Install Completed =======================</info>");
     }
 }

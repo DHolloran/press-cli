@@ -20,6 +20,18 @@ class PostInstall
     public static function executeThemeCommands()
     {
         $config = Configuration::get();
-        $commands = $config['commands'];
+        $rootDir = getcwd();
+        $themeDir = "{$rootDir}/wp-content/themes/{$config['theme']['name']}";
+
+        // Change into the theme directory.
+        chdir($themeDir);
+
+        // Run commands.
+        foreach ($config['commands']['postInstallTheme'] as $command) {
+            system($command);
+        }
+
+        // Change back to root directory.
+        chdir($rootDir);
     }
 }
