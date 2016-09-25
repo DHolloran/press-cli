@@ -19,7 +19,7 @@ class YAMLConfiguration
         $configFile = rtrim( $directory, '/' ) . '/' . self::$configFileName;
 
         if (file_exists($configFile)) {
-            $output->writeln("<comment>Project configuration already exists at {$configFile}!</comment>");
+            $output->writeln("<comment>Project configuration already exists at {$configFile}.</comment>");
 
             return;
         }

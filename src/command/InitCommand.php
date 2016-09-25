@@ -46,7 +46,7 @@ class InitCommand extends Command
         $output->writeln("<info>Creating project directory...</info>");
 
         if (file_exists($directory)) {
-            $output->writeln("<comment>Project directory already exists at {$directory}!</comment>");
+            $output->writeln("<comment>Project directory already exists at {$directory}.</comment>");
 
             return $this;
         }
