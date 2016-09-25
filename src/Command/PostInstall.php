@@ -11,7 +11,11 @@ class PostInstall
     public static function executeCommands()
     {
         $config = Configuration::get();
-        $commands = $config['commands'];
+
+        // Run commands.
+        foreach ($config['commands']['postInstall'] as $command) {
+            system($command);
+        }
     }
 
     /**
