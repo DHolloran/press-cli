@@ -19,6 +19,7 @@ class InstallCommand extends Command
     {
         // Run pre-install commands.
 
+        $output->writeln("<info>== Installing WordPress =======================</info>");
 
         // Check/Download WordPress
         WP::coreDownload($output);
@@ -32,6 +33,8 @@ class InstallCommand extends Command
         // Check/Run install
         WP::coreInstall($output);
 
+        $output->writeln("\n<info>== Setting up Theme =======================</info>");
+
         // Remove default themes (Except latest)
         WP::themeDeleteDefaults();
 
@@ -43,6 +46,7 @@ class InstallCommand extends Command
 
         // Activate Theme
 
+        $output->writeln("\n<info>== Setting up plugins =======================</info>");
 
         // Remove default plugins
         WP::pluginDeleteDefaults();
@@ -53,10 +57,14 @@ class InstallCommand extends Command
         // Install wp.org plugins
         WP::pluginInstallAll();
 
+        $output->writeln("\n<info>== Cleaning up default posts =======================</info>");
+
         // Remove default posts
         WP::postDeleteDefault();
 
         // Create menus from theme menu locations?
+
+        $output->writeln("\n<info>== Setting Permalink Structure =======================</info>");
 
         // Set rewrite rules
         WP::rewriteSetStructure();
