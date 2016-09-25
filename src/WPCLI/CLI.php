@@ -24,6 +24,13 @@ class CLI
         return system($command);
     }
 
+    /**
+     * Execution options.
+     *
+     * @param  array $options Command options.
+     *
+     * @return string         The execution command options.
+     */
     protected static function execOptions($options)
     {
         $options = array_map(function ($key, $value) {
