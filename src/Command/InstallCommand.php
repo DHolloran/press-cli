@@ -18,8 +18,15 @@ class InstallCommand extends Command
     protected function execute(InputInterface $input, OutputInterface $output)
     {
         // Run pre-install commands.
+        // @todo Split sections into there own commands?
+        // @todo Allow for disabling of certain sections via flag?
+        // @todo Post Git pull commands?
 
         $output->writeln("<info>== Installing WordPress =======================</info>");
+
+        // @todo Run pre-install commands.
+
+        $output->writeln("\n<info>== Installing WordPress =======================</info>");
 
         // Check/Download WordPress
         WP::coreDownload($output);
@@ -35,20 +42,19 @@ class InstallCommand extends Command
 
         $output->writeln("\n<info>== Setting up Theme =======================</info>");
 
-        // Remove default themes (Except latest)
+        // Delete default themes (Except latest)
         WP::themeDeleteDefaults();
         $output->writeln('');
 
         // Check/Download/Merge theme (Zip/Tar/Git/Other?)
         WP::themeInstall($output);
 
-        // @todo Rewrite style.css
-
-        // @todo Activate Theme
+        // @todo Rewrite style.css. Will probably have to happen before activation in theme install.
 
         // @todo Install PHPUnit scaffold.
 
         // Run post install theme commands.
+        // @todo Disable with flag?
         PostInstall::executeThemeCommands();
 
         $output->writeln("\n<info>== Setting up plugins =======================</info>");
@@ -69,7 +75,7 @@ class InstallCommand extends Command
         // Remove default posts
         WP::postDeleteDefault();
 
-        // Create menus from theme menu locations?
+        // @todo Create menus from theme menu locations?
 
         $output->writeln("\n<info>== Setting Permalink Structure =======================</info>");
 
@@ -77,6 +83,7 @@ class InstallCommand extends Command
         WP::rewriteSetStructure();
 
         // Run post install commands.
+        // @todo Disable with flag?
         PostInstall::executeCommands();
     }
 }

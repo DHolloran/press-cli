@@ -5,10 +5,12 @@ $config = [
         'user' => 'root',
         'password' => 'root',
         'prefix' => 'wp_',
-        'name' => 'wp_test',
+        'name' => 'wp_test',  // @todo Use `$ kindling init {$name}` to create wp_{name}
         'host' => '127.0.0.1:8889',
     ],
     'plugins' => [
+        // @todo Merge global/local together.
+        // Possibly add all global to local config so we can disable if needed.
         [
             'plugin' => 'jetpack',
             'activate' => false,
@@ -50,28 +52,30 @@ $config = [
         ],
     ],
     'user' => [
-        'username' => 'dholloran',
-        'email' => 'dholloran@matchboxdesigngroup.com',
-        'password' => 'jooL8bYGrYdkVyHKvAeFDsiBnyEB9y',
+        'username' => 'dholloran',  // @todo Verify from CLI Input
+        'email' => 'dholloran@matchboxdesigngroup.com',  // @todo Verify from CLI Input
+        'password' => 'jooL8bYGrYdkVyHKvAeFDsiBnyEB9y',  // @todo Verify from CLI Input
     ],
     'theme' => [
-        'type' => 'zip', // zip, tar, git
-        'url' => '',
-        'root' => '/',
-        'name' => 'test-theme',
+        'type' => 'zip', // @todo zip, tar, git
+        'url' => 'https://github.com/matchboxdesigngroup/kindling/archive/1.0.1.zip',
+        'name' => 'test-theme',  // @todo Get/Verify from CLI Input (Possibly site title, client name, or init name)
         'style-css' => [
             // @todo allow for 'variable' => 'Something' to rewrite {{variable}} in style.css.
+            'client' => 'Test Client', // @todo Get from CLI Input
         ],
     ],
     'site' => [
-        'title' => 'Site Title',
-        'url' => 'test.dev',
-        'client' => 'Test Client',
+        'title' => 'Site Title', // @todo Get from CLI Input
+        'url' => 'test.dev', // @todo Use `$ kindling init {$name}` to create {name}.dev
     ],
     'commands' => [
-        'postInstall' => [
+        'preInstall' => [],
+        'postInstallTheme' => [
             'npm install',
-            'bower install'
+            'bower install',
         ],
+        'postInstall' => [],
     ]
 ];
+            'npm install',
