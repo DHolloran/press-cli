@@ -46,7 +46,9 @@
 - URL: {directoryname}.dev
 
 ## Todo
-- Global configuration creation.
+- [ ] Global configuration creation.
+- [ ] Documentation wiki
+- [ ] Add to packagist to Composer install
 - [ ] src/Option/Configuration.php
     - [ ] Build configuration skeleton creation. Merge global configuration with default configuration and write to .kindling.yaml
 
