@@ -1,0 +1,80 @@
+<?php
+namespace KindlingCLI\Command;
+
+use KindlingCLI\WPCLI\WP;
+use Symfony\Component\Console\Command\Command;
+use Symfony\Component\Console\Input\InputInterface;
+use Symfony\Component\Console\Output\OutputInterface;
+use KindlingCLI\Command\PostInstall;
+
+class InstallCommand extends Command
+{
+    protected function configure()
+    {
+         $this->setName('install')
+              ->setDescription('Installs WordPress, required plugins, theme and dependencies');
+    }
+
+    protected function execute(InputInterface $input, OutputInterface $output)
+    {
+        // Run pre-install commands.
+
+        $output->writeln("<info>== Installing WordPress =======================</info>");
+
+        // Check/Download WordPress
+        WP::coreDownload($output);
+
+        // Check/Create wp-config.php
+        WP::coreConfig($output);
+
+        // Check/Create database
+        WP::dbCreate();
+
+        // Check/Run install
+        WP::coreInstall($output);
+
+        $output->writeln("\n<info>== Setting up Theme =======================</info>");
+
+        // Remove default themes (Except latest)
+        WP::themeDeleteDefaults();
+
+        // Check/Download/Merge theme (Zip/Tar/Git/Other?)
+        WP::themeInstall($output);
+
+        // @todo Rewrite style.css
+
+        // @todo Activate Theme
+
+        // @todo Install PHPUnit scaffold.
+
+        // Run post install theme commands.
+        PostInstall::executeThemeCommands();
+
+        $output->writeln("\n<info>== Setting up plugins =======================</info>");
+
+        // Remove default plugins
+        WP::pluginDeleteDefaults();
+
+        // @todo License paid plugins
+        // define( 'WPMDB_LICENCE', 'XXXXX' );
+        // Possibly activate paid plugins separately after licensing.
+
+        // Install wp.org plugins
+        WP::pluginInstallAll();
+
+        $output->writeln("\n<info>== Cleaning up default posts =======================</info>");
+
+        // Remove default posts
+        WP::postDeleteDefault();
+
+        // Create menus from theme menu locations?
+
+        $output->writeln("\n<info>== Setting Permalink Structure =======================</info>");
+
+        // Set rewrite rules
+        WP::rewriteSetStructure();
+
+        // Run post install commands.
+        PostInstall::executeCommands();
+    }
+}
