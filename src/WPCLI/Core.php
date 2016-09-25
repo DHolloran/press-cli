@@ -2,7 +2,7 @@
 namespace KindlingCLI\WPCLI;
 
 use KindlingCLI\WPCLI\CLI;
-use KindlingCLI\Option\YAMLConfiguration;
+use KindlingCLI\Option\Configuration;
 use Symfony\Component\Console\Output\OutputInterface;
 
 trait Core
@@ -20,7 +20,7 @@ trait Core
      */
     public static function coreConfig()
     {
-        $config = YAMLConfiguration::get();
+        $config = Configuration::get();
         $dbConfig = $config['database'];
         $options = [
             'skip-check' => '',
@@ -40,7 +40,7 @@ trait Core
      */
     public static function coreInstall()
     {
-        $config = YAMLConfiguration::get();
+        $config = Configuration::get();
         $options = [
             'url' => $config['site']['url'],
             'title' => $config['site']['title'],

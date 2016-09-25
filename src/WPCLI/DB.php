@@ -2,7 +2,7 @@
 namespace KindlingCLI\WPCLI;
 
 use KindlingCLI\WPCLI\CLI;
-use KindlingCLI\Option\YAMLConfiguration;
+use KindlingCLI\Option\Configuration;
 use Symfony\Component\Console\Output\OutputInterface;
 
 trait DB

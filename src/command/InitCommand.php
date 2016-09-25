@@ -1,7 +1,7 @@
 <?php
 namespace KindlingCLI\Command;
 
-use KindlingCLI\Option\YAMLConfiguration;
+use KindlingCLI\Option\Configuration;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
@@ -31,7 +31,7 @@ class InitCommand extends Command
 
         $this->createProjectDirectory($directory, $output);
 
-        YAMLConfiguration::createConfiguration($directory, $output);
+        Configuration::createConfiguration($directory, $output);
 
         $output->writeln("<info>Project created!</info>");
     }

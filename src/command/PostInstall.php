@@ -1,7 +1,7 @@
 <?php
 namespace KindlingCLI\Command;
 
-use KindlingCLI\Option\YAMLConfiguration;
+use KindlingCLI\Option\Configuration;
 
 class PostInstall
 {
@@ -10,12 +10,13 @@ class PostInstall
      */
     public static function executeCommands()
     {
-        // $config = YAMLConfiguration::get();
         // $commands = $config['commands'];
         //
         // Execute Theme commands.
         // Execute Root commands
         // Other?
+        $config = Configuration::get();
+        $config = Configuration::get();
     }
 //
 }

@@ -3,7 +3,7 @@ namespace KindlingCLI\Option;
 
 use Symfony\Component\Console\Output\OutputInterface;
 
-class YAMLConfiguration
+class Configuration
 {
     protected static $configFileName = '.kindling.yaml';
 

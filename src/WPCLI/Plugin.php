@@ -2,7 +2,7 @@
 namespace KindlingCLI\WPCLI;
 
 use KindlingCLI\WPCLI\CLI;
-use KindlingCLI\Option\YAMLConfiguration;
+use KindlingCLI\Option\Configuration;
 use Symfony\Component\Console\Output\OutputInterface;
 
 trait Plugin
@@ -37,7 +37,7 @@ trait Plugin
      */
     public static function pluginInstallAll()
     {
-        $config = YAMLConfiguration::get();
+        $config = Configuration::get();
         foreach ($config['plugins'] as $plugin) {
             self::pluginInstall($plugin['plugin'], (bool) $plugin['activate']);
         }
