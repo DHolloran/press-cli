@@ -48,8 +48,6 @@ class InstallCommand extends Command
         // Check/Download/Merge theme (Zip/Tar/Git/Other?)
         WP::themeInstall($output);
 
-        // @todo Rewrite style.css. Will probably have to happen before activation in theme install.
-
         // @todo Install PHPUnit scaffold.
 
         $output->writeln("\n<info>== Running Post Theme Install Commands =======================</info>");

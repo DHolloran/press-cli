@@ -61,8 +61,9 @@ $config = [
         'url' => 'https://github.com/matchboxdesigngroup/kindling/archive/1.0.1.zip',
         'name' => 'test-theme',  // @todo Get/Verify from CLI Input (Possibly site title, client name, or init name)
         'style-css' => [
-            // @todo allow for 'variable' => 'Something' to rewrite {{variable}} in style.css.
-            'client' => 'Test Client', // @todo Get from CLI Input
+            'theme-name' => 'Theme Name', // @todo Get from CLI Input (Possibly use `$ kindling init {$name}`)
+            'client' => 'Client Name', // @todo Get from CLI Input
+            'version' => '1.0.0-dev', // @todo Verify from CLI Input
         ],
     ],
     'site' => [
@@ -78,4 +79,3 @@ $config = [
         'postInstall' => [],
     ]
 ];
-            'npm install',

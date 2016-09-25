@@ -4,6 +4,7 @@ namespace KindlingCLI\WPCLI;
 use KindlingCLI\WPCLI\CLI;
 use KindlingCLI\ThemeInstall\Zip;
 use KindlingCLI\Option\Configuration;
+use KindlingCLI\ThemeInstall\StyleCSS;
 use Symfony\Component\Console\Output\OutputInterface;
 
 trait Theme
@@ -73,6 +74,9 @@ trait Theme
         }
 
         $output->writeln("Success: Theme successfully installed!");
+
+        // Set style.css
+        StyleCSS::set();
 
         // Activate theme.
         self::themeActivate($name);
