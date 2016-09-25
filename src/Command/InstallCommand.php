@@ -37,6 +37,7 @@ class InstallCommand extends Command
 
         // Remove default themes (Except latest)
         WP::themeDeleteDefaults();
+        $output->writeln('');
 
         // Check/Download/Merge theme (Zip/Tar/Git/Other?)
         WP::themeInstall($output);
@@ -54,13 +55,14 @@ class InstallCommand extends Command
 
         // Remove default plugins
         WP::pluginDeleteDefaults();
+        $output->writeln('');
 
         // @todo License paid plugins
         // define( 'WPMDB_LICENCE', 'XXXXX' );
         // Possibly activate paid plugins separately after licensing.
 
         // Install wp.org plugins
-        WP::pluginInstallAll();
+        WP::pluginInstallAll($output);
 
         $output->writeln("\n<info>== Cleaning up default posts =======================</info>");
 

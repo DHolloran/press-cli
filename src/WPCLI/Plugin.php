@@ -34,12 +34,15 @@ trait Plugin
 
     /**
      * Installs all of the plugins from the configuration.
+     *
+     * @param  OutputInterface $output
      */
-    public static function pluginInstallAll()
+    public static function pluginInstallAll(OutputInterface $output)
     {
         $config = Configuration::get();
         foreach ($config['plugins'] as $plugin) {
             self::pluginInstall($plugin['plugin'], (bool) $plugin['activate']);
+            $output->writeln('');
         }
     }
 
