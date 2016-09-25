@@ -5,12 +5,10 @@ $config = [
         'user' => 'root',
         'password' => 'root',
         'prefix' => 'wp_',
-        'name' => 'wp_test',  // @todo Use `$ kindling init {$name}` to create wp_{name}
+        'name' => 'wp_test',
         'host' => '127.0.0.1:8889',
     ],
     'plugins' => [
-        // @todo Merge global/local together.
-        // Possibly add all global to local config so we can disable if needed.
         [
             'plugin' => 'jetpack',
             'activate' => false,
@@ -52,23 +50,37 @@ $config = [
         ],
     ],
     'user' => [
-        'username' => 'dholloran',  // @todo Verify from CLI Input
-        'email' => 'dholloran@matchboxdesigngroup.com',  // @todo Verify from CLI Input
-        'password' => 'jooL8bYGrYdkVyHKvAeFDsiBnyEB9y',  // @todo Verify from CLI Input
+        'username' => 'dholloran',
+        'email' => 'dholloran@matchboxdesigngroup.com',
+        'password' => 'jooL8bYGrYdkVyHKvAeFDsiBnyEB9y',
     ],
     'theme' => [
-        'type' => 'zip', // @todo zip, tar, git
+        'type' => 'zip',
         'url' => 'https://github.com/matchboxdesigngroup/kindling/archive/1.0.1.zip',
-        'name' => 'test-theme',  // @todo Get/Verify from CLI Input (Possibly site title, client name, or init name)
+        'name' => 'test-theme',
         'style-css' => [
-            'theme-name' => 'Theme Name', // @todo Get from CLI Input (Possibly use `$ kindling init {$name}`)
-            'client' => 'Client Name', // @todo Get from CLI Input
-            'version' => '1.0.0-dev', // @todo Verify from CLI Input
+            'theme-name' => 'Theme Name',
+            'client' => 'Client Name',
+            'version' => '1.0.0-dev',
+        ],
+    ],
+    'menus' => [
+        [
+            'name' => 'Primary Navigation',
+            'location' => 'primary_navigation',
+        ],
+        [
+            'name' => 'Footer Navigation',
+            'location' => 'footer_navigation',
+        ],
+        [
+            'name' => 'Social Menu',
+            'location' => 'social_menu',
         ],
     ],
     'site' => [
-        'title' => 'Site Title', // @todo Get from CLI Input
-        'url' => 'test.dev', // @todo Use `$ kindling init {$name}` to create {name}.dev
+        'title' => 'Site Title',
+        'url' => 'test.dev',
     ],
     'commands' => [
         'preInstall' => [],

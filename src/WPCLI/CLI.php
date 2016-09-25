@@ -6,8 +6,6 @@ class CLI
     /**
      * Executes a WP CLI command.
      *
-     * @todo Set an install path.
-     *
      * @param  string $command   The command to execute.
      * @param  array  $arguments Optional, command arguments. Default none.
      * @param  array  $options   Optional, command options. Default none.

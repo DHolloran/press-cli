@@ -46,4 +46,32 @@
 - URL: {directoryname}.dev
 
 ## Todo
-- Build all the things!
+- Global configuration creation.
+- [ ] src/Option/Configuration.php
+    - [ ] Build configuration skeleton creation. Merge global configuration with default configuration and write to .kindling.yaml
+
+- [ ] config.php
+    - [ ] **database:name** Use `$ kindling init {$name}` to create wp_{name}
+    - [ ] **plugins** Merge global/local together. Possibly add all global to local config so we can disable if needed.
+    - [ ] **user:username** Verify via CLI input
+    - [ ] **user:email** Verify via CLI input
+    - [ ] **user:password** Verify via CLI input
+    - [ ] **theme:type** Allow for tar and git theme types
+    - [ ] **theme:name** Get/Verify from CLI Input (Possibly site title, client name, or init name)
+    - [ ] **theme:style-css:theme-name** Get/Verify from CLI Input (Possibly site title, client name, theme:name or init name)
+    - [ ] **theme:style-css:client** Verify via CLI input
+    - [ ] **theme:style-css:version** Verify via CLI input
+    - [ ] **site:title** Get from CLI Input
+    - [ ] **site:url** Use `$ kindling init {$name}` to create {name}.dev
+
+- [ ] src/Command/InstallCommand.php
+    - [ ] Check for .kindling.yaml before executing and throw error if not found.
+    - [ ] Split sections into there own commands? That way you can install via `$ kindling install:all` or `$kindling install:section`
+    - [ ] Allow for disabling of certain sections via flag?
+    - [ ] Post Git pull commands?
+    - [ ] Install PHPUnit scaffold once theme is installed.
+    - [ ] Initialize Git repository and remotes.
+    - [ ] Read in files as templates. '.gitignore' => 'https://wpengine.com/wp-content/uploads/2013/10/recommended-gitignore-no-wp.txt'
+    - [ ] License paid plugins
+        - [ ] WP Migrate DB Pro: `define( 'WPMDB_LICENCE', 'XXXXX' );`
+        - [ ] Possibly activate paid plugins separately after licensing.

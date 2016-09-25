@@ -17,16 +17,6 @@ class InstallCommand extends Command
 
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-        // @codingStandardsIgnoreStart
-        // @todo Check for .kindling.yaml before executing and throw error if not found.
-        // @todo Split sections into there own commands? That way you can install via `$ kindling install:all` or `$kindling install:section`
-        // @todo Allow for disabling of certain sections via flag?
-        // @todo Post Git pull commands?
-        // @todo Install PHPUnit scaffold once theme is installed.
-        // @todo Initialize Git repository and remotes.
-        // @todo Read in files as templates. '.gitignore' => 'https://wpengine.com/wp-content/uploads/2013/10/recommended-gitignore-no-wp.txt'
-        // @codingStandardsIgnoreEnd
-
         $output->writeln("<info>== Running Pre-install Commands =======================</info>");
 
         // Run pre-install commands.
@@ -65,10 +55,6 @@ class InstallCommand extends Command
         // Remove default plugins
         WP::pluginDeleteDefaults();
         $output->writeln('');
-
-        // @todo License paid plugins
-        // define( 'WPMDB_LICENCE', 'XXXXX' );
-        // Possibly activate paid plugins separately after licensing.
 
         // Install wp.org plugins
         WP::pluginInstallAll($output);

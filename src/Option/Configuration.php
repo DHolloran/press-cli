@@ -49,6 +49,5 @@ class Configuration
      */
     protected static function configSkeleton()
     {
-        return '# @todo';
     }
 }
