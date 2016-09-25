@@ -23,7 +23,8 @@ class InstallCommand extends Command
 
         $output->writeln("<info>== Running Pre-install Commands =======================</info>");
 
-        // @todo Run pre-install commands.
+        // Run pre-install commands.
+        PreInstall::executeCommands();
 
         $output->writeln("\n<info>== Installing WordPress =======================</info>");
 
