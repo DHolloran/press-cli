@@ -8,6 +8,8 @@ use Symfony\Component\Console\Application;
 
 define('KCLI_EXEC_DIR', __DIR__);
 
+putenv('WP_CLI_CONFIG_PATH='.KCLI_EXEC_DIR . '/config.yml');
+
 $application = new Application();
 
 $application->add(new InstallCommand);
