@@ -24,6 +24,7 @@ class InstallCommand extends Command
         // @todo Post Git pull commands?
         // @todo Install PHPUnit scaffold once theme is installed.
         // @todo Initialize Git repository and remotes.
+        // @todo Read in files as templates. '.gitignore' => 'https://wpengine.com/wp-content/uploads/2013/10/recommended-gitignore-no-wp.txt'
         // @codingStandardsIgnoreEnd
 
         $output->writeln("<info>== Running Pre-install Commands =======================</info>");
