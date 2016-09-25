@@ -75,7 +75,8 @@ class InstallCommand extends Command
         // Remove default posts
         WP::postDeleteDefault();
 
-        // @todo Create menus from theme menu locations?
+        // Create menus from theme menu locations?
+        WP::menuCreateAll();
 
         $output->writeln("\n<info>== Setting Permalink Structure =======================</info>");
 
