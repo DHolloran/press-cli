@@ -34,6 +34,16 @@ trait Theme
     }
 
     /**
+     * Activates a theme.
+     *
+     * @param  string $theme Theme name to activate.
+     */
+    protected static function themeActivate($theme)
+    {
+        CLI::execCommand('theme', ['activate', $theme]);
+    }
+
+    /**
      * Installs a theme.
      *
      * @param  OutputInterface $output
@@ -49,6 +59,9 @@ trait Theme
         if (file_exists("{$directory}/{$name}")) {
             $output->writeln("Warning: Theme already exists in {$directory}/{$name}.");
 
+            // Activate theme.
+            self::themeActivate($name);
+
             return;
         }
 
@@ -60,5 +73,8 @@ trait Theme
         }
 
         $output->writeln("Success: Theme successfully installed!");
+
+        // Activate theme.
+        self::themeActivate($name);
     }
 }
