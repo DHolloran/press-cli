@@ -61,6 +61,7 @@
     - [x] Merge global configuration with default configuration
     - [x] Write to .kindling.yml
     - [ ] Allow for JSON configuration?
+    - [ ] Add Mailtrap for WordPress
 - [ ] config.php
     - [ ] **theme:style-css:client** Verify via CLI input
     - [ ] **theme:style-css:version** Verify via CLI input
