@@ -47,6 +47,9 @@
 
 ## Todo
 - [x] Global configuration creation.
+- [ ] New name? Possibly Flint/Flint CLI other things that bring up thoughts of starting (Theme is kindling so flint and steel would start kindling)
+- [ ] Add new command that runs init/install
+- [ ] Rename init to create on config?
 - [ ] Documentation wiki
 - [ ] Install instructions
 - [ ] Tests
