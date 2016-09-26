@@ -10,17 +10,17 @@ use Symfony\Component\Console\Output\OutputInterface;
 class InitCommand extends Command
 {
     /**
-     * Configure init command.
+     * Configure create command.
      */
     protected function configure()
     {
-        $this->setName('init')
-              ->setDescription('Initializes a new Kindling WordPress project.')
+        $this->setName('create')
+              ->setDescription('Creates a new project directory and configuration.')
               ->addArgument('name', InputArgument::REQUIRED, 'The project name');
     }
 
     /**
-     * Execute init command.
+     * Execute create command.
      *
      * @param  InputInterface  $input
      * @param  OutputInterface $output
