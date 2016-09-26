@@ -27,11 +27,12 @@ class InitCommand extends Command
      */
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-        $directory = getcwd() . '/' . $input->getArgument('name');
+        $name = $input->getArgument('name');
+        $directory = getcwd() . "/{$name}";
 
         $this->createProjectDirectory($directory, $output);
 
-        Configuration::createConfiguration($directory, $output);
+        Configuration::create($directory, $name, $output);
 
         $output->writeln("<info>Project created!</info>");
     }

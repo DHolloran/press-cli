@@ -2,7 +2,8 @@
     "require": {
         "wp-cli/wp-cli": "^0.24.1",
         "symfony/console" : "~2.7",
-        "guzzlehttp/guzzle" : "~6.0"
+        "guzzlehttp/guzzle" : "~6.0",
+        "symfony/yaml": "~2.7"
     },
     "bin": [
         "kindling"

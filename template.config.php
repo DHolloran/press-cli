@@ -5,7 +5,7 @@ $config = [
         'user' => 'root',
         'password' => 'root',
         'prefix' => 'wp_',
-        'name' => 'wp_test',
+        'name' => '',
         'host' => '127.0.0.1:8889',
     ],
     'plugins' => [
@@ -57,7 +57,7 @@ $config = [
     'theme' => [
         'type' => 'zip',
         'url' => 'https://github.com/matchboxdesigngroup/kindling/archive/1.0.1.zip',
-        'name' => 'test-theme',
+        'name' => '',
         'style-css' => [
             'theme-name' => 'Theme Name',
             'client' => 'Client Name',
