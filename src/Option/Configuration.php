@@ -49,5 +49,14 @@ class Configuration
      */
     protected static function configSkeleton()
     {
+
+    /**
+     * Checks if the configuration exists.
+     *
+     * @return boolean
+     */
+    public static function configExists()
+    {
+        return file_exists('.kindling.yaml');
     }
 }
