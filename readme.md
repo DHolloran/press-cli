@@ -59,7 +59,7 @@
 - [ ] src/Option/Configuration.php
     - [x] Build configuration skeleton creation.
     - [x] Merge global configuration with default configuration
-    - [x] Write to .kindling.yml
+    - [x] Write to .kindling.json
     - [ ] Allow for JSON configuration?
     - [ ] Add Mailtrap for WordPress
 - [ ] config.php
@@ -81,7 +81,7 @@
     - [x] **database:name** Use `$ kindling init {$name}` to create wp_{name}
 
 - [ ] src/Command/InstallCommand.php
-    - [x] Check for .kindling.yml before executing and throw error if not found.
+    - [x] Check for .kindling.json before executing and throw error if not found.
     - [ ] Split sections into there own commands? That way you can install via `$ kindling install:all` or `$kindling install:section`
     - [ ] Allow for disabling of certain sections via flag?
     - [ ] Post Git pull commands?

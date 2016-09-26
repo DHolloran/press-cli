@@ -1,7 +1,6 @@
 <?php
 namespace KindlingCLI\Option;
 
-use Symfony\Component\Yaml\Yaml;
 use KindlingCLI\Option\GlobalConfiguration;
 use Symfony\Component\Console\Output\OutputInterface;
 
@@ -12,7 +11,7 @@ class Configuration
      *
      * @var string
      */
-    protected static $configFileName = '.kindling.yml';
+    protected static $configFileName = '.kindling.json';
 
     /**
      * Creates the configuration file.
@@ -41,7 +40,8 @@ class Configuration
         }
 
         // Add configuration from skeleton.
-        $config = Yaml::dump(self::configSkeleton($name));
+        $config = json_encode(self::configSkeleton($name), JSON_PRETTY_PRINT);
+        $config = stripslashes($config);
         file_put_contents($configFile, $config);
 
         $output->writeln("<info>\nProject configuration created at {$configFile}!</info>");
@@ -58,7 +58,7 @@ class Configuration
             return [];
         }
 
-        $config = Yaml::parse(file_get_contents(self::$configFileName));
+        $config = json_decode(file_get_contents(self::$configFileName), true);
 
         return $config;
     }
