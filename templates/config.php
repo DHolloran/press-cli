@@ -6,7 +6,7 @@ $config = [
         'password' => 'root',
         'prefix' => 'wp_',
         'name' => '',
-        'host' => '127.0.0.1:8889',
+        'host' => '127.0.0.1',
     ],
     'plugins' => [
         [
@@ -29,38 +29,19 @@ $config = [
             'plugin' => 'force-regenerate-thumbnails',
             'activate' => true,
         ],
-        [
-            'plugin' => 'disable-comments',
-            'activate' => false,
-        ],
-        [
-            'plugin' => '~/Desktop/plugins/advanced-custom-fields.zip',
-            'activate' => true,
-            'serial' => '',
-        ],
-        [
-            'plugin' => '~/Desktop/plugins/gravityforms.zip',
-            'activate' => true,
-            'serial' => '',
-        ],
-        [
-            'plugin' => '~/Desktop/plugins/wp-migrate-db-pro.zip',
-            'activate' => true,
-            'serial' => '',
-        ],
     ],
     'user' => [
-        'username' => 'dholloran',
-        'email' => 'dholloran@matchboxdesigngroup.com',
-        'password' => 'jooL8bYGrYdkVyHKvAeFDsiBnyEB9y',
+        'username' => '',
+        'email' => '',
+        'password' => '',
     ],
     'theme' => [
         'type' => 'zip',
         'url' => 'https://github.com/matchboxdesigngroup/kindling/archive/1.0.1.zip',
         'name' => '',
         'style-css' => [
-            'theme-name' => 'Theme Name',
-            'client' => 'Client Name',
+            'theme-name' => '',
+            'client' => '',
             'version' => '1.0.0-dev',
         ],
     ],
@@ -79,8 +60,8 @@ $config = [
         ],
     ],
     'site' => [
-        'title' => 'Site Title',
-        'url' => 'test.dev',
+        'title' => '',
+        'url' => '',
     ],
     'commands' => [
         'preInstall' => [],

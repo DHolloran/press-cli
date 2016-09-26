@@ -3,7 +3,7 @@ namespace KindlingCLI\Command;
 
 use KindlingCLI\WPCLI\WP;
 use KindlingCLI\Command\PostInstall;
-use KindlingCLI\Option\LocalConfiguration;
+use KindlingCLI\Option\Configuration;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
@@ -19,7 +19,7 @@ class InstallCommand extends Command
     protected function execute(InputInterface $input, OutputInterface $output)
     {
         // Make sure the configuration exists.
-        if (!LocalConfiguration::configExists()) {
+        if (!Configuration::exists()) {
             $output->writeln(
                 '<error>Configuration file not present run kindling init {project-name} to get started.</error>'
             );

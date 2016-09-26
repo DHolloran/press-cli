@@ -41,7 +41,7 @@ trait Plugin
     {
         $config = Configuration::get();
         foreach ($config['plugins'] as $plugin) {
-            self::pluginInstall($plugin['plugin'], (bool) $plugin['activate']);
+            self::pluginInstall($plugin['plugin'], (bool) $plugin['activate'], $plugin['version']);
             $output->writeln('');
         }
     }
@@ -50,14 +50,19 @@ trait Plugin
      * Installs and optionally activates plugin.
      *
      * @param string  $plugin   A plugin slug, the path to a local zip file, or URL to a remote zip file.
-     * @param boolean $activate If true, the plugin will be activated immediately after install.
+     * @param boolean $activate Optional, if true the plugin will be activated immediately after install.
+     * @param string  $version  Optional, version of plugin to install. Default stable.
      */
-    public static function pluginInstall($plugin, $activate = true)
+    public static function pluginInstall($plugin, $activate = true, $version = null)
     {
-        $options = [];
+        $options = [ 'force' => '' ];
 
         if ($activate) {
             $options['activate'] = '';
+        }
+
+        if (!is_null($version)) {
+            $options['version'] = $version;
         }
 
         CLI::execCommand('plugin', ['install', $plugin], $options);

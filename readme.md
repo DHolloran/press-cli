@@ -46,28 +46,36 @@
 - URL: {directoryname}.dev
 
 ## Todo
-- [ ] Global configuration creation.
+- [x] Global configuration creation.
 - [ ] Documentation wiki
+- [ ] Install instructions
+- [ ] Tests
 - [ ] Add to packagist to Composer install
+- [ ] Build Plugin/Add to theme to retrieve configuration details on live site
 - [ ] src/Option/Configuration.php
-    - [ ] Build configuration skeleton creation. Merge global configuration with default configuration and write to .kindling.yaml
-
+    - [x] Build configuration skeleton creation.
+    - [ ] Merge global configuration with default configuration
+    - [x] Write to .kindling.yml
 - [ ] config.php
-    - [ ] **database:name** Use `$ kindling init {$name}` to create wp_{name}
-    - [ ] **plugins** Merge global/local together. Possibly add all global to local config so we can disable if needed.
+    - [ ] **theme:style-css:client** Verify via CLI input
+    - [ ] **theme:style-css:version** Verify via CLI input
+    - [ ] **site:title** Get from CLI Input
+    - [ ] **plugins**
+        - Merge global/local together.
+        - [x] Possibly add all global to local config so we can disable if needed.
+        - [x] Add --force
+        - [x] Add version number option and default to latest stable
     - [ ] **user:username** Verify via CLI input
     - [ ] **user:email** Verify via CLI input
     - [ ] **user:password** Verify via CLI input
     - [ ] **theme:type** Allow for tar and git theme types
-    - [ ] **theme:name** Get/Verify from CLI Input (Possibly site title, client name, or init name)
-    - [ ] **theme:style-css:theme-name** Get/Verify from CLI Input (Possibly site title, client name, theme:name or init name)
-    - [ ] **theme:style-css:client** Verify via CLI input
-    - [ ] **theme:style-css:version** Verify via CLI input
-    - [ ] **site:title** Get from CLI Input
-    - [ ] **site:url** Use `$ kindling init {$name}` to create {name}.dev
+    - [ ] **theme:name** Get/Verify from CLI Input
+    - [ ] **theme:style-css:theme-name** Get/Verify from CLI Input (Possibly site title)
+    - [x] **site:url** Use `$ kindling init {$name}` to create {name}.dev
+    - [x] **database:name** Use `$ kindling init {$name}` to create wp_{name}
 
 - [ ] src/Command/InstallCommand.php
-    - [ ] Check for .kindling.yaml before executing and throw error if not found.
+    - [x] Check for .kindling.yml before executing and throw error if not found.
     - [ ] Split sections into there own commands? That way you can install via `$ kindling install:all` or `$kindling install:section`
     - [ ] Allow for disabling of certain sections via flag?
     - [ ] Post Git pull commands?
