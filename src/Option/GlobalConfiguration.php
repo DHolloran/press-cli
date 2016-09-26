@@ -54,8 +54,6 @@ class GlobalConfiguration
     {
         include KCLI_EXEC_DIR . '/templates/config.php';
 
-        ksort($config);
-
         return $config;
     }
 

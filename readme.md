@@ -51,17 +51,18 @@
 - [ ] Install instructions
 - [ ] Tests
 - [ ] Add to packagist to Composer install
-- [ ] Build Plugin/Add to theme to retrieve configuration details on live site
+- [ ] Build Plugin or Add to theme to retrieve configuration details on live site
 - [ ] src/Option/Configuration.php
     - [x] Build configuration skeleton creation.
-    - [ ] Merge global configuration with default configuration
+    - [x] Merge global configuration with default configuration
     - [x] Write to .kindling.yml
+    - [ ] Allow for JSON configuration?
 - [ ] config.php
     - [ ] **theme:style-css:client** Verify via CLI input
     - [ ] **theme:style-css:version** Verify via CLI input
     - [ ] **site:title** Get from CLI Input
-    - [ ] **plugins**
-        - Merge global/local together.
+    - [x] **plugins**
+        - [x] Merge global/local together.
         - [x] Possibly add all global to local config so we can disable if needed.
         - [x] Add --force
         - [x] Add version number option and default to latest stable

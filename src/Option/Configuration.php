@@ -76,8 +76,28 @@ class Configuration
         $config['site']['url'] = self::makeURL($name);
         $config['theme']['name'] = self::makeThemeName($name);
 
-        $config = self::mergeGlobalConfiguration($config);
-        ksort($config);
+        $config = self::mergeConfiguration(GlobalConfiguration::get(), $config);
+        $config = self::removeDuplicatePlugins($config);
+
+        return $config;
+    }
+
+    /**
+     * Removes duplicate plugins.
+     *
+     * @param  array $config
+     *
+     * @return array
+     */
+    protected static function removeDuplicatePlugins($config)
+    {
+        $plugins = [];
+        foreach ($config['plugins'] as $plugin) {
+            $key = $plugin['plugin'];
+            $plugins[ $key ] = $plugin;
+        }
+
+        $config['plugins'] = array_values($plugins);
 
         return $config;
     }
@@ -85,23 +105,22 @@ class Configuration
     /**
      * Merges the global configuration into the local configuration.
      *
-     * @param  array $local The local configuration.
+     * @param  array $config1
+     * @param  array $config2
      *
-     * @return array         The merged configuration.
+     * @return array
      */
-    protected static function mergeGlobalConfiguration($local)
+    protected static function mergeConfiguration($config1, $config2)
     {
-        $global = GlobalConfiguration::get();
-
-        foreach ($local as $key => $value) {
-            if (array_key_exists($key, $global) && is_array($value)) {
-                $global[$key] = self::mergeGlobalConfiguration($global[$key], $local[$key]);
+        foreach ($config2 as $key => $value) {
+            if (array_key_exists($key, $config1) && is_array($value)) {
+                $config1[$key] = self::mergeConfiguration($config1[$key], $config2[$key]);
             } else {
-                $global[$key] = $value;
+                $config1[$key] = $value;
             }
         }
 
-        return $global;
+        return $config1;
     }
 
     /**
