@@ -29,6 +29,10 @@ $config = [
             'plugin' => 'force-regenerate-thumbnails',
             'activate' => true,
         ],
+        [
+            'plugin' => 'mailtrap-for-wp',
+            'activate' => false,
+        ],
     ],
     'user' => [
         'username' => '',

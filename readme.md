@@ -62,6 +62,7 @@
     - [x] Write to .kindling.json
     - [ ] Allow for JSON configuration?
     - [ ] Add Mailtrap for WordPress
+    - [x] Add Mailtrap for WordPress
 - [ ] config.php
     - [ ] **theme:style-css:client** Verify via CLI input
     - [ ] **theme:style-css:version** Verify via CLI input
