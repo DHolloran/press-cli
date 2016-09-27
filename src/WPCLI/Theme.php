@@ -52,9 +52,14 @@ trait Theme
     public static function themeInstall(OutputInterface $output)
     {
         $config = Configuration::get();
-        $url = $config['theme']['url'];
-        $name = $config['theme']['name'];
+        $url = isset($config['theme']['url']) ? $config['theme']['url'] : '';
+        $name = isset($config['theme']['name']) ? $config['theme']['name'] : '';
         $directory = getcwd() . '/wp-content/themes';
+
+        // Make sure we have the required configuration.
+        if (!$url or !$name) {
+            return;
+        }
 
         // Make sure the theme does not already exist.
         if (file_exists("{$directory}/{$name}")) {

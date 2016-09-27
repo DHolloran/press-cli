@@ -11,7 +11,13 @@ class StyleCSS
     public static function set()
     {
         $config = Configuration::get();
-        $themePath = getcwd() . "/wp-content/themes/{$config['theme']['name']}";
+        $name = isset($config['theme']['name']) ? $config['theme']['name'] : '';
+        $themePath = getcwd() . "/wp-content/themes/{$name}";
+
+        // Make sure we have the required configuration.
+        if (!$name) {
+            return;
+        }
 
         // Render template.
         $template = self::renderTemplate($themePath);

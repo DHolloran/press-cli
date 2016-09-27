@@ -40,7 +40,8 @@ trait Plugin
     public static function pluginInstallAll(OutputInterface $output)
     {
         $config = Configuration::get();
-        foreach ($config['plugins'] as $plugin) {
+        $plugins = isset($config['plugins']) ? $config['plugins'] : [];
+        foreach ($plugins as $plugin) {
             self::pluginInstall($plugin['plugin'], (bool) $plugin['activate'], $plugin['version']);
             $output->writeln('');
         }

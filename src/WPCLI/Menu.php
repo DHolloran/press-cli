@@ -28,7 +28,8 @@ trait Menu
     public static function menuCreateAll()
     {
         $config = Configuration::get();
-        foreach ($config['menus'] as $menu) {
+        $menus = isset($config['menus']) ? $config['menus'] : [];
+        foreach ($menus as $menu) {
             $name = $menu['name'];
             $location = $menu['location'];
             $menu_id = self::getMenuIdFromName($name);

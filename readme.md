@@ -56,12 +56,11 @@
 - [ ] Tests
 - [ ] Add to packagist to Composer install
 - [ ] Build Plugin or Add to theme to retrieve configuration details on live site
-- [ ] src/Option/Configuration.php
+- [x] src/Option/Configuration.php
     - [x] Build configuration skeleton creation.
     - [x] Merge global configuration with default configuration
     - [x] Write to .kindling.json
-    - [ ] Allow for JSON configuration?
-    - [ ] Add Mailtrap for WordPress
+    - [x] Allow for JSON configuration?
     - [x] Add Mailtrap for WordPress
 - [ ] config.php
     - [ ] **theme:style-css:client** Verify via CLI input
