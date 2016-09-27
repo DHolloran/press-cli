@@ -1,0 +1,50 @@
+## Todo
+- [x] Global configuration creation.
+- [ ] New name? Possibly Flint/Flint CLI other things that bring up thoughts of starting (Theme is kindling so flint and steel would start kindling)
+- [ ] Add licensing
+- [ ] Add contributing/issue template
+- [ ] Update repo name.
+- [ ] Add update command that runs things like plugins and new option commands:update
+- [ ] Add new command that runs init/install
+- [x] Rename init to create on config?
+- [ ] Documentation wiki
+- [ ] Install instructions
+- [ ] Tests
+- [ ] Add to packagist to Composer install
+- [ ] Build Plugin or Add to theme to retrieve configuration details on live site
+- [ ] Move external plugins URLs to a url parameter so we can add a name as well. This will allow for finding serials in the global configuration so we do not have to store them in version control.
+- [x] src/Option/Configuration.php
+    - [x] Build configuration skeleton creation.
+    - [x] Merge global configuration with default configuration
+    - [x] Write to .kindling.json
+    - [x] Allow for JSON configuration?
+    - [x] Add Mailtrap for WordPress
+- [ ] config.php
+    - [ ] **theme:style-css:client** Verify via CLI input
+    - [ ] **theme:style-css:version** Verify via CLI input
+    - [ ] **site:title** Get from CLI Input
+    - [x] **plugins**
+        - [x] Merge global/local together.
+        - [x] Possibly add all global to local config so we can disable if needed.
+        - [x] Add --force
+        - [x] Add version number option and default to latest stable
+    - [ ] **user:username** Verify via CLI input
+    - [ ] **user:email** Verify via CLI input
+    - [ ] **user:password** Verify via CLI input
+    - [ ] **theme:type** Allow for tar and git theme types
+    - [ ] **theme:name** Get/Verify from CLI Input
+    - [ ] **theme:style-css:theme-name** Get/Verify from CLI Input (Possibly site title)
+    - [x] **site:url** Use `$ kindling init {$name}` to create {name}.dev
+    - [x] **database:name** Use `$ kindling init {$name}` to create wp_{name}
+
+- [ ] src/Command/InstallCommand.php
+    - [x] Check for .kindling.json before executing and throw error if not found.
+    - [ ] Split sections into there own commands? That way you can install via `$ kindling install:all` or `$kindling install:section`
+    - [ ] Allow for disabling of certain sections via flag?
+    - [ ] Post Git pull commands?
+    - [ ] Install PHPUnit scaffold once theme is installed.
+    - [ ] Initialize Git repository and remotes.
+    - [ ] Read in files as templates. '.gitignore' => 'https://wpengine.com/wp-content/uploads/2013/10/recommended-gitignore-no-wp.txt'
+    - [ ] License paid plugins
+        - [ ] WP Migrate DB Pro: `define( 'WPMDB_LICENCE', 'XXXXX' );`
+        - [ ] Possibly activate paid plugins separately after licensing.
