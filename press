@@ -2,8 +2,9 @@
 <?php
 require __DIR__.'/vendor/autoload.php';
 
-use KindlingCLI\Command\ConfigureCommand;
+use KindlingCLI\Command\NewCommand;
 use KindlingCLI\Command\InstallCommand;
+use KindlingCLI\Command\ConfigureCommand;
 use Symfony\Component\Console\Application;
 
 define('KCLI_EXEC_DIR', __DIR__);
@@ -14,5 +15,6 @@ $application = new Application();
 
 $application->add(new InstallCommand);
 $application->add(new ConfigureCommand);
+$application->add(new NewCommand);
 
 $application->run();
