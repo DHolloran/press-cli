@@ -1,6 +1,5 @@
 ## Todo
 - [x] Global configuration creation.
-- [ ] New name? Possibly Flint/Flint CLI other things that bring up thoughts of starting (Theme is kindling so flint and steel would start kindling)
 - [ ] Add licensing
 - [ ] Add contributing/issue template
 - [ ] Update repo name.
@@ -16,7 +15,7 @@
 - [x] src/Option/Configuration.php
     - [x] Build configuration skeleton creation.
     - [x] Merge global configuration with default configuration
-    - [x] Write to .kindling.json
+    - [x] Write to .press-cli.json
     - [x] Allow for JSON configuration?
     - [x] Add Mailtrap for WordPress
 - [ ] config.php
@@ -34,12 +33,12 @@
     - [ ] **theme:type** Allow for tar and git theme types
     - [ ] **theme:name** Get/Verify from CLI Input
     - [ ] **theme:style-css:theme-name** Get/Verify from CLI Input (Possibly site title)
-    - [x] **site:url** Use `$ kindling init {$name}` to create {name}.dev
-    - [x] **database:name** Use `$ kindling init {$name}` to create wp_{name}
+    - [x] **site:url** Use `$ press init {$name}` to create {name}.dev
+    - [x] **database:name** Use `$ press init {$name}` to create wp_{name}
 
 - [ ] src/Command/InstallCommand.php
-    - [x] Check for .kindling.json before executing and throw error if not found.
-    - [ ] Split sections into there own commands? That way you can install via `$ kindling install:all` or `$kindling install:section`
+    - [x] Check for .press-cli.json before executing and throw error if not found.
+    - [ ] Split sections into there own commands? That way you can install via `$ press install:all` or `$press install:section`
     - [ ] Allow for disabling of certain sections via flag?
     - [ ] Post Git pull commands?
     - [ ] Install PHPUnit scaffold once theme is installed.

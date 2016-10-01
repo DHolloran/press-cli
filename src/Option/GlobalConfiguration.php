@@ -74,6 +74,6 @@ class GlobalConfiguration
      */
     protected static function getConfigFile()
     {
-        return "{$_SERVER['HOME']}/.kindling.json";
+        return "{$_SERVER['HOME']}/.press-cli.json";
     }
 }

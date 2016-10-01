@@ -11,7 +11,7 @@
 2. Install PHP if not already installed, you can use [Homebrew](http://brew.sh/) to easily install PHP.
     - Install Hombrew or if Homebrew was already installed make sure it is up to date via `brew update`.
     - Install PHP 7.0 `via brew install homebrew/php/php70`.
-3. Install Kindling CLI via `composer global require dholloran/kindling-cli`.
+3. Install Kindling CLI via `composer global require dholloran/press-cli`.
 4. Install Laravel Valet
     - [Installation Instructions](https://laravel.com/docs/valet#installation)
 

@@ -13,7 +13,7 @@ class Configuration
      *
      * @var string
      */
-    protected static $configFileName = '.kindling.json';
+    protected static $configFileName = '.press-cli.json';
 
     /**
      * Creates the configuration file.
