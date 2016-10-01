@@ -1,13 +1,14 @@
 ## Todo
 - [x] Global configuration creation.
 - [ ] Add licensing
+- [ ] Disable saving password to local configuration.
 - [ ] Add contributing/issue template
-- [ ] Update repo name.
+- [x] Update repo name.
 - [ ] Add update command that runs things like plugins and new option commands:update
-- [ ] Add new command that runs init/install
+- [x] Add new command that runs init/install
 - [x] Rename init to create on config?
 - [ ] Documentation wiki
-- [ ] Install instructions
+- [x] Install instructions
 - [ ] Tests
 - [ ] Add to packagist to Composer install
 - [ ] Build Plugin or Add to theme to retrieve configuration details on live site
@@ -21,17 +22,17 @@
 - [ ] config.php
     - [ ] **theme:style-css:client** Verify via CLI input
     - [ ] **theme:style-css:version** Verify via CLI input
-    - [ ] **site:title** Get from CLI Input
+    - [x] **site:title** Get from CLI Input
     - [x] **plugins**
         - [x] Merge global/local together.
         - [x] Possibly add all global to local config so we can disable if needed.
         - [x] Add --force
         - [x] Add version number option and default to latest stable
-    - [ ] **user:username** Verify via CLI input
-    - [ ] **user:email** Verify via CLI input
-    - [ ] **user:password** Verify via CLI input
+    - [x] **user:username** Verify via CLI input
+    - [x] **user:email** Verify via CLI input
+    - [x] **user:password** Verify via CLI input
     - [ ] **theme:type** Allow for tar and git theme types
-    - [ ] **theme:name** Get/Verify from CLI Input
+    - [x] **theme:name** Get/Verify from CLI Input
     - [ ] **theme:style-css:theme-name** Get/Verify from CLI Input (Possibly site title)
     - [x] **site:url** Use `$ press init {$name}` to create {name}.dev
     - [x] **database:name** Use `$ press init {$name}` to create wp_{name}
