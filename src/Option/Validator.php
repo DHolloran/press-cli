@@ -21,13 +21,11 @@ class Validator
      */
     public static function validate($config, QuestionHelper $helper, InputInterface $input, OutputInterface $output)
     {
-        foreach (self::required() as $ruleKey => $rule) {
+        foreach (self::rules() as $ruleKey => $rule) {
             $value = self::getValue($config, $ruleKey);
             $value = self::askQuestion($value, $rule, $helper, $input, $output);
             $config = self::setValue($config, $value, $ruleKey);
         }
-
-        self::optional();
 
         return $config;
     }
@@ -105,30 +103,12 @@ class Validator
         return (string) $config;
     }
 
-    protected static function optional()
-    {
-        var_dump('Finish Validator::optional');
-        exit(1);
-        $rules = [
-            'theme:style-css:client' => [
-                'question' => 'Theme Name:',
-                'verify' => true,
-            ],
-            'theme:style-css:name' => [
-                'question' => 'Theme Name:',
-                'verify' => true,
-            ],
-        ];
-
-        return $rules;
-    }
-
     /**
      * Validation required rules.
      *
      * @return array
      */
-    protected static function required()
+    protected static function rules()
     {
         return [
             'database:user' => [
