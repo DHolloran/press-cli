@@ -42,7 +42,9 @@ trait Plugin
         $config = Configuration::get();
         $plugins = isset($config['plugins']) ? $config['plugins'] : [];
         foreach ($plugins as $plugin) {
-            self::pluginInstall($plugin['plugin'], (bool) $plugin['activate'], $plugin['version']);
+            $version = isset($plugin['version']) ? $plugin['version'] : '';
+            $activate = isset($plugin['activate']) ? (bool) $plugin['activate'] : false;
+            self::pluginInstall($plugin['plugin'], $activate, $version);
             $output->writeln('');
         }
     }
@@ -62,7 +64,7 @@ trait Plugin
             $options['activate'] = '';
         }
 
-        if (!is_null($version)) {
+        if ($version) {
             $options['version'] = $version;
         }
 
