@@ -32,9 +32,7 @@ class CreateCommand extends Command
 
         $this->createProjectDirectory($directory, $output);
 
-        Configuration::create($directory, $name, $output);
-
-        $output->writeln("<info>Project created!</info>");
+        Configuration::create($directory, $name, $input, $output, $this->getHelper('question'));
     }
 
     /**

@@ -2,6 +2,7 @@
 namespace KindlingCLI\Command;
 
 use KindlingCLI\WPCLI\WP;
+use KindlingCLI\Option\Validator;
 use KindlingCLI\Command\PostInstall;
 use KindlingCLI\Option\Configuration;
 use Symfony\Component\Console\Command\Command;

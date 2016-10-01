@@ -2,6 +2,8 @@
 namespace KindlingCLI\Option;
 
 use KindlingCLI\Option\GlobalConfiguration;
+use Symfony\Component\Console\Input\InputInterface;
+use Symfony\Component\Console\Helper\QuestionHelper;
 use Symfony\Component\Console\Output\OutputInterface;
 
 class Configuration
@@ -16,11 +18,13 @@ class Configuration
     /**
      * Creates the configuration file.
      *
-     * @param  string          $directory
-     * @param  string          $name
-     * @param  OutputInterface $output
+     * @param string          $directory
+     * @param string          $name
+     * @param InputInterface  $input
+     * @param OutputInterface $output
+     * @param QuestionHelper  $helper
      */
-    public static function create($directory, $name, OutputInterface $output)
+    public static function create($directory, $name, InputInterface $input, OutputInterface $output, QuestionHelper $helper)
     {
         // Create the global configuration if needed.
         if (!GlobalConfiguration::exists()) {
@@ -30,7 +34,7 @@ class Configuration
         }
 
         // Start local configuration.
-        $output->writeln("<info>Creating project configuration...</info>");
+        $output->writeln("\n<info>Creating project configuration...</info>");
         $configFile = rtrim($directory, '/') . '/' . self::$configFileName;
 
         if (file_exists($configFile)) {
@@ -40,7 +44,8 @@ class Configuration
         }
 
         // Add configuration from skeleton.
-        $config = json_encode(self::configSkeleton($name), JSON_PRETTY_PRINT);
+        $skeleton = self::configSkeleton($name, $input, $output, $helper);
+        $config = json_encode($skeleton, JSON_PRETTY_PRINT);
         $config = stripslashes($config);
         file_put_contents($configFile, $config);
 
@@ -68,16 +73,21 @@ class Configuration
      *
      * @return string
      */
-    protected static function configSkeleton($name)
+    protected static function configSkeleton($name, InputInterface $input, OutputInterface $output, QuestionHelper $helper)
     {
         include KCLI_EXEC_DIR . '/templates/config.php';
 
+        // Merge global and local.
+        $config = self::mergeConfiguration($config, GlobalConfiguration::get());
+        $config = self::removeDuplicatePlugins($config);
+
+        // Build out some standard stuff.
         $config['database']['name'] = self::makeDbName($name);
         $config['site']['url'] = self::makeURL($name);
         $config['theme']['name'] = self::makeThemeName($name);
 
-        $config = self::mergeConfiguration(GlobalConfiguration::get(), $config);
-        $config = self::removeDuplicatePlugins($config);
+        // Validate the configuration options.
+        $config = Validator::validate($config, $helper, $input, $output);
 
         return $config;
     }
