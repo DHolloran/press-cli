@@ -2,7 +2,7 @@
 <?php
 require __DIR__.'/vendor/autoload.php';
 
-use KindlingCLI\Command\CreateCommand;
+use KindlingCLI\Command\ConfigureCommand;
 use KindlingCLI\Command\InstallCommand;
 use Symfony\Component\Console\Application;
 
@@ -13,6 +13,6 @@ putenv('WP_CLI_CONFIG_PATH='.KCLI_EXEC_DIR . '/config.yml');
 $application = new Application();
 
 $application->add(new InstallCommand);
-$application->add(new CreateCommand);
+$application->add(new ConfigureCommand);
 
 $application->run();

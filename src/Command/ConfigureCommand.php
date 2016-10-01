@@ -7,16 +7,16 @@ use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 
-class CreateCommand extends Command
+class ConfigureCommand extends Command
 {
     /**
      * Configure create command.
      */
     protected function configure()
     {
-        $this->setName('create')
+        $this->setName('configure')
               ->setDescription('Creates a new project directory and configuration.')
-              ->addArgument('name', InputArgument::REQUIRED, 'The project name');
+              ->addArgument('name', InputArgument::OPTIONAL, 'The project name');
     }
 
     /**
@@ -29,9 +29,7 @@ class CreateCommand extends Command
     {
         $name = $input->getArgument('name');
         $directory = getcwd() . "/{$name}";
-
         $this->createProjectDirectory($directory, $output);
-
         Configuration::create($directory, $name, $input, $output, $this->getHelper('question'));
     }
 
