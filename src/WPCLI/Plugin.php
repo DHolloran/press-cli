@@ -44,7 +44,18 @@ trait Plugin
         foreach ($plugins as $plugin) {
             $version = isset($plugin['version']) ? $plugin['version'] : '';
             $activate = isset($plugin['activate']) ? (bool) $plugin['activate'] : false;
-            self::pluginInstall($plugin['plugin'], $activate, $version);
+            $location = isset($plugin['location']) ? $plugin['location'] : '';
+
+            // Let the user know which custom plugin is being installed.
+            if ($location) {
+                $locVersion = $version ? "($version)" : '';
+                $output->writeln(trim("Installing {$plugin['plugin']} {$locVersion}"));
+            }
+
+            // Install the plugin.
+            $install = $location ? $location : $plugin['plugin'];
+            self::pluginInstall($install, $activate, $version);
+
             $output->writeln('');
         }
     }

@@ -33,6 +33,11 @@ $config = [
             'plugin' => 'mailtrap-for-wp',
             'activate' => false,
         ],
+        // [
+        //     'plugin' => 'wp-migrate-db-pro',
+        //     'activate' => false,
+        //     'location' => '~/Desktop/plugins/wp-migrate-db-pro.zip',
+        // ],
     ],
     'user' => [
         'username' => '',

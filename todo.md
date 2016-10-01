@@ -12,7 +12,7 @@
 - [ ] Tests
 - [ ] Add to packagist to Composer install
 - [ ] Build Plugin or Add to theme to retrieve configuration details on live site
-- [ ] Move external plugins URLs to a url parameter so we can add a name as well. This will allow for finding serials in the global configuration so we do not have to store them in version control.
+- [x] Move external plugins URLs to a url parameter so we can add a name as well. This will allow for finding serials in the global configuration so we do not have to store them in version control.
 - [x] src/Option/Configuration.php
     - [x] Build configuration skeleton creation.
     - [x] Merge global configuration with default configuration
