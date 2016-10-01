@@ -40,7 +40,7 @@ class Validator
     protected static function setValue($config, $value, $ruleKey)
     {
         // For now all validation is 2 levels deep so this should be good for now.
-        $keys = explode(':', 'database:user');
+        $keys = explode(':', $ruleKey);
         $config[ $keys[0] ][ $keys[1] ] = $value;
 
         return $config;
