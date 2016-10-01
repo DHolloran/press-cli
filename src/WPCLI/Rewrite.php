@@ -20,8 +20,10 @@ trait Rewrite
      */
     public static function rewriteSetStructure()
     {
-        $structure = "'/%postname%/'";
+        $config = Configuration::get();
+        $rewrite = isset($config['rewrite']) ? $config['rewrite'] : '/%postname%/';
 
-        CLI::execCommand('rewrite', ['structure', $structure], ['hard' => '']);
+        CLI::execCommand('rewrite', ['structure', "'{$rewrite}'"], ['hard' => '']);
+        CLI::execCommand('rewrite', ['flush'], ['hard' => '']);
     }
 }

@@ -67,6 +67,7 @@ $config = [
         'title' => '',
         'url' => '',
     ],
+    'rewrite' => '/%postname%/',
     'commands' => [
         'preInstall' => [],
         'postInstallTheme' => [
