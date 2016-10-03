@@ -45,11 +45,58 @@ class Configuration
 
         // Add configuration from skeleton.
         $skeleton = self::configSkeleton($name, $input, $output, $helper);
-        $config = json_encode($skeleton, JSON_PRETTY_PRINT);
-        $config = stripslashes($config);
-        file_put_contents($configFile, $config);
+        self::write($skeleton, $configFile);
 
         $output->writeln("<info>\nProject configuration created at {$configFile}!</info>");
+    }
+
+    /**
+     * Writes the configuration to the file.
+     *
+     * @param array  $config
+     * @param string $configFile
+     */
+    protected static function write($config, $configFile = null)
+    {
+        $configFile = is_null($configFile) ? self::$configFileName : $configFile;
+        $config = json_encode($config, JSON_PRETTY_PRINT);
+        $config = stripslashes($config);
+        file_put_contents($configFile, $config);
+    }
+
+    /**
+     * Removes the user password.
+     */
+    public static function cleanUpConfigForVCS()
+    {
+        $global = GlobalConfiguration::get();
+        $afterInstall = isset($global['settings']['afterInstall']) ? $global['settings']['afterInstall'] : [];
+
+        if (!$afterInstall) {
+            return;
+        }
+
+        $config = self::get();
+
+        // Remove user password.
+        $removeUserPassword = isset($afterInstall['removeUserPassword']) ? (bool) $afterInstall['removeUserPassword'] : false;
+        if ($removeUserPassword) {
+            $config['user']['password'] = '';
+        }
+
+        // Remove user email.
+        $removeUserPassword = isset($afterInstall['removeUserEmail']) ? (bool) $afterInstall['removeUserEmail'] : false;
+        if ($removeUserPassword) {
+            $config['user']['email'] = '';
+        }
+
+        // Remove user name.
+        $removeUserPassword = isset($afterInstall['removeUserName']) ? (bool) $afterInstall['removeUserName'] : false;
+        if ($removeUserPassword) {
+            $config['user']['name'] = '';
+        }
+
+        self::write($config);
     }
 
     /**
@@ -88,6 +135,11 @@ class Configuration
 
         // Validate the configuration options.
         $config = Validator::validate($config, $helper, $input, $output);
+
+        // Remove settings for local configuration.
+        if (isset($config['settings'])) {
+            unset($config['settings']);
+        }
 
         return $config;
     }

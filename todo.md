@@ -1,7 +1,7 @@
 ## Todo
 - [x] Global configuration creation.
 - [ ] Add licensing
-- [ ] Disable saving password to local configuration.
+- [x] Disable saving password to local configuration.
 - [ ] Add contributing/issue template
 - [x] Update repo name.
 - [ ] Add update command that runs things like plugins and new option commands:update
@@ -28,7 +28,7 @@
         - [x] Possibly add all global to local config so we can disable if needed.
         - [x] Add --force
         - [x] Add version number option and default to latest stable
-    - [x] **user:username** Verify via CLI input
+    - [x] **user:name** Verify via CLI input
     - [x] **user:email** Verify via CLI input
     - [x] **user:password** Verify via CLI input
     - [ ] **theme:type** Allow for tar and git theme types

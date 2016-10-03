@@ -128,7 +128,7 @@ class Validator
             'database:host' => [
                 'question' => 'Database Host',
             ],
-            'user:username' => [
+            'user:name' => [
                 'question' => 'User Login',
                 'verify' => true,
             ],

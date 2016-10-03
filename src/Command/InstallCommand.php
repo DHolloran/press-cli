@@ -90,5 +90,8 @@ class InstallCommand extends Command
         PostInstall::executeCommands();
 
         $output->writeln("\n<info>Install Completed!</info>");
+
+        // Clean up the configuration for VCS.
+        Configuration::cleanUpConfigForVCS();
     }
 }

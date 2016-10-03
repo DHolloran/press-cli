@@ -44,7 +44,7 @@ trait Core
         $options = [
             'url' => $config['site']['url'],
             'title' => $config['site']['title'],
-            'admin_user' => $config['user']['username'],
+            'admin_user' => $config['user']['name'],
             'admin_password' => $config['user']['password'],
             'admin_email' => $config['user']['email'],
             'skip-email' => '',

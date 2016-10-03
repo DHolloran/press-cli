@@ -80,5 +80,12 @@ $config = [
             'bower install',
         ],
         'postInstall' => [],
-    ]
+    ],
+    'settings' => [
+        'afterInstall' => [
+            'removeUserPassword' => true,
+            'removeUserEmail' => true,
+            'removeUserName' => true,
+        ],
+    ],
 ];
