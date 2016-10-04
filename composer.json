@@ -3,14 +3,14 @@
     "description": "A simple configurable opinionated WordPress installer.",
     "keywords": ["WordPress"],
     "homepage": "https://github.com/DHolloran/press-cli/",
-    "authors" : {
+    "authors" : [
         {
             "name": "Dan Holloran",
             "email": "dtholloran@gmail.com",
             "homepage":"http://danholloran.me",
             "role": "Developer"
         }
-    },
+    ],
     "require": {
         "wp-cli/wp-cli": "^0.24.1",
         "symfony/console" : "~2.7",
