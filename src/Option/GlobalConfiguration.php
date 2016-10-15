@@ -52,7 +52,7 @@ class GlobalConfiguration
      */
     protected static function configSkeleton()
     {
-        include KCLI_EXEC_DIR . '/templates/config.php';
+        include PRESS_CLI_EXEC_DIR . '/templates/config.php';
 
         return $config;
     }

@@ -6,20 +6,20 @@ if (file_exists(__DIR__.'/../../autoload.php')) {
     require __DIR__.'/vendor/autoload.php';
 }
 
-if (file_exists(__DIR__.'/../../bin/wp')) {
-    define('KCLI_WP_EXEC', __DIR__.'/../../bin/wp');
-} else {
-    define('KCLI_WP_EXEC', __DIR__.'/bin/wp');
-}
-
 use KindlingCLI\Command\NewCommand;
 use KindlingCLI\Command\InstallCommand;
 use KindlingCLI\Command\ConfigureCommand;
 use Symfony\Component\Console\Application;
 
-define('KCLI_EXEC_DIR', __DIR__);
+if (file_exists(__DIR__.'/../../bin/wp')) {
+    define('PRESS_CLI_WP_EXEC', __DIR__.'/../../bin/wp');
+} else {
+    define('PRESS_CLI_WP_EXEC', __DIR__.'/bin/wp');
+}
 
-putenv('WP_CLI_CONFIG_PATH='.KCLI_EXEC_DIR . '/config.yml');
+define('PRESS_CLI_EXEC_DIR', __DIR__);
+
+putenv('WP_CLI_CONFIG_PATH='.PRESS_CLI_EXEC_DIR . '/config.yml');
 
 $application = new Application();
 

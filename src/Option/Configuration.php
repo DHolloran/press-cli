@@ -122,7 +122,7 @@ class Configuration
      */
     protected static function configSkeleton($name, InputInterface $input, OutputInterface $output, QuestionHelper $helper)
     {
-        include KCLI_EXEC_DIR . '/templates/config.php';
+        include PRESS_CLI_EXEC_DIR . '/templates/config.php';
 
         // Merge global and local.
         $config = self::mergeConfiguration($config, GlobalConfiguration::get());

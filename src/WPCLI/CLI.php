@@ -16,7 +16,7 @@ class CLI
     {
         $arguments = trim(implode(' ', $arguments));
         $options = self::execOptions($options);
-        $command = trim(KCLI_WP_EXEC . " {$command}");
+        $command = trim(PRESS_CLI_WP_EXEC . " {$command}");
         $command = implode(' ', array_filter([$command, $arguments, $options]));
 
         return system($command);
