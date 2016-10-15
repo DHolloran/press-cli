@@ -93,7 +93,7 @@ class Validator
     {
         $value = '';
         foreach (explode(':', $ruleKey) as $configKey) {
-            $config = $config[ $configKey ];
+            $config = isset($config[ $configKey ]) ? $config[ $configKey ] : '';
         }
 
         if (is_array($config)) {
