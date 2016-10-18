@@ -48,11 +48,11 @@ $config = [
         'type' => 'zip',
         'url' => 'https://github.com/matchboxdesigngroup/kindling/archive/1.0.1.zip',
         'name' => '',
-        'style-css' => [
-            'theme-name' => '',
-            'client' => '',
-            'version' => '1.0.0-dev',
-        ],
+        // 'style-css' => [
+        //     'theme-name' => '',
+        //     'client' => '',
+        //     'version' => '1.0.0-dev',
+        // ],
     ],
     'menus' => [
         [
