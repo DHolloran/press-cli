@@ -76,7 +76,7 @@ $config = [
     'commands' => [
         'preInstall' => [],
         'postInstallTheme' => [
-            'npm install',
+            'yarn',
             'bower install',
         ],
         'postInstall' => [],
