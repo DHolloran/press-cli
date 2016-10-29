@@ -1,0 +1,4 @@
+.editorconfig export-ignore
+notes.md export-ignore
+phpunit.xml export-ignore
+todo.md export-ignore
