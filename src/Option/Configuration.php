@@ -125,6 +125,7 @@ class Configuration
         include PRESS_CLI_EXEC_DIR . '/templates/config.php';
 
         // Merge global and local.
+        $config = self::emptyConfig($config);
         $config = self::mergeConfiguration($config, GlobalConfiguration::get());
         $config = self::removeDuplicatePlugins($config);
 
@@ -255,5 +256,43 @@ class Configuration
     public static function exists()
     {
         return file_exists(self::$configFileName);
+    }
+
+    /**
+     * Empty configuration values.
+     *
+     * @param  array $config The configuration.
+     *
+     * @return array         The emptied configuration.
+     */
+    protected static function emptyConfigValues($config) {
+        return array_map(function($value) {
+            if (is_array($value)) {
+                $value = self::emptyConfigValues($value);
+                return $value;
+            }
+
+            return '';
+        }, $config);
+    }
+
+    /**
+     * Empties the configuration.
+     *
+     * @param  array $config The configuration.
+     *
+     * @return array         The emptied configuration.
+     */
+    protected static function emptyConfig($config) {
+        $config['plugins'] = [];
+        $config['menus'] = [];
+        $config['commands'] = isset($config['commands']) ? $config['commands'] : [];
+        $config['commands'] = array_map(function($command) {
+            return [];
+        }, $config['commands']);
+
+        $config = self::emptyConfigValues($config);
+
+        return $config;
     }
 }

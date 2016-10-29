@@ -40,7 +40,7 @@ $config = [
         // ],
     ],
     'user' => [
-        'username' => '',
+        'name' => '',
         'email' => '',
         'password' => '',
     ],
