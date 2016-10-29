@@ -14,7 +14,7 @@ use Symfony\Component\Console\Application;
 if (file_exists(__DIR__.'/../../bin/wp')) {
     define('PRESS_CLI_WP_EXEC', __DIR__.'/../../bin/wp');
 } else {
-    define('PRESS_CLI_WP_EXEC', __DIR__.'/bin/wp');
+    define('PRESS_CLI_WP_EXEC', __DIR__.'/vendor/bin/wp');
 }
 
 define('PRESS_CLI_EXEC_DIR', __DIR__);
