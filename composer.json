@@ -12,7 +12,7 @@
         }
     ],
     "require": {
-        "wp-cli/wp-cli": "^0.24.1",
+        "wp-cli/wp-cli": "^0.25.0",
         "symfony/console" : "~2.7",
         "guzzlehttp/guzzle" : "~6.0",
         "php": ">=5.6.0"
