@@ -3,6 +3,7 @@
     "description": "A simple configurable opinionated WordPress installer.",
     "keywords": ["WordPress"],
     "homepage": "https://github.com/DHolloran/press-cli/",
+    "license": "GPL-3.0",
     "authors" : [
         {
             "name": "Dan Holloran",
