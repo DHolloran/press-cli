@@ -1,14 +1,15 @@
 {
     "name": "dholloran/press-cli",
     "description": "A simple configurable opinionated WordPress installer.",
-    "keywords": ["WordPress"],
-    "homepage": "https://github.com/DHolloran/press-cli/",
+    "keywords": ["WordPress", "install"],
+    "homepage": "https://pressc.li",
     "license": "GPL-3.0",
+    "type": "project",
     "authors" : [
         {
             "name": "Dan Holloran",
             "email": "dtholloran@gmail.com",
-            "homepage":"http://danholloran.me",
+            "homepage":"https://danholloran.me",
             "role": "Developer"
         }
     ],
@@ -17,6 +18,11 @@
         "symfony/console" : "~2.7",
         "guzzlehttp/guzzle" : "~6.0",
         "php": ">=5.6.0"
+    },
+    "support": {
+        "issues": "https://github.com/DHolloran/press-cli/issues",
+        "docs": "https://pressc.li/docs/",
+        "source": "https://github.com/DHolloran/press-cli"
     },
     "bin": [
         "press"
