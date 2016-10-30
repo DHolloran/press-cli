@@ -21,7 +21,7 @@ define('PRESS_CLI_EXEC_DIR', __DIR__);
 
 putenv('WP_CLI_CONFIG_PATH='.PRESS_CLI_EXEC_DIR . '/config.yml');
 
-$application = new Application();
+$application = new Application('Press CLI', '0.9.1');
 
 $application->add(new InstallCommand);
 $application->add(new ConfigureCommand);
