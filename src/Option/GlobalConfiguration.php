@@ -1,10 +1,13 @@
 <?php
 namespace PressCLI\Option;
 
+use PressCLI\Option\DefaultConfiguration;
 use Symfony\Component\Console\Output\OutputInterface;
 
 class GlobalConfiguration
 {
+    use DefaultConfiguration;
+
     /**
      * Creates the configuration file.
      *
@@ -52,7 +55,7 @@ class GlobalConfiguration
      */
     protected static function configSkeleton()
     {
-        $config = presscli_config();
+        $config = self::getDefaultConfiguration();
 
         return $config;
     }

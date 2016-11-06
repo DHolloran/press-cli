@@ -2,12 +2,15 @@
 namespace PressCLI\Option;
 
 use PressCLI\Option\GlobalConfiguration;
+use PressCLI\Option\DefaultConfiguration;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Helper\QuestionHelper;
 use Symfony\Component\Console\Output\OutputInterface;
 
 class Configuration
 {
+    use DefaultConfiguration;
+
     /**
      * Configuration file name.
      *
@@ -122,7 +125,7 @@ class Configuration
      */
     protected static function configSkeleton($name, InputInterface $input, OutputInterface $output, QuestionHelper $helper)
     {
-        $config = presscli_config();
+        $config = self::getDefaultConfiguration();
 
         // Merge global and local.
         $config = self::emptyConfig($config);
