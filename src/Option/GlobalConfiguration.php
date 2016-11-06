@@ -1,5 +1,5 @@
 <?php
-namespace KindlingCLI\Option;
+namespace PressCLI\Option;
 
 use Symfony\Component\Console\Output\OutputInterface;
 

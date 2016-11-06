@@ -1,8 +1,8 @@
 <?php
-namespace KindlingCLI\WPCLI;
+namespace PressCLI\WPCLI;
 
-use KindlingCLI\WPCLI\CLI;
-use KindlingCLI\Option\Configuration;
+use PressCLI\WPCLI\CLI;
+use PressCLI\Option\Configuration;
 
 trait Rewrite
 {

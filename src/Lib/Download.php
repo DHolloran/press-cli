@@ -1,5 +1,5 @@
 <?php
-namespace KindlingCLI\Lib;
+namespace PressCLI\Lib;
 
 use GuzzleHttp\Client;
 

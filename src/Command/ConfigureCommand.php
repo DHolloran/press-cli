@@ -1,9 +1,9 @@
 <?php
-namespace KindlingCLI\Command;
+namespace PressCLI\Command;
 
 use RuntimeException;
-use KindlingCLI\Option\Configuration;
-use KindlingCLI\Option\GlobalConfiguration;
+use PressCLI\Option\Configuration;
+use PressCLI\Option\GlobalConfiguration;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Input\InputArgument;

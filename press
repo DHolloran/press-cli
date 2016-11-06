@@ -6,9 +6,9 @@ if (file_exists(__DIR__.'/../../autoload.php')) {
     require __DIR__.'/vendor/autoload.php';
 }
 
-use KindlingCLI\Command\NewCommand;
-use KindlingCLI\Command\InstallCommand;
-use KindlingCLI\Command\ConfigureCommand;
+use PressCLI\Command\NewCommand;
+use PressCLI\Command\InstallCommand;
+use PressCLI\Command\ConfigureCommand;
 use Symfony\Component\Console\Application;
 
 if (file_exists(__DIR__.'/../../bin/wp')) {

@@ -1,7 +1,7 @@
 <?php
-namespace KindlingCLI\Option;
+namespace PressCLI\Option;
 
-use KindlingCLI\Option\GlobalConfiguration;
+use PressCLI\Option\GlobalConfiguration;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Helper\QuestionHelper;
 use Symfony\Component\Console\Output\OutputInterface;

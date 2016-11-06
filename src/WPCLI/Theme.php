@@ -1,10 +1,10 @@
 <?php
-namespace KindlingCLI\WPCLI;
+namespace PressCLI\WPCLI;
 
-use KindlingCLI\WPCLI\CLI;
-use KindlingCLI\ThemeInstall\Zip;
-use KindlingCLI\Option\Configuration;
-use KindlingCLI\ThemeInstall\StyleCSS;
+use PressCLI\WPCLI\CLI;
+use PressCLI\ThemeInstall\Zip;
+use PressCLI\Option\Configuration;
+use PressCLI\ThemeInstall\StyleCSS;
 use Symfony\Component\Console\Output\OutputInterface;
 
 trait Theme

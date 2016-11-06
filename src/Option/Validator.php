@@ -1,5 +1,5 @@
 <?php
-namespace KindlingCLI\Option;
+namespace PressCLI\Option;
 
 use RuntimeException;
 use Symfony\Component\Console\Question\Question;

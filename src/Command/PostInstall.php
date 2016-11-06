@@ -1,7 +1,7 @@
 <?php
-namespace KindlingCLI\Command;
+namespace PressCLI\Command;
 
-use KindlingCLI\Option\Configuration;
+use PressCLI\Option\Configuration;
 
 class PostInstall
 {

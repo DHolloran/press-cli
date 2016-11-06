@@ -1,9 +1,10 @@
 <?php
-namespace KindlingCLI\Command;
+namespace PressCLI\Command;
 
-use KindlingCLI\WPCLI\WP;
-use KindlingCLI\Command\PostInstall;
-use KindlingCLI\Option\Configuration;
+use PressCLI\WPCLI\WP;
+use PressCLI\Command\PostInstall;
+use PressCLI\Option\Configuration;
+use PressCLI\Exception\ConfigurationNotFound;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;

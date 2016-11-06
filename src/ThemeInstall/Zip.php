@@ -1,8 +1,8 @@
 <?php
-namespace KindlingCLI\ThemeInstall;
+namespace PressCLI\ThemeInstall;
 
 use ZipArchive;
-use KindlingCLI\Lib\Download;
+use PressCLI\Lib\Download;
 
 class Zip
 {

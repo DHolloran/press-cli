@@ -1,5 +1,5 @@
 <?php
-namespace KindlingCLI\Command;
+namespace PressCLI\Command;
 
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\ArrayInput;

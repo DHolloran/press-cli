@@ -1,5 +1,5 @@
 <?php
-namespace KindlingCLI\WPCLI;
+namespace PressCLI\WPCLI;
 
 class CLI
 {

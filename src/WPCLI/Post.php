@@ -1,7 +1,7 @@
 <?php
-namespace KindlingCLI\WPCLI;
+namespace PressCLI\WPCLI;
 
-use KindlingCLI\WPCLI\CLI;
+use PressCLI\WPCLI\CLI;
 
 trait Post
 {

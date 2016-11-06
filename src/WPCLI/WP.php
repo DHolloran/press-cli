@@ -1,13 +1,13 @@
 <?php
-namespace KindlingCLI\WPCLI;
+namespace PressCLI\WPCLI;
 
-use KindlingCLI\WPCLI\DB;
-use KindlingCLI\WPCLI\Core;
-use KindlingCLI\WPCLI\Post;
-use KindlingCLI\WPCLI\Theme;
-use KindlingCLI\WPCLI\Plugin;
-use KindlingCLI\WPCLI\Rewrite;
-use KindlingCLI\WPCLI\Menu;
+use PressCLI\WPCLI\DB;
+use PressCLI\WPCLI\Core;
+use PressCLI\WPCLI\Post;
+use PressCLI\WPCLI\Theme;
+use PressCLI\WPCLI\Plugin;
+use PressCLI\WPCLI\Rewrite;
+use PressCLI\WPCLI\Menu;
 
 class WP
 {

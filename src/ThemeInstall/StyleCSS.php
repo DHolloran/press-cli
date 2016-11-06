@@ -1,7 +1,7 @@
 <?php
-namespace KindlingCLI\ThemeInstall;
+namespace PressCLI\ThemeInstall;
 
-use KindlingCLI\Option\Configuration;
+use PressCLI\Option\Configuration;
 
 class StyleCSS
 {
