@@ -21,10 +21,7 @@ class InstallCommand extends Command
     {
         // Make sure the configuration exists.
         if (!Configuration::exists()) {
-            $output->writeln(
-                '<error>Configuration file not present run press init {project-name} to get started.</error>'
-            );
-            exit(1);
+            throw new ConfigurationNotFound;
         }
 
         $output->writeln("<info>== Running Pre-install Commands =======================</info>");
