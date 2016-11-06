@@ -1,6 +1,9 @@
 [![Latest Stable Version](https://poser.pugx.org/dholloran/press-cli/v/stable?format=flat-square)](https://packagist.org/packages/dholloran/press-cli)
 [![License](https://poser.pugx.org/dholloran/press-cli/license?format=flat-square)](https://packagist.org/packages/dholloran/press-cli)
+[![composer.lock](https://poser.pugx.org/dholloran/press-cli/composerlock)](https://packagist.org/packages/dholloran/press-cli)
 [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/DHolloran/press-cli/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/DHolloran/press-cli/?branch=master)
+[![Dependency Status](https://www.versioneye.com/php/dholloran:press-cli/dev-master/badge.png)](https://www.versioneye.com/php/dholloran:press-cli/dev-master)
+
 
 [![SensioLabsInsight](https://insight.sensiolabs.com/projects/3510b596-245d-4d0f-bd70-6033502d3732/big.png)](https://insight.sensiolabs.com/projects/3510b596-245d-4d0f-bd70-6033502d3732)
 
