@@ -198,9 +198,7 @@ class Configuration
      */
     protected static function makeDbName($name)
     {
-        $dbname = self::sanitizeValue($name);
-        $dbname = str_replace('-', '_', $dbname);
-        $dbname = strtolower($dbname);
+        $dbname = self::slugify($name, '_');
 
         return "wp_{$dbname}";
     }
@@ -214,9 +212,7 @@ class Configuration
      */
     protected static function makeURL($name)
     {
-        $url = self::sanitizeValue($name);
-        $url = str_replace('_', '-', $url);
-        $url = strtolower($url);
+        $url = self::slugify($name);
 
         return "http://{$url}.dev";
     }
@@ -230,25 +226,26 @@ class Configuration
      */
     protected static function makeThemeName($name)
     {
-        $themeName = self::sanitizeValue($name);
-        $themeName = str_replace('_', '-', $themeName);
-        $themeName = strtolower($themeName);
+        $themeName = self::slugify($name);
 
         return $themeName;
     }
 
     /**
-     * Creates the database name from the initialization name.
+     * Sanitizes the value.
      *
-     * @param  string $value The value.
+     * @param  string $value     The value.
+     * @param  string $separator The separator to use for spaces.
      *
-     * @return string       The sanitized value.
+     * @return string            The sanitized value.
      */
-    protected static function sanitizeValue($value)
+    protected static function slugify($value, $separator = '-')
     {
-        $value = str_replace(' ', '-', $value);
+        $value = str_replace([' ', '-', '_'], $separator, $value);
+        $value = preg_replace('/[^A-Za-z0-9-_]/um', '', $value);
+        $dbname = strtolower($value);
 
-        return preg_replace('/[^A-Za-z0-9-_]/um', '', $value);
+        return $value;
     }
 
     /**
@@ -290,7 +287,7 @@ class Configuration
         $config['plugins'] = [];
         $config['menus'] = [];
         $config['commands'] = isset($config['commands']) ? $config['commands'] : [];
-        $config['commands'] = array_map(function($command) {
+        $config['commands'] = array_map(function() {
             return [];
         }, $config['commands']);
 

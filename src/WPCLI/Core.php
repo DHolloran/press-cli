@@ -28,7 +28,6 @@ trait Core
             'dbprefix' => $dbConfig['prefix'],
             'dbname' => $dbConfig['name'],
             'dbhost' => $dbConfig['host'],
-            // 'extra-php' => "define( 'WP_DEBUG', true );\ndefine( 'WP_DEBUG_LOG', true );",
         ];
 
         CLI::execCommand('core', ['config'], $options);

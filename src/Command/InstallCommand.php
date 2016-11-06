@@ -32,16 +32,16 @@ class InstallCommand extends Command
         $output->writeln("\n<info>== Installing WordPress =======================</info>");
 
         // Check/Download WordPress
-        WP::coreDownload($output);
+        WP::coreDownload();
 
         // Check/Create wp-config.php
-        WP::coreConfig($output);
+        WP::coreConfig();
 
         // Check/Create database
         WP::dbCreate();
 
         // Check/Run install
-        WP::coreInstall($output);
+        WP::coreInstall();
 
         $output->writeln("\n<info>== Setting up Theme =======================</info>");
 
