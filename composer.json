@@ -35,6 +35,9 @@
     "autoload": {
         "psr-4": {
             "KindlingCLI\\": "src"
-        }
+        },
+        "files": [
+            "templates/config.php"
+        ]
     }
 }

@@ -1,5 +1,8 @@
 [![Latest Stable Version](https://poser.pugx.org/dholloran/press-cli/v/stable?format=flat-square)](https://packagist.org/packages/dholloran/press-cli)
 [![License](https://poser.pugx.org/dholloran/press-cli/license?format=flat-square)](https://packagist.org/packages/dholloran/press-cli)
+[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/DHolloran/press-cli/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/DHolloran/press-cli/?branch=master)
+
+[![SensioLabsInsight](https://insight.sensiolabs.com/projects/3510b596-245d-4d0f-bd70-6033502d3732/big.png)](https://insight.sensiolabs.com/projects/3510b596-245d-4d0f-bd70-6033502d3732)
 
 #Press CLI
 Press CLI is a WordPress installer to help you get up an running faster. It installs WordPress, themes, plugins and more! With the ability to set sane defaults for all your projects with the ability to customize on a prer project basis is need. Learn more about Press CLI at [https://pressc.li/](https://pressc.li/).

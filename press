@@ -17,9 +17,7 @@ if (file_exists(__DIR__.'/../../bin/wp')) {
     define('PRESS_CLI_WP_EXEC', __DIR__.'/vendor/bin/wp');
 }
 
-define('PRESS_CLI_EXEC_DIR', __DIR__);
-
-putenv('WP_CLI_CONFIG_PATH='.PRESS_CLI_EXEC_DIR . '/config.yml');
+putenv('WP_CLI_CONFIG_PATH='.__DIR__ . '/config.yml');
 
 $application = new Application('Press CLI', '0.9.1');
 

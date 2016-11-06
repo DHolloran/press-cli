@@ -122,7 +122,7 @@ class Configuration
      */
     protected static function configSkeleton($name, InputInterface $input, OutputInterface $output, QuestionHelper $helper)
     {
-        include PRESS_CLI_EXEC_DIR . '/templates/config.php';
+        $config = presscli_config();
 
         // Merge global and local.
         $config = self::emptyConfig($config);

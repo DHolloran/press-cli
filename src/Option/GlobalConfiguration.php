@@ -52,7 +52,7 @@ class GlobalConfiguration
      */
     protected static function configSkeleton()
     {
-        include PRESS_CLI_EXEC_DIR . '/templates/config.php';
+        $config = presscli_config();
 
         return $config;
     }

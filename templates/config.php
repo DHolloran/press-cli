@@ -1,93 +1,99 @@
 <?php
-
-$config = [
-    'database' => [
-        'user' => 'root',
-        'password' => 'root',
-        'prefix' => 'wp_',
-        'name' => '',
-        'host' => '127.0.0.1',
-    ],
-    'plugins' => [
-        [
-            'plugin' => 'jetpack',
-            'activate' => false,
+/**
+ * The Press CLI default configuration.
+ *
+ * @return array The configuration.
+ */
+function presscli_config() {
+    return [
+        'database' => [
+            'user' => 'root',
+            'password' => 'root',
+            'prefix' => 'wp_',
+            'name' => '',
+            'host' => '127.0.0.1',
         ],
-        [
-            'plugin' => 'crop-thumbnails',
-            'activate' => true,
+        'plugins' => [
+            [
+                'plugin' => 'jetpack',
+                'activate' => false,
+            ],
+            [
+                'plugin' => 'crop-thumbnails',
+                'activate' => true,
+            ],
+            [
+                'plugin' => 'query-monitor',
+                'activate' => true,
+            ],
+            [
+                'plugin' => 'force-regenerate-thumbnails',
+                'activate' => true,
+            ],
+            [
+                'plugin' => 'force-regenerate-thumbnails',
+                'activate' => true,
+            ],
+            [
+                'plugin' => 'mailtrap-for-wp',
+                'activate' => false,
+            ],
+            // [
+            //     'plugin' => 'wp-migrate-db-pro',
+            //     'activate' => false,
+            //     'location' => '~/Desktop/plugins/wp-migrate-db-pro.zip',
+            // ],
         ],
-        [
-            'plugin' => 'query-monitor',
-            'activate' => true,
+        'user' => [
+            'name' => '',
+            'email' => '',
+            'password' => '',
         ],
-        [
-            'plugin' => 'force-regenerate-thumbnails',
-            'activate' => true,
+        'theme' => [
+            'type' => 'zip',
+            'url' => 'https://github.com/matchboxdesigngroup/kindling/archive/1.0.1.zip',
+            'name' => '',
+            // 'style-css' => [
+            //     'theme-name' => '',
+            //     'client' => '',
+            //     'version' => '1.0.0-dev',
+            // ],
         ],
-        [
-            'plugin' => 'force-regenerate-thumbnails',
-            'activate' => true,
+        'menus' => [
+            [
+                'name' => 'Primary Navigation',
+                'location' => 'primary_navigation',
+            ],
+            [
+                'name' => 'Footer Navigation',
+                'location' => 'footer_navigation',
+            ],
+            [
+                'name' => 'Social Menu',
+                'location' => 'social_menu',
+            ],
         ],
-        [
-            'plugin' => 'mailtrap-for-wp',
-            'activate' => false,
+        'site' => [
+            'title' => '',
+            'url' => '',
         ],
-        // [
-        //     'plugin' => 'wp-migrate-db-pro',
-        //     'activate' => false,
-        //     'location' => '~/Desktop/plugins/wp-migrate-db-pro.zip',
-        // ],
-    ],
-    'user' => [
-        'name' => '',
-        'email' => '',
-        'password' => '',
-    ],
-    'theme' => [
-        'type' => 'zip',
-        'url' => 'https://github.com/matchboxdesigngroup/kindling/archive/1.0.1.zip',
-        'name' => '',
-        // 'style-css' => [
-        //     'theme-name' => '',
-        //     'client' => '',
-        //     'version' => '1.0.0-dev',
-        // ],
-    ],
-    'menus' => [
-        [
-            'name' => 'Primary Navigation',
-            'location' => 'primary_navigation',
+        'rewrite' => [
+            'structure' => '/%postname%/',
         ],
-        [
-            'name' => 'Footer Navigation',
-            'location' => 'footer_navigation',
+        'commands' => [
+            'preInstall' => [],
+            'postInstallTheme' => [
+                'yarn',
+                'bower install',
+            ],
+            'postInstall' => [],
         ],
-        [
-            'name' => 'Social Menu',
-            'location' => 'social_menu',
+        'settings' => [
+            'afterInstall' => [
+                'removeUserPassword' => true,
+                'removeUserEmail' => true,
+                'removeUserName' => true,
+            ],
         ],
-    ],
-    'site' => [
-        'title' => '',
-        'url' => '',
-    ],
-    'rewrite' => [
-        'structure' => '/%postname%/',
-    ],
-    'commands' => [
-        'preInstall' => [],
-        'postInstallTheme' => [
-            'yarn',
-            'bower install',
-        ],
-        'postInstall' => [],
-    ],
-    'settings' => [
-        'afterInstall' => [
-            'removeUserPassword' => true,
-            'removeUserEmail' => true,
-            'removeUserName' => true,
-        ],
-    ],
-];
+    ];
+}
