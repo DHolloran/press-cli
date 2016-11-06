@@ -75,7 +75,7 @@ trait Plugin
             $options['activate'] = '';
         }
 
-        if ($version) {
+        if (! is_null($version) && $version) {
             $options['version'] = $version;
         }
 
