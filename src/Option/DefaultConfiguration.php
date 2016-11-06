@@ -42,11 +42,6 @@ trait DefaultConfiguration
                     'plugin' => 'mailtrap-for-wp',
                     'activate' => false,
                 ],
-                // [
-                //     'plugin' => 'wp-migrate-db-pro',
-                //     'activate' => false,
-                //     'location' => '~/Desktop/plugins/wp-migrate-db-pro.zip',
-                // ],
             ],
             'user' => [
                 'name' => '',
@@ -57,11 +52,6 @@ trait DefaultConfiguration
                 'type' => 'zip',
                 'url' => 'https://github.com/matchboxdesigngroup/kindling/archive/1.0.1.zip',
                 'name' => '',
-                // 'style-css' => [
-                //     'theme-name' => '',
-                //     'client' => '',
-                //     'version' => '1.0.0-dev',
-                // ],
             ],
             'menus' => [
                 [
