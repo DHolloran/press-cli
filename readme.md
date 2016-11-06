@@ -2,6 +2,7 @@
 [![License](https://poser.pugx.org/dholloran/press-cli/license?format=flat-square)](https://packagist.org/packages/dholloran/press-cli)
 [![composer.lock](https://poser.pugx.org/dholloran/press-cli/composerlock)](https://packagist.org/packages/dholloran/press-cli)
 [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/DHolloran/press-cli/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/DHolloran/press-cli/?branch=master)
+[![Build Status](https://scrutinizer-ci.com/g/DHolloran/press-cli/badges/build.png?b=master)](https://scrutinizer-ci.com/g/DHolloran/press-cli/build-status/master)
 [![Dependency Status](https://www.versioneye.com/php/dholloran:press-cli/dev-master/badge.png)](https://www.versioneye.com/php/dholloran:press-cli/dev-master)
 
 
