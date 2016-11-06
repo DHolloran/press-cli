@@ -2,6 +2,7 @@
 namespace PressCLI\Command;
 
 use RuntimeException;
+use PressCLI\Lib\FileSystem;
 use PressCLI\Option\Configuration;
 use PressCLI\Option\GlobalConfiguration;
 use Symfony\Component\Console\Command\Command;
@@ -12,6 +13,8 @@ use Symfony\Component\Console\Output\OutputInterface;
 
 class ConfigureCommand extends Command
 {
+    use FileSystem;
+
     /**
      * Configure create command.
      */
@@ -52,27 +55,5 @@ class ConfigureCommand extends Command
         $directory = getcwd() . "/{$name}";
         $this->createProjectDirectory($directory, $output);
         Configuration::create($directory, $name, $input, $output, $this->getHelper('question'));
-    }
-
-    /**
-     * Create project directory.
-     *
-     * @return InitCommand
-     */
-    protected function createProjectDirectory($directory, OutputInterface $output)
-    {
-        $output->writeln("<info>Creating project directory...</info>");
-
-        if (file_exists($directory)) {
-            $output->writeln("<comment>Project directory already exists at {$directory}.</comment>");
-
-            return $this;
-        }
-
-        mkdir($directory, 0755, true);
-
-        $output->writeln("<info>Project directory created at {$directory}!</info>");
-
-        return $this;
     }
 }

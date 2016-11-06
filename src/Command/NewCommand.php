@@ -1,6 +1,7 @@
 <?php
 namespace PressCLI\Command;
 
+use PressCLI\Lib\FileSystem;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\ArrayInput;
 use Symfony\Component\Console\Input\InputArgument;
@@ -9,6 +10,8 @@ use Symfony\Component\Console\Output\OutputInterface;
 
 class NewCommand extends Command
 {
+    use FileSystem;
+
     /**
      * Configure create command.
      */
@@ -38,27 +41,5 @@ class NewCommand extends Command
 
         $install = $this->getApplication()->find('install');
         $install->run(new ArrayInput([]), $output);
-    }
-
-    /**
-     * Create project directory.
-     *
-     * @return InitCommand
-     */
-    protected function createProjectDirectory($directory, OutputInterface $output)
-    {
-        $output->writeln("<info>Creating project directory...</info>");
-
-        if (file_exists($directory)) {
-            $output->writeln("<comment>Project directory already exists at {$directory}.</comment>");
-
-            return $this;
-        }
-
-        mkdir($directory, 0755, true);
-
-        $output->writeln("<info>Project directory created at {$directory}!</info>");
-
-        return $this;
     }
 }
