@@ -57,7 +57,7 @@ trait Theme
         $directory = getcwd() . '/wp-content/themes';
 
         // Make sure we have the required configuration.
-        if (!$url or !$name) {
+        if (!$url || !$name) {
             return;
         }
 

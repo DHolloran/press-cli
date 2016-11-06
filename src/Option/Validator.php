@@ -63,7 +63,7 @@ class Validator
         $verify = isset($rule['verify']) ? (boolean) $rule['verify'] : false;
 
         // We should only ask for things when they are empty or requested to verify.
-        if (!$verify and $value) {
+        if (!$verify && $value) {
             return $value;
         }
 
@@ -91,7 +91,6 @@ class Validator
      */
     protected static function getValue($config, $ruleKey)
     {
-        $value = '';
         foreach (explode(':', $ruleKey) as $configKey) {
             $config = isset($config[ $configKey ]) ? $config[ $configKey ] : '';
         }
