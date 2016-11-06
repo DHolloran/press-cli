@@ -243,7 +243,7 @@ class Configuration
     {
         $value = str_replace([' ', '-', '_'], $separator, $value);
         $value = preg_replace('/[^A-Za-z0-9-_]/um', '', $value);
-        $dbname = strtolower($value);
+        $value = strtolower($value);
 
         return $value;
     }
