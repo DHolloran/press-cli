@@ -17,6 +17,7 @@ trait Theme
         $themes = [
             'twentyfifteen',
             'twentyfourteen',
+            'twentysixteen',
         ];
 
         foreach ($themes as $theme) {
