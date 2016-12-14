@@ -27,6 +27,37 @@ class Validator
             $config = self::setValue($config, $value, $ruleKey);
         }
 
+        $config = self::shouldThemeBeInstalled($config, $helper, $input, $output);
+
+        return $config;
+    }
+
+    /**
+     * Asks if the theme should be installed and removes the theme specific configuration if not.
+     *
+     * @param  array           $config
+     * @param  QuestionHelper  $helper
+     * @param  InputInterface  $input
+     * @param  OutputInterface $output
+     *
+     * @return array
+     */
+    protected static function shouldThemeBeInstalled($config, QuestionHelper $helper, InputInterface $input, OutputInterface $output)
+    {
+        $question = new Question("<info>Install default theme Y/n</info>: ", 'Y');
+        $response = strtolower( trim( $helper->ask( $input, $output, $question) ) );
+        $shouldInstall = ( 0 === strpos( $response, 'y' ) || '' === $response );
+
+        // Remove theme details if the theme is not going to be installed.
+        if ( ! $shouldInstall && isset( $config['theme'] ) ) {
+            unset( $config['theme'] );
+        }
+
+        // Remove post install theme commands if the theme is not going to be installed.
+        if ( ! $shouldInstall && isset( $config['commands']['postInstallTheme'] ) ) {
+            unset( $config['commands']['postInstallTheme'] );
+        }
+
         return $config;
     }
 
