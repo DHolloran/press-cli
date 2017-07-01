@@ -6,23 +6,14 @@ if (file_exists(__DIR__.'/../../autoload.php')) {
     require __DIR__.'/vendor/autoload.php';
 }
 
-use PressCLI\Command\NewCommand;
-use PressCLI\Command\InstallCommand;
-use PressCLI\Command\ConfigureCommand;
 use Symfony\Component\Console\Application;
 
-if (file_exists(__DIR__.'/../../bin/wp')) {
-    define('PRESS_CLI_WP_EXEC', __DIR__.'/../../bin/wp');
-} else {
-    define('PRESS_CLI_WP_EXEC', __DIR__.'/vendor/bin/wp');
-}
+define('PRESS_BIN', __dir__ .'/bin');
+define('PRESS_WP', PRESS_BIN . '/wp');
 
-putenv('WP_CLI_CONFIG_PATH='.__DIR__ . '/config.yml');
+$application = new Application();
 
-$application = new Application('Press CLI', '0.9.1');
-
-$application->add(new InstallCommand);
-$application->add(new ConfigureCommand);
-$application->add(new NewCommand);
+$application->add(new \PressCLI\Command\WPCLIInstallCommand);
+$application->add(new \PressCLI\Command\WPCLIUpdateCommand);
 
 $application->run();

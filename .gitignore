@@ -3,3 +3,6 @@ config.json
 test-com
 test
 /config.php
+.DS_Store
+/.idea
+/bin
