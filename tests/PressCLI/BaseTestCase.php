@@ -17,7 +17,7 @@ class BaseTestCase extends TestCase
     public function setUp()
     {
         // Get the directories/files needed.
-        $this->dir = __dir__ . '/../../..';
+        $this->dir = __dir__ . '/../..';
         $this->bin = "{$this->dir}/bin/test";
         $this->wp = "{$this->bin}/wp";
         $this->phar = "{$this->dir}/wp-cli.phar";

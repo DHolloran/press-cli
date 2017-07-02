@@ -49,7 +49,7 @@ class Install
     protected function makeBin()
     {
         if (!file_exists($this->wp->getBin())) {
-            mkdir($this->wp->getBin());
+            mkdir($this->wp->getBin(), 0777, true);
         }
     }
 
