@@ -1,19 +1,26 @@
 #!/usr/bin/env php
 <?php
-if (file_exists(__DIR__.'/../../autoload.php')) {
-    require __DIR__.'/../../autoload.php';
-} else {
-    require __DIR__.'/vendor/autoload.php';
-}
+
+require_once __dir__ . '/bootstrap/autoload.php';
 
 use Symfony\Component\Console\Application;
 
-define('PRESS_BIN', __dir__ .'/bin');
+define('PRESS_DIR', __dir__);
+define('PRESS_BIN', PRESS_DIR .'/bin');
 define('PRESS_WP', PRESS_BIN . '/wp');
 
 $application = new Application();
 
+// `$ press wp-cli:install`  Installs the wp-cli executable.
 $application->add(new \PressCLI\Command\WPCLIInstallCommand);
+
+// `$ press wp-cli:update`   Updates the wp-cli executable.
 $application->add(new \PressCLI\Command\WPCLIUpdateCommand);
+
+// `$ press configure`  Creates a new project directory and configuration.
+// `$ press help`       Displays help for a command
+// `$ press install`    Installs WordPress, required plugins, theme and dependencies
+// `$ press list`       Lists commands
+// `$ press new`        Creates a new project directory, configuration and runs the install.
 
 $application->run();

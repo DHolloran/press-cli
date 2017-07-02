@@ -28,5 +28,19 @@
         "psr-4": {
             "PressCLI\\": "src"
         }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Tests\\": "tests/"
+        }
+    },
+    "post-package-install": [
+        "php press wp-cli:install"
+    ],
+    "post-package-update": [
+        "php press wp-cli:update"
+    ],
+    "require-dev": {
+        "phpunit/phpunit": "^6.2"
     }
 }
