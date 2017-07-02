@@ -36,8 +36,11 @@ class Install
      */
     public function download()
     {
-        $this->cli->passthru('curl -O https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar');
         chdir(PRESS_DIR);
+
+        if (!file_exists('wp-cli.phar')) {
+            $this->cli->passthru('curl -O https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar');
+        }
     }
 
     /**
