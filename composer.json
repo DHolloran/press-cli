@@ -14,7 +14,8 @@
         }
     ],
     "require": {
-        "symfony/console": "^3.3"
+        "symfony/console": "^3.3",
+        "tightenco/collect": "^5.4"
     },
     "support": {
         "issues": "https://github.com/DHolloran/press-cli/issues",

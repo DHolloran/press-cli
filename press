@@ -8,6 +8,9 @@ use Symfony\Component\Console\Application;
 define('PRESS_DIR', __dir__);
 define('PRESS_BIN', PRESS_DIR .'/bin');
 define('PRESS_WP', PRESS_BIN . '/wp');
+define('PRESS_STUBS', PRESS_DIR . '/stubs');
+define('PRESS_CONFIG_NAME', '.press-cli.json');
+define('PRESS_GLOBAL_CONFIG', "{$_SERVER['HOME']}/" . PRESS_CONFIG_NAME);
 
 $application = new Application();
 
@@ -18,6 +21,8 @@ $application->add(new \PressCLI\Command\WPCLIInstallCommand);
 $application->add(new \PressCLI\Command\WPCLIUpdateCommand);
 
 // `$ press configure`  Creates a new project directory and configuration.
+$application->add(new \PressCLI\Command\ConfigureCommand);
+
 // `$ press help`       Displays help for a command
 // `$ press install`    Installs WordPress, required plugins, theme and dependencies
 // `$ press list`       Lists commands

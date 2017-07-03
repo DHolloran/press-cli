@@ -6,7 +6,6 @@ use Tests\PressCLI\BaseTestCase;
 use PressCLI\Command\WPCLIUpdateCommand;
 use Symfony\Component\Console\Application;
 use Symfony\Component\Console\Tester\CommandTester;
-use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 
 /**
  * @codingStandardsIgnoreStart
@@ -21,6 +20,7 @@ class WPCLIUpdateCommandTest extends BaseTestCase
         parent::setUp();
 
         $this->removeWPCLIExecutable();
+        $this->instalWPCLIStub();
     }
 
     /**
@@ -33,7 +33,6 @@ class WPCLIUpdateCommandTest extends BaseTestCase
 
     /**
      * @test
-     * @group failing
      */
     public function it_updates_the_wp_cli_executable()
     {
@@ -59,21 +58,5 @@ class WPCLIUpdateCommandTest extends BaseTestCase
         $this->assertFileNotExists($this->phar);
         $this->assertFileExists($this->bin);
         $this->assertFileExists($this->wp);
-    }
-
-    /**
-     * Installs WP-CLI stub so we can test that updating works.
-     *
-     * @return [type] [description]
-     */
-    protected function instalWPCLIStub()
-    {
-        if (!file_exists($this->bin)) {
-            mkdir($this->bin, 0777, true);
-        }
-
-        if (!file_exists($this->wp)) {
-            exec("cp {$this->dir}/tests/stubs/wp {$this->wp}");
-        }
     }
 }

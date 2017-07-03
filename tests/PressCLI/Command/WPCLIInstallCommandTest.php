@@ -6,7 +6,6 @@ use Tests\PressCLI\BaseTestCase;
 use PressCLI\Command\WPCLIInstallCommand;
 use Symfony\Component\Console\Application;
 use Symfony\Component\Console\Tester\CommandTester;
-use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 
 /**
  * @codingStandardsIgnoreStart
@@ -33,7 +32,6 @@ class WPCLIInstallCommandTest extends BaseTestCase
 
     /**
      * @test
-     * @group failing
      */
     public function it_installs_the_wp_cli_executable()
     {
