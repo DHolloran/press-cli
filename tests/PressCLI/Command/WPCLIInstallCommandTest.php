@@ -8,6 +8,9 @@ use Symfony\Component\Console\Application;
 use Symfony\Component\Console\Tester\CommandTester;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 
+/**
+ * @codingStandardsIgnoreStart
+ */
 class WPCLIInstallCommandTest extends BaseTestCase
 {
     /**

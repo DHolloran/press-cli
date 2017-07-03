@@ -23,9 +23,17 @@ class BaseTestCase extends TestCase
         $this->phar = "{$this->dir}/wp-cli.phar";
 
         // Setup required constants.
-        define('PRESS_DIR', $this->dir);
-        define('PRESS_BIN', $this->bin);
-        define('PRESS_WP', $this->wp);
+        if (!defined('PRESS_DIR')) {
+            define('PRESS_DIR', $this->dir);
+        }
+
+        if (!defined('PRESS_BIN')) {
+            define('PRESS_BIN', $this->bin);
+        }
+
+        if (!defined('PRESS_WP')) {
+            define('PRESS_WP', $this->wp);
+        }
     }
 
     protected function removeWPCLIExecutable()

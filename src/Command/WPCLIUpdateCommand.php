@@ -28,6 +28,5 @@ class WPCLIUpdateCommand extends Command
         } else {
             (new WPInstall($cli))->execute();
         }
-        // ()->execute();
     }
 }
