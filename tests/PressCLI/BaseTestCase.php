@@ -7,6 +7,13 @@ use PHPUnit\Framework\TestCase;
 class BaseTestCase extends TestCase
 {
     /**
+     * Testing data.
+     *
+     * @var Faker\Factory
+     */
+    protected $faker;
+
+    /**
      * Base Press CLI path.
      *
      * @var string
@@ -35,11 +42,53 @@ class BaseTestCase extends TestCase
     protected $phar;
 
     /**
+     * The test site root directory.
+     *
+     * @var string
+     */
+    protected $siteRoot;
+
+    /**
+     * The test site name.
+     *
+     * @var string
+     */
+    protected $projectName;
+
+    /**
      * The test site directory.
      *
      * @var string
      */
     protected $site;
+
+    /**
+     * the install database name.
+     *
+     * @var string
+     */
+    protected $databaseName;
+
+    /**
+     * The install site URL.
+     *
+     * @var string
+     */
+    protected $siteURL;
+
+    /**
+     * The install site administrator details.
+     *
+     * @var Illuminate\Support\Collection
+     */
+    protected $siteAdmin;
+
+    /**
+     * The install site details.
+     *
+     * @var Illuminate\Support\Collection
+     */
+    protected $siteDetails;
 
     /**
      * Install stubs path.
@@ -60,15 +109,37 @@ class BaseTestCase extends TestCase
      */
     public function setUp()
     {
+        // Setup faker
+        $this->faker = \Faker\Factory::create();
+
         // Get the directories/files needed.
         $this->dir = __dir__ . '/../..';
         $this->bin = "{$this->dir}/bin/test";
         $this->wp = "{$this->bin}/wp";
         $this->phar = "{$this->dir}/wp-cli.phar";
-        $this->site = "{$this->dir}/test-site";
+        $this->siteRoot = "{$this->dir}/test-server";
+        $this->projectName = implode('-', $this->faker->randomElements(
+            $this->faker->words(4),
+            $this->faker->numberBetween(1, 4)
+        ));
+        $this->site = "{$this->siteRoot}/{$this->projectName}";
         $this->stubs = "{$this->dir}/stubs";
         $this->testStubs = "{$this->dir}/test/stubs";
 
+        // Set required configuration details.
+        $cleanName = preg_replace("/[^A-Za-z0-9-_]/", '', $this->projectName);
+        $this->databaseName = 'wp_' . str_replace('-', '_', $cleanName);
+        $this->siteDetails = collect([
+            'title' => $this->faker->sentence(6, true),
+            'url' => "http://{$cleanName}",
+        ]);
+        $this->siteAdmin = collect([
+           'name' => $this->faker->userName,
+           'email' => $this->faker->safeEmail,
+           'password' => $this->faker->password,
+        ]);
+
+        // Set required constants;
         if (!defined('PRESS_DIR')) {
             define('PRESS_DIR', $this->dir);
         }
@@ -128,35 +199,56 @@ class BaseTestCase extends TestCase
     protected function createBinDirectory()
     {
         if (!file_exists($this->bin)) {
-            mkdir($this->bin, 0777, true);
+            mkdir($this->bin, 0755, true);
         }
     }
 
     /**
-     * Creates the test site directory.
+     * Creates the test site root directory.
      */
-    protected function createSiteDirectory()
+    protected function createSiteRootDirectory()
     {
-        if (!file_exists($this->site)) {
-            mkdir($this->site, 0777, true);
+        if (!file_exists($this->siteRoot)) {
+            mkdir($this->siteRoot, 0755, true);
         }
     }
 
     /**
-     * Removes the test site directory.
+     * Removes the test site root directory.
      */
-    protected function removeSiteDirectory()
+    protected function removeSiteRootDirectory()
     {
-        var_dump('Remove site directory');
+        if (file_exists($this->siteRoot)) {
+            $this->recursiveRemoveDirectory($this->siteRoot);
+        }
+    }
+
+    protected function recursiveRemoveDirectory($directory)
+    {
+        if (is_dir($directory)) {
+            $objects = scandir($directory);
+            foreach ($objects as $object) {
+                if ($object != '.' and $object != '..') {
+                    $path = "{$directory}/{$object}";
+                    if (is_dir($path)) {
+                        $this->recursiveRemoveDirectory($path);
+                    } else {
+                        unlink($path);
+                    }
+                }
+            }
+
+            rmdir($directory);
+        }
     }
 
     /**
-     * Resets the test site directory.
+     * Resets the test site root directory.
      */
-    protected function resetSiteDirectory()
+    protected function resetSiteRootDirectory()
     {
-        $this->removeSiteDirectory();
-        $this->createSiteDirectory();
+        $this->removeSiteRootDirectory();
+        $this->createSiteRootDirectory();
     }
 
     /**

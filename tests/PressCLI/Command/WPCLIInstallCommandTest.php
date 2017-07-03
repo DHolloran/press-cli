@@ -46,9 +46,9 @@ class WPCLIInstallCommandTest extends BaseTestCase
         $this->assertFileNotExists($this->wp);
 
         // Execute press wp-cli:install
-        $commandTester->execute(array(
+        $commandTester->execute([
             'command'  => $command->getName(),
-        ));
+        ]);
 
         // Execute wp-cli
         exec("{$this->wp} --info", $wpinfoOutput, $wpinfoStatus);

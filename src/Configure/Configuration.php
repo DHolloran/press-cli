@@ -2,8 +2,31 @@
 
 namespace PressCLI\Configure;
 
+use Symfony\Component\Console\Input\InputInterface;
+use Symfony\Component\Console\Output\OutputInterface;
+
 abstract class Configuration
 {
+    /**
+     * Console input interface
+     *
+     * @var Symfony\Component\Console\Input\InputInterface
+     */
+    protected $input;
+
+    /**
+     * Console output interface.
+     *
+     * @var Symfony\Component\Console\Output\OutputInterface
+     */
+    protected $output;
+
+    public function __construct(InputInterface $input, OutputInterface $output)
+    {
+        $this->input = $input;
+        $this->output = $output;
+    }
+
     /**
      * Gets the configuration path.
      *

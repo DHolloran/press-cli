@@ -19,8 +19,14 @@ class ConfigureCommand extends Command
              ->addArgument('project-name', InputArgument::OPTIONAL, 'The project name.')
              ->addOption(
                  'global',
-                 null,
+                 '-g',
                  InputOption::VALUE_NONE,
+                 'Creates the global configuration if it does not already exist.'
+             )
+             ->addOption(
+                 'path',
+                 '-p',
+                 InputOption::VALUE_REQUIRED,
                  'Creates the global configuration if it does not already exist.'
              );
     }
@@ -28,9 +34,9 @@ class ConfigureCommand extends Command
     protected function execute(InputInterface $input, OutputInterface $output)
     {
         if ($input->getOption('global')) {
-            (new GlobalConfiguration)->write();
+            (new GlobalConfiguration($input, $output))->write();
         } else {
-            (new LocalConfiguration)->write();
+            (new LocalConfiguration($input, $output))->write();
         }
     }
 }
