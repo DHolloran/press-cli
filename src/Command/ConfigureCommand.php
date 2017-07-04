@@ -27,7 +27,7 @@ class ConfigureCommand extends Command
                  'path',
                  '-p',
                  InputOption::VALUE_REQUIRED,
-                 'Creates the global configuration if it does not already exist.'
+                 'Configure the installer at a specific path.'
              )
              ->addOption(
                  'force',
