@@ -131,7 +131,7 @@ class BaseTestCase extends TestCase
         $this->databaseName = 'wp_' . str_replace('-', '_', $cleanName);
         $this->siteDetails = collect([
             'title' => $this->faker->sentence(6, true),
-            'url' => "http://{$cleanName}",
+            'url' => "http://{$cleanName}.dev",
         ]);
         $this->siteAdmin = collect([
            'name' => $this->faker->userName,

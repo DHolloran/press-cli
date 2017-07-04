@@ -49,7 +49,7 @@ class CLI
     }
 
     /**
-     * Outputs a info message.
+     * Outputs an info message.
      *
      * @param  string $message
      *
@@ -58,6 +58,30 @@ class CLI
     public function info($message)
     {
         return $this->message("<info>{$message}</info>");
+    }
+
+    /**
+     * Outputs a success message.
+     *
+     * @param  string $message
+     *
+     * @return PressCLI\CLI
+     */
+    public function success($message)
+    {
+        return $this->message("\n<comment>{$message}</comment>");
+    }
+
+    /**
+     * Outputs a warning message.
+     *
+     * @param  string $message
+     *
+     * @return PressCLI\CLI
+     */
+    public function warning($message)
+    {
+        return $this->message("\n<comment>{$message}</comment>");
     }
 
     /**

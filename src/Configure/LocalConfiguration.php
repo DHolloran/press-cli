@@ -3,16 +3,13 @@
 namespace PressCLI\Configure;
 
 use PressCLI\Exception\CommandException;
+use PressCLI\Configure\GlobalConfiguration;
+use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 
 class LocalConfiguration extends Configuration
 {
-    public function __construct(InputInterface $input, OutputInterface $output)
-    {
-        parent::__construct($input, $output);
-    }
-
     /**
      * Gets the install root path.
      *
@@ -66,9 +63,16 @@ class LocalConfiguration extends Configuration
      */
     protected function getConfigurationtoWrite()
     {
-        $stub = $this->readStub();
+        $configuration = $this->getGlobalConfiguration();
+        $configuration = (new ConfigurationDefaults($configuration, $this->input))->set();
+        $configuration = (new ConfigurationQuestion(
+           $this->questionHelper,
+           $this->input,
+           $this->output,
+           $configuration
+        ))->ask($configuration);
 
-        return $stub;
+        return $configuration;
     }
 
     /**
@@ -81,5 +85,15 @@ class LocalConfiguration extends Configuration
         if (!file_exists($path)) {
             mkdir($path, 0755, true);
         }
+    }
+
+    protected function getGlobalConfiguration()
+    {
+        $global = new GlobalConfiguration($this->input, $this->output, $this->command);
+        if (!$global->exists()) {
+            $global->write();
+        }
+
+        return $global->read();
     }
 }

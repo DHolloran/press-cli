@@ -36,17 +36,8 @@ class ConfigureCommandTest extends BaseTestCase
      */
     public function it_creates_the_global_configuration()
     {
-        // Setup
-        $application = new Application();
-        $application->add(new ConfigureCommand());
-        $command = $application->find('configure');
-        $commandTester = new CommandTester($command);
-
-        // Execute press configure --global
-        $commandTester->execute([
-            'command'  => $command->getName(),
-            '--global' => 'y',
-        ]);
+        // Execute
+        $this->executeGlobalConfiguration();
 
         // Assert configuration was correctly created
         $this->assertFileExists(PRESS_GLOBAL_CONFIG);
@@ -58,31 +49,20 @@ class ConfigureCommandTest extends BaseTestCase
 
     /**
      * @test
-     * @group failing
      */
     public function it_creates_the_local_configuration_in_current_directory()
     {
         // Setup
-        $application = new Application();
-        $application->add(new ConfigureCommand());
-        $command = $application->find('configure');
-        $commandTester = new CommandTester($command);
+        $stub = $this->getFilledStub();
 
-        // Set current working directory to site root
-        chdir($this->siteRoot);
+        // Execute
+        $this->executeLocalConfiguration($stub);
 
-        // Execute press configure
-        $commandTester->execute([
-            'command'  => $command->getName(),
-            'project-name' => $this->projectName,
-        ]);
-
-        // Assert configuration was correctly created
-        $configurationPath = "{$this->site}/" . PRESS_CONFIG_NAME;
-        $this->assertFileExists($configurationPath);
+        // Assert
+        $this->assertFileExists($this->getLocalPath());
         $this->assertEquals(
-            $this->getStubConfiguration(),
-            $this->fillLocalConfiguration($configurationPath)
+            $stub,
+            $this->readConfiguration($this->getLocalPath())
         );
     }
 
@@ -97,9 +77,59 @@ class ConfigureCommandTest extends BaseTestCase
 
     /**
      * @test
-     * @group failing
      */
     public function it_creates_the_global_configuration_when_creating_the_local_configuration_if_not_present()
+    {
+        // Setup
+        $stub = $this->getFilledStub();
+
+        // Make sure the global configuration does not already exist.
+        $this->assertFileNotExists(PRESS_GLOBAL_CONFIG);
+
+        // Execute
+        $this->executeLocalConfiguration($stub);
+
+        // Assert
+        $this->assertFileExists(PRESS_GLOBAL_CONFIG);
+    }
+
+    /**
+     * @test
+     */
+    public function it_does_not_overwrite_the_global_configuration()
+    {
+        // Setup
+        file_put_contents(PRESS_GLOBAL_CONFIG, $content = '{}');
+
+        // Execute
+        $this->executeGlobalConfiguration();
+
+        // Assert configuration was correctly created
+        $this->assertEquals($content, file_get_contents(PRESS_GLOBAL_CONFIG));
+    }
+
+    /**
+     * @test
+     */
+    public function it_does_not_overwrite_the_local_configuration()
+    {
+        // Setup
+        mkdir($this->site, 0755, true);
+        file_put_contents($this->getLocalPath(), $content = '{}');
+        $stub = $this->getFilledStub();
+
+        // Execute
+        $this->executeLocalConfiguration($stub);
+
+        // Assert configuration was correctly created
+        $this->assertEquals($content, file_get_contents($this->getLocalPath()));
+    }
+
+    /**
+     * @test
+     * @group failing
+     */
+    public function it_allows_global_configuration_to_be_forcibly_overwritten()
     {
         $this->assertTrue(false);
     }
@@ -108,21 +138,70 @@ class ConfigureCommandTest extends BaseTestCase
      * @test
      * @group failing
      */
-    public function it_merges_the_global_and_local_configurations()
+    public function it_allows_local_configuration_to_be_forcibly_overwritten()
     {
         $this->assertTrue(false);
     }
 
     /**
-     * Fills the local configuration file with test data.
+     * Executes the global configuration command.
      *
-     * @param  string $configurationPath
+     * @return CommandTester
+     */
+    protected function executeGlobalConfiguration()
+    {
+        // Setup
+        $application = new Application();
+        $application->add(new ConfigureCommand());
+        $command = $application->find('configure');
+        $commandTester = new CommandTester($command);
+
+        // Execute press configure --global
+        $commandTester->execute([
+            'command'  => $command->getName(),
+            '--global' => 'y',
+        ]);
+
+        return $commandTester;
+    }
+
+    /**
+     * Executes the local configuration
+     *
+     * @param  Illuminate\Support\Collection $stub
+     *
+     * @return CommandTester
+     */
+    protected function executeLocalConfiguration($stub)
+    {
+        // Setup
+        $application = new Application();
+        $application->add(new ConfigureCommand());
+        $command = $application->find('configure');
+        $commandTester = new CommandTester($command);
+
+        // Set current working directory to site root
+        chdir($this->siteRoot);
+
+        $commandTester->setInputs($this->getInputs($stub));
+
+        // Execute press configure
+        $commandTester->execute([
+            'command'  => $command->getName(),
+            'project-name' => $this->projectName,
+        ]);
+
+        return $commandTester;
+    }
+
+    /**
+     * Fills the stub configuration file with test data.
      *
      * @return Illuminate\Support\Collection
      */
-    protected function fillLocalConfiguration($configurationPath)
+    protected function getFilledStub()
     {
-        $configuration = $this->readConfiguration($configurationPath);
+        $configuration = $this->getStubConfiguration();
 
         // Setup database
         $database = $configuration->get('database', []);
@@ -175,6 +254,39 @@ class ConfigureCommandTest extends BaseTestCase
      */
     protected function readConfiguration($path)
     {
-        return collect(json_decode(file_get_contents($path), true));
+        return rcollect(json_decode(file_get_contents($path), true));
+    }
+
+    /**
+     * Gets the command options.
+     *
+     * @param  Illuminate\Support\Collection $stub
+     * @param  array $overrides
+     *
+     * @return array
+     */
+    protected function getInputs($stub, $overrides = [])
+    {
+        return array_merge([
+            'database_user' => $stub->get('database')->get('user'),
+            'database_password' => $stub->get('database')->get('password'),
+            'database_prefix' => $stub->get('database')->get('prefix'),
+            'database_name' => $stub->get('database')->get('name'),
+            'database_host' => $stub->get('database')->get('host'),
+            'user_name' => $stub->get('user')->get('name'),
+            'user_email' => $stub->get('user')->get('email'),
+            'user_password' => $stub->get('user')->get('password'),
+            'site_title' => $stub->get('site')->get('title'),
+            'site_url' => $stub->get('site')->get('url'),
+            'theme_install' => 'yes',
+            'theme_type' => 'zip',
+            'theme_url' => '',
+            'theme_name' => $this->projectName,
+        ], $overrides);
+    }
+
+    protected function getLocalPath()
+    {
+        return "{$this->site}/" . PRESS_CONFIG_NAME;
     }
 }

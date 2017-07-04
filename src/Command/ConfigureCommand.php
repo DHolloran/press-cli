@@ -34,9 +34,9 @@ class ConfigureCommand extends Command
     protected function execute(InputInterface $input, OutputInterface $output)
     {
         if ($input->getOption('global')) {
-            (new GlobalConfiguration($input, $output))->write();
+            (new GlobalConfiguration($input, $output, $this))->write();
         } else {
-            (new LocalConfiguration($input, $output))->write();
+            (new LocalConfiguration($input, $output, $this))->write();
         }
     }
 }

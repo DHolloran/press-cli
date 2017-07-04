@@ -2,6 +2,8 @@
 
 namespace PressCLI\Configure;
 
+use PressCLI\CLI;
+use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 
@@ -10,21 +12,51 @@ abstract class Configuration
     /**
      * Console input interface
      *
-     * @var Symfony\Component\Console\Input\InputInterface
+     * @var InputInterface
      */
     protected $input;
 
     /**
      * Console output interface.
      *
-     * @var Symfony\Component\Console\Output\OutputInterface
+     *
+     * @var OutputInterface
      */
     protected $output;
 
-    public function __construct(InputInterface $input, OutputInterface $output)
+    /**
+     * Console command interface.
+     *
+     * @var Command
+     */
+    protected $command;
+
+    /**
+     * Console question helper.
+     *
+     * @var Symfony\Component\Console\Helper\QuestionHelper
+     */
+    protected $questionHelper;
+
+    /**
+     * Command line helper.
+     *
+     * @var CLI
+     */
+    protected $cli;
+
+    /**
+     * @param InputInterface  $input
+     * @param OutputInterface $output
+     * @param Command         $command
+     */
+    public function __construct(InputInterface $input, OutputInterface $output, Command $command)
     {
         $this->input = $input;
         $this->output = $output;
+        $this->command = $command;
+        $this->questionHelper = $command->getHelper('question');
+        $this->cli = (new CLI($input, $output));
     }
 
     /**
@@ -59,8 +91,8 @@ abstract class Configuration
     {
         $path = is_null($path) ? $this->getPath() : $path;
 
-        if (file_exists($path)) {
-            return collect(json_decode(file_get_contents($path), true));
+        if ($this->exists($path)) {
+            return rcollect(json_decode(file_get_contents($path), true));
         }
 
         return collect([]);
@@ -77,6 +109,20 @@ abstract class Configuration
     }
 
     /**
+     * Checks if the configuration exists.
+     *
+     * @param  null|string $path
+     *
+     * @return boolean
+     */
+    protected function exists($path = null)
+    {
+        $path = is_null($path) ? $this->getPath() : $path;
+
+        return file_exists($path);
+    }
+
+    /**
      * Writes the configuration.
      *
      * @param string $path
@@ -85,9 +131,17 @@ abstract class Configuration
     {
         $path = is_null($path) ? $this->getPath() : $path;
 
+        if ($this->exists($path)) {
+            $this->cli->warning("Configuration already exists at {$path}.");
+
+            return;
+        }
+
         file_put_contents(
             $path,
-            $this->getConfigurationtoWrite()->toJson()
+            json_encode($this->getConfigurationtoWrite()->toArray(), JSON_PRETTY_PRINT)
         );
+
+        $this->cli->success("Configuration written to {$path}.");
     }
 }
