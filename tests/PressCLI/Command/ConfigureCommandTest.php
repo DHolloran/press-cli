@@ -144,6 +144,22 @@ class ConfigureCommandTest extends BaseTestCase
     }
 
     /**
+     * @test
+     * @group failing
+     */
+    public function it_sets_default_settings()
+    {
+        // "settings": {
+        //     "afterInstall": {
+        //         "removeUserPassword": true,
+        //         "removeUserEmail": true,
+        //         "removeUserName": true
+        //     }
+        // }
+        $this->assertTrue(false);
+    }
+
+    /**
      * Executes the global configuration command.
      *
      * @return CommandTester
