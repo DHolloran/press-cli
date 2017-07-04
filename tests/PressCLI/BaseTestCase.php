@@ -223,6 +223,11 @@ class BaseTestCase extends TestCase
         }
     }
 
+    /**
+     * Recursively removes a directory.
+     *
+     * @param  string $directory
+     */
     protected function recursiveRemoveDirectory($directory)
     {
         if (is_dir($directory)) {

@@ -28,6 +28,12 @@ class ConfigureCommand extends Command
                  '-p',
                  InputOption::VALUE_REQUIRED,
                  'Creates the global configuration if it does not already exist.'
+             )
+             ->addOption(
+                 'force',
+                 '-f',
+                 InputOption::VALUE_NONE,
+                 'Force overwriting the configuration'
              );
     }
 

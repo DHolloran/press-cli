@@ -127,44 +127,45 @@ class ConfigureCommandTest extends BaseTestCase
 
     /**
      * @test
-     * @group failing
      */
     public function it_allows_global_configuration_to_be_forcibly_overwritten()
     {
-        $this->assertTrue(false);
+        // Setup
+        file_put_contents(PRESS_GLOBAL_CONFIG, $content = '{}');
+
+        // Execute
+        $this->executeGlobalConfiguration(['--force' => null]);
+
+        // Assert configuration was correctly created
+        $this->assertNotEquals($content, file_get_contents(PRESS_GLOBAL_CONFIG));
     }
 
     /**
      * @test
-     * @group failing
      */
     public function it_allows_local_configuration_to_be_forcibly_overwritten()
     {
-        $this->assertTrue(false);
-    }
+        // Setup
+        mkdir($this->site, 0755, true);
+        file_put_contents($this->getLocalPath(), $content = '{}');
+        $stub = $this->getFilledStub();
 
-    /**
-     * @test
-     * @group failing
-     */
-    public function it_sets_default_settings()
-    {
-        // "settings": {
-        //     "afterInstall": {
-        //         "removeUserPassword": true,
-        //         "removeUserEmail": true,
-        //         "removeUserName": true
-        //     }
-        // }
-        $this->assertTrue(false);
+        // Execute
+        $this->executeLocalConfiguration($stub, ['--force' => null]);
+
+        // Assert configuration was correctly created
+        $this->assertNotEquals($content, file_get_contents($this->getLocalPath()));
     }
 
     /**
      * Executes the global configuration command.
      *
+     * @param  array $commandInput
+     * @param  array $options
+     *
      * @return CommandTester
      */
-    protected function executeGlobalConfiguration()
+    protected function executeGlobalConfiguration($commandInput = [], $options = [])
     {
         // Setup
         $application = new Application();
@@ -173,10 +174,10 @@ class ConfigureCommandTest extends BaseTestCase
         $commandTester = new CommandTester($command);
 
         // Execute press configure --global
-        $commandTester->execute([
+        $commandTester->execute(array_merge([
             'command'  => $command->getName(),
-            '--global' => 'y',
-        ]);
+            '--global' => null,
+        ], $commandInput), $options);
 
         return $commandTester;
     }
@@ -185,10 +186,13 @@ class ConfigureCommandTest extends BaseTestCase
      * Executes the local configuration
      *
      * @param  Illuminate\Support\Collection $stub
+     * @param  array $commandInput
+     * @param  array $options
+     * @param  array $inputs
      *
      * @return CommandTester
      */
-    protected function executeLocalConfiguration($stub)
+    protected function executeLocalConfiguration($stub, $commandInput = [], $options = [], $inputs = [])
     {
         // Setup
         $application = new Application();
@@ -199,13 +203,13 @@ class ConfigureCommandTest extends BaseTestCase
         // Set current working directory to site root
         chdir($this->siteRoot);
 
-        $commandTester->setInputs($this->getInputs($stub));
+        $commandTester->setInputs($this->getInputs($stub, $inputs));
 
         // Execute press configure
-        $commandTester->execute([
+        $commandTester->execute(array_merge([
             'command'  => $command->getName(),
             'project-name' => $this->projectName,
-        ]);
+        ], $commandInput), $options);
 
         return $commandTester;
     }
@@ -301,6 +305,11 @@ class ConfigureCommandTest extends BaseTestCase
         ], $overrides);
     }
 
+    /**
+     * Gets the local configuration path.
+     *
+     * @return string
+     */
     protected function getLocalPath()
     {
         return "{$this->site}/" . PRESS_CONFIG_NAME;

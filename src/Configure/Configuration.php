@@ -131,7 +131,7 @@ abstract class Configuration
     {
         $path = is_null($path) ? $this->getPath() : $path;
 
-        if ($this->exists($path)) {
+        if (!$this->shouldWrite($path)) {
             $this->cli->warning("Configuration already exists at {$path}.");
 
             return;
@@ -143,5 +143,21 @@ abstract class Configuration
         );
 
         $this->cli->success("Configuration written to {$path}.");
+    }
+
+    /**
+     * Checks if the configuration should be written.
+     *
+     * @param  string $path
+     *
+     * @return boolean
+     */
+    protected function shouldWrite($path)
+    {
+        if ($this->input->getOption('force')) {
+            return true;
+        }
+
+        return !$this->exists($path);
     }
 }
