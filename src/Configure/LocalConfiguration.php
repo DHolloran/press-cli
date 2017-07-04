@@ -45,7 +45,16 @@ class LocalConfiguration extends Configuration
      */
     protected function getPath()
     {
-        $this->createProjectDirectory($path = "{$this->getRootPath()}/{$this->getProjectName()}");
+        $path = $this->input->getOption('path');
+
+        if (is_null($path)) {
+            $path = "{$this->getRootPath()}/{$this->getProjectName()}";
+        } else {
+            $path = ltrim($path, '=');
+            $path = rtrim($path, '/');
+        }
+
+        $this->createProjectDirectory($path);
 
         return "{$path}/" . PRESS_CONFIG_NAME;
     }
@@ -87,6 +96,11 @@ class LocalConfiguration extends Configuration
         }
     }
 
+    /**
+     * Gets the global configuration.
+     *
+     * @return Illuminate\Support\Collection
+     */
     protected function getGlobalConfiguration()
     {
         $global = new GlobalConfiguration($this->input, $this->output, $this->command);

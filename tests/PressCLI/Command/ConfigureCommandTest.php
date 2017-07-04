@@ -68,11 +68,25 @@ class ConfigureCommandTest extends BaseTestCase
 
     /**
      * @test
-     * @group failing
      */
     public function it_creates_the_local_configuration_in_a_specified_directory()
     {
-        $this->assertTrue(false);
+        // Setup
+        $stub = $this->getFilledStub();
+        $path = "{$this->siteRoot}/custom-path-site";
+
+        // Make sure it doesn't already exist
+        $this->assertFileNotExists($path);
+
+        // Execute
+        $this->executeLocalConfiguration($stub, ['--path' => $path]);
+
+        // Assert
+        $this->assertFileExists($path);
+        $this->assertEquals(
+            $stub,
+            $this->readConfiguration("{$path}/" . PRESS_CONFIG_NAME)
+        );
     }
 
     /**
